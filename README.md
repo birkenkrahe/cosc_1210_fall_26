@@ -1,4 +1,4 @@
-![img](./img/Flammarion.jpg)
+![img](./img/wanderer.jpg)
 
 
 # Computer Science I (with Python)
