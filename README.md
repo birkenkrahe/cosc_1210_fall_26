@@ -1,4 +1,4 @@
-![img](./img/breughel_babel_1563.jpg)
+![img](./img/Flammarion.jpg)
 
 
 # Computer Science I (with Python)
