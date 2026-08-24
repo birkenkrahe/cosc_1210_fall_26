@@ -1,0 +1,315 @@
+#+TITLE:Course Overview
+#+AUTHOR:Marcus Birkenkrahe
+#+SUBTITLE:COSC 1210, Computer Science I, Augustana U
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+#+PROPERTY: header-args:python :session *Python* :results output :exports both :noweb yes
+#+PROPERTY: header-args:C :main yes :includes <stdio.h> :results output :exports both :noweb yes
+#+PROPERTY: header-args:C++ :main yes :includes <iostream> :results output :exports both :noweb yes
+* Objectives
+
+- Get to know your teacher
+- Share why you are here
+- Check out the entry survey results
+- Understand what this course is about
+- Find out where to find stuff
+- Find out when to ask
+- Find out about the formal stuff
+- Understand how you're being graded
+- Find out what you'll do every week
+- Get your next assignments
+- Find out what's next
+
+* Get to know your teacher
+
+- For the professional stuff, I asked Gemini:
+  https://share.gemini.google/lbAsXSSlJgdJ
+  #+begin_quote
+  I am going to take a course with Marcus Birkenkrahe, Computer
+  Science I (introduction to programming with Python). Tell me
+  something about him that might be interesting and useful.
+  #+end_quote
+
+- Privately:
+  + PhD in theoretical particle physics (cp. "Big Bang Theory")
+  + Worked at large multi-national companies in IT positions
+  + Came to the US in 2021 from Germany (US citizen since 2026)
+  + Family: 1 wife, 1 daughter, 2 grandchildren, 3 dogs, 2 cats
+  + Favorite Operating System (OS): Linux
+  + Favorite programming language: C
+  + Favorite programming environment: Emacs
+  + Favorite food: Schnitzel (aka Milanesa, tonkatsu, escalope)
+  + Favorite drink: peppermint tea
+  + Favorite hobbies: shooting / sailing / singing
+
+** PRACTICE Your turn - why are you here?
+#+attr_html: :width 400px :float nil:
+[[../img/survey.jpeg]]
+
+- Even if you filled in the entry survey:
+
+- Let us hear why you're here
+
+- So that I can hear (and learn) your name.
+
+* Understand what this course is about
+
+- This is what the catalog says:
+  #+begin_quote
+  "An introduction to *computer science*, which include topics such as
+  *software engineering*, computer *architecture*, and programming
+  *languages*. Emphasis on learning the *styles*, *techniques*, and
+  *methodologies* necessary to *design* and *develop* *readable and efficient*
+  programs."
+  #+end_quote
+
+- What this means:
+  #+begin_quote
+  CS is a house with many rooms, many of them under construction. In
+  this course you only get to dip your toe in the water by learning
+  something about it. But *how you do anything is how you do
+  everything*, so: You should approach CS as a professional from the
+  start - no matter what your calling is, e.g. another STEM field,
+  business, arts, or whatever.
+  #+end_quote
+
+- This is what the course is really about:
+  #+begin_quote
+  1. Learn how to tell a machine what to do.
+  2. Learn how to write programs that work.
+  3. Learn to use the computer as a tool.
+  #+end_quote
+
+* Find out where to find stuff
+
+- Canvas
+- GitHub
+- Textbook
+- Google Space
+- YouTube Playlist
+- Photos
+- Chatbots / Generative AI
+
+** PRACTICE From Canvas to the textbook
+#+attr_html: :width 400px :float nil:
+[[../img/codealong.jpeg]]
+
+1) Open the Canvas course
+   (https://augie.instructure.com/courses/15635)
+
+2) Open the first module to get to the links
+
+3) Follow my instructions
+
+** Canvas
+#+attr_html: :width 300px :float nil:
+[[../img/canvas.png]]
+
+- A learning management system (LMS)
+- This is a special case of a content management system (CMS)
+- We use Canvas for:
+  1) Announcements
+  2) Assignments and Quizzes
+  3) Pages for course information
+  4) Grades (as up to date as I can manage)
+  5) Google Meet (link - I record all of my sessions)
+  6) Google Drive (link - session recordings, whiteboard screenshots)
+  7) YuJa (occasional videos)
+  8) Syllabus (course overview, grading, schedule)
+  9) Attendance (transfer from Google Forms)
+  10) Respondus Lockdown Browser (might use it for tests)
+
+** GitHub
+#+attr_html: :width 400px :float nil:
+[[../img/github.png]]
+
+- Do you have a GitHub profile? Have you used Git before?
+
+- GitHub (and other platforms) use the Git version control system
+
+- If not, register for free and complete the [[https://docs.github.com/en/get-started/using-github/hello-world][Hello World project]]
+
+- The course materials are here:
+  https://github.com/birkenkrahe/cosc_1210_fall_26
+
+- All lectures, assignments, tests are in the =org/= directory
+
+- These are Emacs Org-mode files (=.org=) rendered as Markdown (=.md=)
+
+- There will also be PDFs, data, source files, and images
+
+- I use GitHub to merge files from different devices into one repo
+
+** Textbook
+#+attr_html: :width 200px :float nil:
+[[../img/textbook.jpg]]
+
+- We are going to use the textbook "Think Python" by Allen B. Downey,
+  3rd edition - free and online:
+  https://allendowney.github.io/ThinkPython/
+
+- Readings from the book are aligned with our progress.
+
+- The booksite contains the entire book and =Colab= notebooks where you
+  can read through the book and interactively run all of the code.
+
+** Google Chat Space and YouTube Playlist
+#+attr_html: :width 300px :float nil:
+[[../img/chat.png]]
+
+- I do a fair amount of "work on the side": reading, coding, etc.
+
+- In order to protect your precious email space, I'll use Google space.
+
+- I encourage you to use that space to discuss, share, comment.
+
+- This space will stay live across multiple courses after the course.
+
+- Feel free to join or leave it at any time.
+
+- Link: [[https://chat.google.com/room/AAQAG9do5RM?cls=7][chat.google.com/room/AAQAG9do5RM?cls=7]] (open to all of Augie)
+
+- Link to the YouTube playlist:
+  [[https://www.youtube.com/watch?v=9uW6B9LPntY&list=PLRe9Qsi9YpYU][youtube.com/watch?v=9uW6B9LPntY&list=PLRe9Qsi9YpYU]]
+
+** Photos (GDrive)
+#+attr_html: :width 600px :float nil:
+#+caption: I will ask you to put your names into the class photo
+[[../img/classroom.png]]
+
+- I upload photos to GDrive: [[https://drive.google.com/drive/folders/16C7ovrV5sCVCbc59nkbYTLEF-xkBEppO?usp=sharing][tinyurl.com/photos-fa26-1210]]
+
+- The class photo (to help me learn your names) is also here as an
+  editable Powerpoint slide: *please add your name* to your image.
+  
+** Chatbots / Generative AI Assistants
+#+attr_html: :width 300px :float nil:
+[[../img/cyberprof.jpg]]
+
+- Gemini with [[https://colab.research.google.com][Google Colab]] is a true agent + notebook solution that
+  you can use to write Python programs online for free (within set
+  limits). For heavy use, you'll soon run out of tokens, however.
+
+- Privately (since 05/26), I use [[https://claude.com/product/claude-code][Claude Code]] (agent harness using
+  Claude). If you're strapped for cash, I recommend the free combo:
+  [[https://opencode.ai/][OpenCode]] (harness) + [[https://ollama.com/][Ollama]] (server) + [[https://qwen.ai/blog?id=qwen3-coder][Qwen3-Coder]] (model).
+
+- I use generative AI to:
+  + Drill me before lectures (as a tutor)
+  + Generate quizzes from different sources
+  + Give me ideas for new exercises
+  + Check my lecture scripts against the textbook
+
+- I have published about teaching computer and data
+  science with and without AI (see [[https://birkenkrahe.github.io/][birkenkrahe.github.io]] or
+  [[https://www.researchgate.net/profile/Marcus-Birkenkrahe][researchgate.net]])
+
+** PRACTICE *How do you use AI?*
+#+attr_html: :width 300px :float nil:
+[[../img/using_ai.png]]
+
+* Find out whom to ask when
+
+- Always ask your mates/peers/friends first
+
+- If you don't know anyone, make contact with someone
+
+- Next, ask me before, in, or after class
+
+- Come to my office hours: Tue/Thu 9-10 am and 2-3 pm
+
+* Find out about the formal stuff
+
+- Read the fine print in the syllabus
+
+- This course is an AI-enabled course
+
+- Feel free to inform me when I make mistakes
+
+* Understand how you're being graded
+
+| What                    | When   | How much |
+|-------------------------+--------+----------|
+| Programming assignments | weekly |      40% |
+| Quizzes (online)        | weekly |      25% |
+| Participation           | always |      10% |
+| Midterm exam            | TBD    |      15% |
+| Final exam (optional)   | TBD    |      10% |
+|-------------------------+--------+----------|
+| Total                   |        |     100% |
+
+- Programming assignments: weekly, submit as notebooks
+  
+- Quizzes: not timed, home, individual
+
+- Participation: present solutions, ask/answer questions, upload
+  complete notebooks from live-coding sessions (code along)
+
+- Midterm exam: 50 min, individual, based on quizzes
+
+- Final exam: 30 min, optional, individual conversation
+
+* Find out what you'll do every week
+
+1. Overview (theory)
+2. Example (code along)
+3. Practice (your turn)
+4. Problem (home assignment)
+5. Review (following class)
+
+** Detailed breakdown
+
+In class:
+| Retrieval warm-up | 5 min  |
+| Lecture/demo      | 20 min |
+| Live coding       | 20 min |
+| Applied practice  | 15 min |
+| Debrief           | 5 min  |
+| Summary           | 5 min  |
+|-------------------+--------|
+| Total             | 70 min |
+
+Exams:
+| Popquiz               | 10 min  | Surprise |
+| Midterm               | 70 min  | TBD      |
+| (Optional oral) Final | 30 min  | TBD      |
+
+At home (survival minimum):
+| Quiz       | 60 min | Weekly |
+| Assignment | 60 min | Weekly |
+| Reading    | 60 min | Weekly |
+| Review     | 60 min | Weekly |
+|------------+--------+--------|
+| Total      | *4 hrs*  | Weekly |
+
+[Usual for a 3 credit class: 3 * 2-3 hrs = 6-9 hrs]
+
+* Setup: What you'll need and what I use
+
+- *Live-coding*: We'll mostly work in [[https://jupyter.org/try-jupyter/][JupyterLite]] - a full Jupyter
+  notebook that runs entirely in your browser. No installation, no
+  account, nothing to configure - open the link and start coding in
+  Python.
+
+- *Assignments:* Something even lighter than JupyterLite, with no
+  notebook cells? Try [[https://onecompiler.com/python][onecompiler.com/python]] - a plain online Python
+  editor and runner. We'll be using it for home assignment
+  submissions.
+
+- Want to run Python on your own machine too? Install it from
+  [[https://python.org/downloads][python.org/downloads]]. It's free, and installers exist for Windows,
+  macOS, and Linux.
+
+- What else do you need?
+  #+begin_quote
+  *An editor or IDE* - your choice, entirely, if/when you work
+  locally. VS Code, Notepad++, vim, Emacs, whatever you're comfortable
+  with or want to learn. I won't teach or require any particular one.
+  #+end_quote
+
+* TODO Get your next assignments
+
+
+
+* TODO Find out what's next
