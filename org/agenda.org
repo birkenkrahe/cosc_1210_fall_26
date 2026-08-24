@@ -1,0 +1,47 @@
+#+TITLE: Agenda 
+#+AUTHOR: Marcus Birkenkrahe 
+#+SUBTITLE: COSC 1210 (CS I) FA26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+* W1S1: Overview
+#+attr_html: :width 600px :float nil:
+[[../img/Flammarion.jpg]]
+
+Image: from Camille Flammarion's L'Atmosphère: Météorologie populaire
+(1888) - "A medieval missionary tells that he has found the point
+where Heaven and Earth meet.[fn:1]
+
+| Time   | Topic                                                            |
+|--------+------------------------------------------------------------------|
+| 5 min  | Welcome & objectives                                             |
+| 15 min | Get to know your teacher & share why you're here                 |
+| 10 min | Understand what this course is about                             |
+| 15 min | Find out where to find stuff: Canvas, GitHub, chatbots, textbook |
+| 10 min | Whom to ask, and the course formalities                          |
+| 10 min | Weekly rhythm: in-class, exams, and at-home work                 |
+| 5 min  | Assignments & what's next                                        |
+
+* Programming as a way of thinking
+#+attr_html: :width 600px :float nil:
+[[../img/breughel_babel_1563.jpg]]
+
+Image: The (Great) Tower of Babel, by Pieter Bruegel the Elder
+(c. 1563 AD)[fn:2]
+
+| Time   | Topic                                                         |
+|--------+---------------------------------------------------------------|
+| 20 min | Hello world, errors, and your first working program           |
+| 15 min | Building a tax calculator: hardcoded -> general -> visualized |
+| 15 min | Why programming?                                              |
+| 15 min | Why programming in Python?                                    |
+| 5 min  | Glossary & wrap-up                                            |
+
+* Footnotes
+
+[fn:1]That's what we're doing all semester: Not just using tools, but
+reaching past the interface to see, and eventually build, what's
+operating behind it.
+
+[fn:2]The Tower of Babel fell to a confusion of languages —
+programming is the discipline of never letting that happen between you
+and the machine.

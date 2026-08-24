@@ -86,6 +86,7 @@
 - Canvas
 - GitHub
 - Textbook
+- DataCamp
 - Google Space
 - YouTube Playlist
 - Photos
@@ -154,6 +155,24 @@
 - The booksite contains the entire book and =Colab= notebooks where you
   can read through the book and interactively run all of the code.
 
+** DataCamp, Kattis, and other platforms
+
+- DataCamp is a top data science learning platform. You have access to
+  600+ courses for free.
+
+- I am offering this as a practice ground, and I will occasionally
+  refer to a DataCamp course, tutorial or project in class.
+
+- If you've got more energy and enthusiasm after doing your chores,
+  then DataCamp may be a fun activity.
+
+- You find the [[https://www.datacamp.com/groups/shared_links/95be78236a0fcad6a57b9629681bfe5de0d1f03717977e9fa50a89f8e2f72f5b][registration link]] in Canvas. Must register with
+  DataCamp.com first.
+
+- [[https://open.kattis.com][Kattis]] is a site with problems for competitive programming in many
+  different languages including Python. Start with the [[https://open.kattis.com/problems/hello][hello world]]
+  problem to see how it works and then keep solving problems.
+
 ** Google Chat Space and YouTube Playlist
 #+attr_html: :width 300px :float nil:
 [[../img/chat.png]]
@@ -221,11 +240,15 @@
 
 * Find out about the formal stuff
 
-- Read the fine print in the syllabus
+- Read the fine print in the syllabus.
 
-- This course is an AI-enabled course
+- This course is an *AI-enabled course:* AI tools are welcome for
+  research, debugging, and drafting, but every line of code you submit
+  must be code that you understand and can explain live; disclosed use
+  is fine, undisclosed or unexamined AI-written programs are not. More
+  details in the syllabus.
 
-- Feel free to inform me when I make mistakes
+- Feel free to inform me when I make mistakes.
 
 * Understand how you're being graded
 
@@ -239,14 +262,16 @@
 |-------------------------+--------+----------|
 | Total                   |        |     100% |
 
-- Programming assignments: weekly, submit as notebooks
+- Programming assignments: weekly, submit via URL
+
+- There will be plenty of (optional) bonus challenges
   
-- Quizzes: not timed, home, individual
+- Quizzes: multiple choice, not timed, home, individual
 
 - Participation: present solutions, ask/answer questions, upload
   complete notebooks from live-coding sessions (code along)
 
-- Midterm exam: 50 min, individual, based on quizzes
+- Midterm exam: 50 min, individual, based on quizzes (with mock exam)
 
 - Final exam: 30 min, optional, individual conversation
 
@@ -287,15 +312,13 @@ At home (survival minimum):
 
 * Setup: What you'll need and what I use
 
-- *Live-coding*: We'll mostly work in [[https://jupyter.org/try-jupyter/][JupyterLite]] - a full Jupyter
-  notebook that runs entirely in your browser. No installation, no
-  account, nothing to configure - open the link and start coding in
-  Python.
+- *Live-coding and assignments*: We'll mostly work in [[https://jupyter.org/try-jupyter/][JupyterLite]] - a
+  full Jupyter notebook that runs entirely in your browser. No
+  installation, no account, nothing to configure - open the link and
+  start coding in Python.
 
-- *Assignments:* Something even lighter than JupyterLite, with no
-  notebook cells? Try [[https://onecompiler.com/python][onecompiler.com/python]] - a plain online Python
-  editor and runner. We'll be using it for home assignment
-  submissions.
+- Something even lighter than JupyterLite, with no notebook cells? Try
+  [[https://onecompiler.com/python][onecompiler.com/python]] - a plain online Python editor and runner.
 
 - Want to run Python on your own machine too? Install it from
   [[https://python.org/downloads][python.org/downloads]]. It's free, and installers exist for Windows,
@@ -310,6 +333,42 @@ At home (survival minimum):
 
 * TODO Get your next assignments
 
-
-
 * TODO Find out what's next
+
+* Glossary
+
+** Course platforms & tools
+
+| Term                       | Definition                              |
+|----------------------------+-----------------------------------------|
+| Canvas                     | LMS: announcements, assignments, grades |
+| GitHub                     | Hosts course materials via Git          |
+| DataCamp                   | Free platform, 600+ coding courses      |
+| Kattis                     | Practice problems at open.kattis.com    |
+| Google Meet                | Video platform; sessions recorded here  |
+| Google Drive               | Stores recordings, whiteboard photos    |
+| Google Chat Space          | Class discussion and Q&A space          |
+| YouTube                    | Course-related video playlist           |
+| YuJa                       | Occasional supplementary video hosting  |
+| Respondus Lockdown Browser | Locked browser, possibly for tests      |
+
+** AI tools
+
+| Term         | Definition                                     |
+|--------------+------------------------------------------------|
+| Gemini       | Google's chatbot/agent used for research demos |
+| Google Colab | Free notebook environment; runs Gemini agent   |
+| Claude Code  | Agent harness using Claude (instructor's tool) |
+| OpenCode     | Free/open agent harness, alt. to Claude Code   |
+| Ollama       | Runs open LLMs locally, for free               |
+| Qwen3-Coder  | Free open coding model, pairs with Ollama      |
+
+** Setup & dev tools
+
+| Term                   | Definition                                        |
+|------------------------+---------------------------------------------------|
+| JupyterLite            | Browser-based Jupyter notebook, no install needed |
+| python.org/downloads   | Official installer for local Python               |
+| onecompiler.com/python | Plain online Python editor and runner             |
+| Emacs                  | Extensible text editor; author's tool             |
+| Org-mode               | Emacs mode for notes, code, literate docs         |
