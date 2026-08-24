@@ -31,13 +31,13 @@ File: See =org/1_overview.org= in GitHub
 Image: The (Great) Tower of Babel, by Pieter Bruegel the Elder
 (c. 1563 AD)[fn:2]
 
-| Time   | Topic                                                         |
-|--------+---------------------------------------------------------------|
-| 20 min | Hello world, errors, and your first working program           |
-| 15 min | Building a tax calculator: hardcoded -> general -> visualized |
-| 15 min | Why programming?                                              |
-| 15 min | Why programming in Python?                                    |
-| 5 min  | Glossary & wrap-up                                            |
+|   | Topic                                                         |
+|---+---------------------------------------------------------------|
+|   | Hello world, errors, and your first working program           |
+|   | Building a tax calculator: hardcoded -> general -> visualized |
+|   | Why programming?                                              |
+|   | Why programming in Python?                                    |
+|   | Glossary & wrap-up                                            |
 
 * Footnotes
 
