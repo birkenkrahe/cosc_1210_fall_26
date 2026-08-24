@@ -331,9 +331,23 @@ At home (survival minimum):
   with or want to learn. I won't teach or require any particular one.
   #+end_quote
 
-* TODO Get your next assignments
+* Get your next assignments
 
-* TODO Find out what's next
+- First *quiz* based on all materials from this week (due Fri 2pm)
+
+- Simple *home assignment* with Jupyter notebooks (due Fri 2 pm)
+
+- Upload code-along notebook (due Fri 2 pm) for participation
+
+- Optional: register with DataCamp and take a look
+
+- Reading: chapter 1, Think Python.
+
+* Find out what's next
+
+- Programming as a way of thinking (ch 1)
+
+- Code-along with me: Getting started with Jupyter
 
 * Glossary
 
