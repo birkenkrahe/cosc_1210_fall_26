@@ -38,10 +38,9 @@
   + Family: 1 wife, 1 daughter, 2 grandchildren, 3 dogs, 2 cats
   + Favorite Operating System (OS): Linux
   + Favorite programming language: C
-  + Favorite programming environment: Emacs
+  + Favorite programming environment: Emacs (Lisp)
   + Favorite food: Schnitzel (aka Milanesa, tonkatsu, escalope)
   + Favorite drink: peppermint tea
-  + Favorite hobbies: shooting / sailing / singing
 
 ** PRACTICE Your turn - why are you here?
 #+attr_html: :width 400px :float nil:
@@ -49,7 +48,7 @@
 
 - Even if you filled in the entry survey:
 
-- Let us hear why you're here
+- Let us hear why you're here - One-word check-in
 
 - So that I can hear (and learn) your name.
 
@@ -101,7 +100,7 @@
 
 2) Open the first module to get to the links
 
-3) Follow my instructions
+3) Follow along
 
 ** Canvas
 #+attr_html: :width 300px :float nil:
@@ -187,7 +186,7 @@
 
 - Feel free to join or leave it at any time.
 
-- Link: [[https://chat.google.com/room/AAQAG9do5RM?cls=7][chat.google.com/room/AAQAG9do5RM?cls=7]] (open to all of Augie)
+- Link: [[https://tinyurl.com/gspace-1210]] (open to all of Augie)
 
 - Link to the YouTube playlist:
   [[https://www.youtube.com/watch?v=9uW6B9LPntY&list=PLRe9Qsi9YpYU][youtube.com/watch?v=9uW6B9LPntY&list=PLRe9Qsi9YpYU]]
