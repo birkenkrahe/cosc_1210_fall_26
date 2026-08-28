@@ -32,7 +32,7 @@
   #+end_quote
 
 - Privately:
-  + PhD in theoretical particle physics (cp. "Big Bang Theory")
+  + PhD in theoretical particle physics (lattice gauge theory)
   + Worked at large multi-national companies in IT positions
   + Came to the US in 2021 from Germany (US citizen since 2026)
   + Family: 1 wife, 1 daughter, 2 grandchildren, 3 dogs, 2 cats
@@ -91,6 +91,7 @@
 - Photos
 - Chatbots / Generative AI
 
+  
 ** PRACTICE From Canvas to the textbook
 #+attr_html: :width 400px :float nil:
 [[../img/codealong.jpeg]]
@@ -227,6 +228,13 @@
 #+attr_html: :width 300px :float nil:
 [[../img/using_ai.png]]
 
+- Clean up my notes and give me a summary
+- Tell me how long I should study for assignment X
+- Debug my code after trying other resources
+- Sort through large amounts of data give me patterns (shopping)
+- Manage my bank transaction for budgeting purposes
+- Tell me a problem (at my level) and don't give me the answer
+
 * Find out whom to ask when
 
 - Always ask your mates/peers/friends first
@@ -332,11 +340,11 @@ At home (survival minimum):
 
 * Get your next assignments
 
-- First *quiz* based on all materials from this week (due Fri 2pm)
+- First *quiz* based on all materials from this week (due Fri 9/4 2pm)
 
-- Simple *home assignment* with Jupyter notebooks (due Fri 2 pm)
+- Simple *home assignment* with Jupyter notebooks (due Fri 9/4 2 pm)
 
-- Upload code-along notebook (due Fri 2 pm) for participation
+- Upload code-along notebook (due Fri 9/4 2 pm) for participation
 
 - Optional: register with DataCamp and take a look
 
