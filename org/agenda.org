@@ -10,16 +10,18 @@ Image: from Camille Flammarion's L'Atmosphère: Météorologie populaire
 (1888) - "A medieval missionary tells that he has found the point
 where Heaven and Earth meet.[fn:1]
 
+- *Check-in when in class:*
+  
 |   | Topic                                                                   |
 |---+-------------------------------------------------------------------------|
-|   | Welcome & objectives                                                    |
-|   | Get to know your teacher & share why you're here                        |
-|   | Understand what this course is about                                    |
-|   | Find out where to find stuff: Canvas, GitHub, textbook, DataCamp/Kattis |
-|   | Whom to ask, formalities, and grading                                   |
-|   | Weekly rhythm: in-class, exams, and at-home work                        |
-|   | Setup: JupyterLite, onecompiler, python.org                             |
-|   | Assignments & what's next (content still TODO in overview file)         |
+| x | Welcome & objectives                                                    |
+| x | Get to know your teacher & share why you're here                        |
+| x | Understand what this course is about                                    |
+| x | Find out where to find stuff: Canvas, GitHub, textbook, DataCamp/Kattis |
+| x | Whom to ask, formalities, and grading                                   |
+| x | Weekly rhythm: in-class, exams, and at-home work                        |
+| x | Setup: JupyterLite, onecompiler, python.org                             |
+| x | Assignments & what's next (content still TODO in overview file)         |
 |---+-------------------------------------------------------------------------|
 
 File: See =org/1_overview.org= in GitHub
@@ -30,6 +32,12 @@ File: See =org/1_overview.org= in GitHub
 
 Image: The (Great) Tower of Babel, by Pieter Bruegel the Elder
 (c. 1563 AD)[fn:2]
+
+- I sorted the Google Space problem out (with the help of IT): You
+  should have received an invitation from me.
+
+- I also added the link to the class photo to Canvas: please open it
+  and add your name to your face so that I can learn it.
 
 |   | Topic                                                         |
 |---+---------------------------------------------------------------|
