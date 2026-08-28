@@ -3,6 +3,22 @@
 #+SUBTITLE: COSC 1210 (CS I) FA26 | Augustana U.
 #+STARTUP: overview hideblocks indent entitiespretty
 #+OPTIONS: toc:nil num:nil ^:nil
+* Objectives
+
+Find out:
+- What is programming?
+- Why learn programming?
+- Why program in Python?
+
+Along the way, you see:
+- How to open and use a Jupyter notebook
+- 32 different technical terms or commands
+- How to define a function
+- How to handle a program exception
+- How to solve a computational problem
+- How to generalize the solution of a computational problem
+- How to visualize data
+
 * What is programming?
 
 In your browser, open a [[https://jupyter.org/try-jupyter/lab/index.html][Jupyter notebook]] to code along: go to
@@ -10,6 +26,18 @@ In your browser, open a [[https://jupyter.org/try-jupyter/lab/index.html][Jupyte
 
 Alternatively, you can download Jupyter lab from jupyter.org ("Install
 JupyterLab").
+
+** Code along exercises
+
+- There is at least one code along exercise in every class that you
+  need to upload.
+
+- You can download the ~.ipynb~ file from Jupyter and upload it to
+  Canvas.
+
+- At the end of today's session, upload your .ipynb file to Canvas
+
+- I'm going to switch to Jupyter myself now: jupyter.org/try-jupyter
 
 ** Jupyter notebooks
 

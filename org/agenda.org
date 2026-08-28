@@ -39,6 +39,8 @@ Image: The (Great) Tower of Babel, by Pieter Bruegel the Elder
 - I also added the link to the class photo to Canvas: please open it
   and add your name to your face so that I can learn it.
 
+- I added a link to the Google Meet recordings in Canvas.
+
 |   | Topic                                                         |
 |---+---------------------------------------------------------------|
 |   | Hello world, errors, and your first working program           |
