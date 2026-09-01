@@ -19,7 +19,7 @@ Along the way, you see:
 - How to generalize the solution of a computational problem
 - How to visualize data
 
-* What is programming?
+* DONE What is programming?
 
 In your browser, open a [[https://jupyter.org/try-jupyter/lab/index.html][Jupyter notebook]] to code along: go to
 [[jupyter.org/try-jupyter/]] (this is JupyterLite in the cloud).
@@ -173,22 +173,16 @@ person, nudged up by a fixed 10-25% depending on that visit's tip.
 
 - What do you think?
   #+begin_quote
-  1) 
-  2) 
-  3) 
-  4) 
-  5) 
-  6) 
-  7) 
-  8) 
-  9) 
-  10) 
+  1) Independence (self-sufficiency, freedom)
+  2) Understand what AI does and control it
+  3) Make tools to make your work easier
+  4) Learn how to use machines for problem-solving
   #+end_quote
 
 - What do I think?
   #+begin_quote
   1) Programming builds empirical, iterative thinking: it's
-     immediately falsifiable ("Did it work?")
+     immediately falsifiable ("Did it work?")[fn:1]
      
   2) Programming is a form of autonomy (freedom): you can turn your
      ideas into a working product without asking for permission,
@@ -207,14 +201,14 @@ person, nudged up by a fixed 10-25% depending on that visit's tip.
   6) AI does not lower the bar, it raises it: getting something to run
      is easy now, knowing when and how to deploy agents is difficult.
   #+end_quote
-
+  
 - When and how did I start programming?
   #+begin_quote
   In 1979, when I was 16, my dad bought me a TI-99/4 home computer. My
-  best friend had an Apple II Plus[fn:1]. We began to write computer
+  best friend had an Apple II Plus[fn:2]. We began to write computer
   games and eventually both ended up getting our PhDs in physics. It's
   fun to compare what Linus Torvalds, the creator Linux (and still its
-  head honcho) [[https://www.brynmawr.edu/inside/academic-information/departments-programs/computer-science/beauty-programming][has to say about this]].
+  head honcho) [[https://www.brynmawr.edu/inside/academic-information/departments-programs/computer-science/beauty-programming][has to say about "The beauty of programming"]].
   #+end_quote  
   #+attr_html: :width 400px :float nil:
   [[../img/ti-99.jpg]] [[../img/apple-plus.jpg]]
@@ -401,7 +395,16 @@ your tech vocabulary is to use the tech - in this case: by coding.
 
 * Footnotes
 
-[fn:1]These home computers cost around $1,000 in 1979, which is about
+[fn:1]Falsifiable vs. verifiable: 1) A claim is falsifiable if there
+is one possible observation that would prove it wrong: "All swans are
+white" is proven wrong if you can find one black swan. 2) A claim is
+verifiable if there is some possible observation that would prove it
+right: "There exists a black swan" is verifiable (find one), but not
+falsifiable (you can never finish checking that none exist
+anywhere). "All swans are white" is falsifiable but not verifiable:
+you cannot test an infinite number of swans.
+
+[fn:2]These home computers cost around $1,000 in 1979, which is about
 $5,000 in today's money. To enter computing then was not a poor kid's
 game. Today, you can start with a $5 micro:bit computer and
 MicroPython, if you want the hardware, or just use your browser.
