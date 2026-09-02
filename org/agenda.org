@@ -95,7 +95,7 @@ See: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/org/3_arithmet
 
 * W2S2: Python basics - more operators, strings, values, errors and types
 
-** Housekeeping
+** Housekeeping - Code-along uploads & DataCamp
 
 - Several of you are still missing submissions for *code-along
   files*. This will affect your *participation* grade.
@@ -108,6 +108,17 @@ See: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/org/3_arithmet
 
 - I will review the data on the weekend and may reach out to you.
 
+- *DataCamp*: few of you have registered with this platform. While it is
+  not mandatory, you should take a look at it and use the additional
+  opportunity to practice Python, esp. if you're into *data science*.
+
+- The material of this week, for example, is covered in the first
+  lesson of the *Introduction to Python* course - takes only 20 minutes.
+
+- Once you've completed a lesson you get daily practice opportunities:
+  5 minutes of Python every day will keep you immersed and make your
+  learning much easier and more efficient!
+  
 ** Review
 
 I ask a question and you (hopefully) know the answer. You don't have
