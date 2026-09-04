@@ -3,11 +3,12 @@
 #+AUTHOR: Marcus Birkenkrahe
 #+STARTUP: overview hideblocks indent
 #+OPTIONS: toc:nil num:nil ^:nil
+
 * Why install this at all?
 
-So far you have been coding entirely in the browser: Colab, DataCamp,
-and the JupyterLite version of JupyterLab we used in class. None of
-those require anything installed on your computer.
+So far you have been coding entirely in the browser, with the
+JupyterLite version of JupyterLab we used in class. This does require
+anything installed on your computer except the browser app.
 
 Installing Python 3 and JupyterLab locally gives you a copy that:
 
