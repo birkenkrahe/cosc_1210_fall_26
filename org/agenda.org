@@ -49,7 +49,7 @@ Image: The (Great) Tower of Babel, by Pieter Bruegel the Elder
 |   | Why programming in Python?                                    |
 |   | Glossary & wrap-up                                            |
 
-* W2S1: Python basics - arithmetic, expressions, precedence
+* DONE W2S1: Python basics - arithmetic, expressions, precedence
 
 |   | Block                                             | min |
 |---+---------------------------------------------------+-----|
@@ -93,7 +93,7 @@ Image: The (Great) Tower of Babel, by Pieter Bruegel the Elder
 
 See: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/org/3_arithmetic.org][3_arithmetic.org in GitHub]].
 
-* W2S2: Python basics - more operators, strings, values, errors and types
+* DONE W2S2: Python basics - more operators, strings, values, errors and types
 
 ** Housekeeping - Code-along uploads & DataCamp
 
@@ -174,18 +174,123 @@ to say anything - just make sure yourself that you are on top of it.
    #+RESULTS:
    :   File "<string>", line 1
    :     print 5 ** 2
-   :           ^
-   : SyntaxError: Missing parentheses in call to 'print'. Did you mean print(5 ** 2)?
+   :     ^^^^^^^^^^^^
+   : SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
 
 ** Python arithmetic part 2
 
-- [ ] More operators
-- [ ] Built-in functions
-- [ ] Strings
-- [ ] Data types
-- [ ] Debugging
+- [X] More operators
+- [X] Built-in functions
+- [X] String operations
 
-* W2S3
+** Take aways
+
+- Check out with one word: something that you take away from class
+  today as
+  1. something you either did not know yet, or
+  2. that you perhaps know but understand better, or
+  3. that you knew but liked to see and use again.
+
+* DONE W2S3: Python basics
+#+attr_html: :width 400px :float nil:
+[[../img/Programming_Arithmetic_Fundamentals_Guide.png]]
+** Extras
+
+Highlighting some bonus content for this class ([[https://chat.google.com/room/AAQAeL5a2zw?cls=7][from the chat]]):
+1) Spam, Spam, Spam  by Monty Python (1970)
+2) JupyterLab installation notes
+3) The Beauty of Programming by Linus Torvalds (2001)
+4) ELIZA chatbot by Joseph Weizenbaum (1966)
+5) Python resources: python.org, realpython.com, freeCodeCamp
+6) Is learning to code in 2026 still important? YouTube Playlist
+
+You will get a 1-page infographic and a video overview for this week
+(link in Canvas in the 2. Programming module to Photos, Slides,
+Videos).
+
+** Review
+
+1) ~divmod~ is a function that combines integer division and modulo
+   operation: =divmod(a,b) = (a // b, a % b)=
+
+   What is the result of =divmod(10,3)=?
+   #+begin_src python :results output :exports both :session *Python* :python python3 
+     print(divmod(10,3)) # 10 = 3 * 3 + 1
+   #+end_src
+
+   #+RESULTS:
+   : (3, 1)
+
+2) How would you convert 500 days to whole days and leftover hours?
+   #+begin_src python :results output :exports both :session *Python* :python python3 
+     print(divmod(500,24)) # how many times does 24 fit in 500
+     print(f"500 days are {divmod(500,24)[0]} whole days \
+     and {divmod(500,24)[1]} hours.")
+   #+end_src
+
+   #+RESULTS:
+   : (20, 20)
+   : 500 days are 20 whole days and 20 hours.
+
+3) What do you need to remember about using ~round~ on decimals ending
+   in 5?
+   #+begin_quote
+   ~round~ works from the actual stored value, not the decimal
+   literal. A decimal ending in 5 is almost never a perfect tie in
+   binary.
+   #+end_quote
+   #+begin_src python :results output :exports both :session *Python* :python python3 
+     print(round(3.675,2))
+   #+end_src
+
+   #+RESULTS:
+   : 3.67
+
+4) What do you get when you run =print("Spam") * 5= ?
+   #+begin_quote
+   ="Spam"= because the machine executes from the left, and then you get
+   a ~TypeError~ because the operands =print("Spam")= and =5=, cannot be
+   multiplied (=5= is an integer, and =print("Spam")= returns "nothing"
+   aka ~None~ - it only does something, namely print.
+   #+end_quote
+
+5) What's "XOR" stand for?
+   #+begin_quote
+     XOR is a logical operator. It is ~True~ only if its two operands
+     have different truth (aka boolean) values:
+
+     | p     | q     | p XOR q | Example                   |
+     |-------+-------+---------+---------------------------|
+     | True  | True  | False   | N is even and odd         |
+     | True  | False | True    | N = 4: even, not odd      |
+     | False | True  | True    | N = 7: odd, not even      |
+     | False | False | False   | N is neither even nor odd |
+
+     In Python, the caret (~^~) is the XOR operator for binary values.
+   #+end_quote
+   #+begin_src python :results output :exports both :session *Python* :python python3 
+     n = 5
+     print((n % 2 == 0) ^ (n % 2 == 1)) # always True for any integer n
+                                        # (tautology)
+   #+end_src
+
+** Code-along lecture + Practice
+
+- Open JupyterLite in a browser: https://jupyter.org/try-jupyter
+- Code along with me
+- Download your notebook's .ipynb file
+- Upload the file to Canvas:
+  [[https://augie.instructure.com/courses/15635/assignments/272783][Code-Along: String functions, values, types, debugging]]
+
+** Home assignments (by Sept 11, 11:59 pm)
+
+- Watch the video recording, upload your code along file
+- Quiz 2 covering all content from this week (incl. the video)
+- Programming assignment: String Art
+
+* W3S1: Variables and statements
+
+* W3S2: ~print~ function and arguments
 
 * Footnotes
 
