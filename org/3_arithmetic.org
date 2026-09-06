@@ -1120,7 +1120,216 @@ Python errors fall into three families: /syntax/ errors (bad grammar —
 Python refuses to run), /runtime/ errors (crash during execution), and
 /semantic/ errors (runs, but gives the wrong answer — no message at all).
 
+** SyntaxError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # SyntaxError - Python cannot parse the code
+  print("hello)
+#+end_src
+
+#+begin_example
+  Cell In[1], line 2
+    print("hello)
+          ^
+SyntaxError: unterminated string literal (detected at line 2)
+#+end_example
+
+Fix:
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print("hello")
+#+end_src
+
+#+RESULTS:
+: hello
+
+** IndentationError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # IndentationError - unexpected indent
+  print("hello", end=" ")
+    print("world")
+#+end_src
+
+#+begin_example
+  Cell In[2], line 3
+    print("world")
+    ^
+IndentationError: unexpected indent
+#+end_example
+
+Fix:
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print("hello", end=" ")
+  print("world")
+#+end_src
+
+#+RESULTS:
+: hello world
+
+** NameError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # NameError - variable is used before it was defined
+  print(age)
+#+end_src
+
+#+begin_example
+Traceback (most recent call last):
+  Cell In[5], line 2
+    print(age)
+NameError: name 'age' is not defined
+#+end_example
+
+Fix:
+#+begin_src python :results output :exports both :session *Python* :python python3
+  age = 25
+  print(age)
+#+end_src
+
+#+RESULTS:
+: 25
+
+** TypeError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # TypeError - wrong type for the operation
+  print('3' + 3)
+#+end_src
+
+#+begin_example
+Traceback (most recent call last):
+  Cell In[8], line 2
+    print('3' + 3)
+TypeError: can only concatenate str (not "int") to str
+#+end_example
+
+Fix:
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print('3' + str(3)) # concatenating two strings
+  print(3 + 3)        # adding two integers
+#+end_src
+
+#+RESULTS:
+: 33
+: 6
+
+** ValueError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # ValueError - right type, but the value cannot be converted
+  int("hello")
+#+end_src
+
+#+begin_example
+Traceback (most recent call last):
+  Cell In[10], line 2
+    int("hello")
+ValueError: invalid literal for int() with base 10: 'hello'
+#+end_example
+
+Fix:
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(int("444"))
+#+end_src
+
+#+RESULTS:
+: 444
+
+** ZeroDivisionError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # ZeroDivisionError - dividing by zero is not defined
+  print(10/0)
+#+end_src
+
+#+begin_example
+Traceback (most recent call last):
+  Cell In[12], line 2
+    print(10/0)
+ZeroDivisionError: division by zero
+#+end_example
+
+There's no fix but you can build guardrails around operations that
+might return this error, using the ~try...except~ command in Python.
+
+** ModuleNotFoundError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # ModuleNotFoundError - module does not exist or is not installed
+  import pandaemonium
+#+end_src
+
+#+begin_example
+Traceback (most recent call last):
+  Cell In[13], line 2
+    import pandaemonium
+ModuleNotFoundError: No module named 'pandaemonium'
+#+end_example
+
+** IndexError
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # IndexError - index goes beyond the length of the list
+  x = [10, 20, 30]
+  print(len(x))   # notice that Python starts numbering at 0
+#+end_src
+
+#+RESULTS:
+: 3
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(x[3])
+#+end_src
+
+#+begin_example
+Traceback (most recent call last):
+  Cell In[15], line 1
+    print(x[3])
+IndexError: list index out of range
+#+end_example
+
+Fix:
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(x[len(x)-1])
+#+end_src
+
+#+RESULTS:
+: 30
+
+** Semantic error
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # Semantic error - runs, but gives the wrong answer
+  import math
+
+  radius = 5
+  area = 2 * math.pi * radius # wrong formula!
+
+  print(area)
+#+end_src
+
+#+RESULTS:
+: 31.41592653589793
+
+Fix:
+#+begin_src python :results output :exports both :session *Python* :python python3
+  area = math.pi * radius**2
+  print(area)
+#+end_src
+
+#+RESULTS:
+: 78.53981633974483
+
+* A gallery of errors (CLI version)
+
+Python errors fall into three families: /syntax/ errors (bad grammar —
+Python refuses to run), /runtime/ errors (crash during execution), and
+/semantic/ errors (runs, but gives the wrong answer — no message at all).
+
 Each block below runs independently so one error does not affect the next.
+
+I am only using the command-line ~python3~ here so that you see the
+error displayed (otherwise it would only show on the console.
 
 #+begin_src bash :results output :exports both
 # SyntaxError — Python cannot parse the code

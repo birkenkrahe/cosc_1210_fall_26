@@ -19,7 +19,7 @@ Along the way, you see:
 - How to generalize the solution of a computational problem
 - How to visualize data
 
-* DONE What is programming?
+* What is programming?
 
 In your browser, open a [[https://jupyter.org/try-jupyter/lab/index.html][Jupyter notebook]] to code along: go to
 [[jupyter.org/try-jupyter/]] (this is JupyterLite in the cloud).
