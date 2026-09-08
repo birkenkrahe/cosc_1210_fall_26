@@ -302,6 +302,112 @@ Videos).
   
 - New bonus assignment "Debug the Bill Splitter"
 
+** Review: strings, values, types, and errors
+
+From week 2, part 2 (string functions onward) - the ground quiz 2 covers.
+
+1) Strings are called *immutable*. What does that mean, and what do the
+   string methods ~upper~ and ~lower~ actually do to a string?
+   #+begin_quote
+   Immutable = you cannot change a character inside an existing
+   string; the string object itself never changes. ~"hello".upper()~
+   does not touch ="hello"= - it builds and returns a *new* string
+   ="HELLO"=.
+   #+end_quote
+
+2) Why is ~len("hello")~ written differently from ~"hello".upper()~?
+   #+begin_quote
+   ~len~ is a *built-in function*: the string goes inside its parentheses
+   as an *argument*. ~upper~ is a *string method*: it belongs to the string
+   and you reach it with the *dot operator*, with empty parentheses.
+   You can also call ~len~ on other other data structures, e.g. a list.
+   #+end_quote
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     print(len("hello"))      # function - argument in ()
+     print("hello".upper())   # method - reached with the dot
+     print(len(range(0,9)));  # calling len() on a range of numbers
+     print(type(range(0,9)))
+     print(len([100,"hello", [3.14,2.71]])) # calling len() on a list
+   #+end_src
+
+3) In ="Spam, " * 5 + "and Spam!"=, does the ~*~ or the ~+~ happen
+   first, and what is the result?
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     print("Spam, " * 5 + "and Spam!")   # * binds tighter than +
+   #+end_src
+
+4) What happens when you run =print(2 + " Spam " * 5)=?
+   #+begin_quote
+   A ~TypeError~. The ~*~ is fine (=str * int= repeats the string), but
+   then ~+~ needs a string on both sides and =2= is an integer - the
+   same reason ="Spam" + 5= fails.
+   #+end_quote
+   #+begin_src python :results output :exports both :session *Python* :python python3 
+     print(str(2) + " Spam " * 5)
+   #+end_src
+   
+5) Python is *dynamically typed*, and every value has a type. Name the
+   four basic types, with one value of each.
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     print(type(2))        # int   - whole number
+     print(type(33.3))     # float - number with a decimal point
+     print(type("hello"))  # str   - text
+     print(type(True))     # bool  - True / False
+   #+end_src
+
+6) What does =int(33.9)= give? And =int(-33.9)=? Is that rounding?
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     print(int(33.9))   # 33  - drops the fraction, does NOT round
+     print(int(-33.9))  # -33 - truncates towards zero
+   #+end_src
+
+7) =int("444")= works but =int("hello")= does not. What is the
+   difference?
+   #+begin_quote
+   =int("444")= returns =444=, an ~int~. =int("hello")= raises a ~ValueError~:
+   the argument is the right *type* (a string) but its *value* cannot be
+   read as a decimal number.
+   #+end_quote
+
+8) =print(str(33))= and =print(33)= put the same thing on screen. So
+   what did ~str~ actually change?
+   #+begin_quote
+   Nothing you can see - ~str~ converts the *type* from ~int~ to ~str~.
+   The type is not visible in the output; you check it with ~type~.
+   #+end_quote
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     print(str(33))         # looks like 33
+     print(type(str(33)))   # ...but it is a string now
+     print(type(33))        # the original is still an int
+   #+end_src
+
+   #+RESULTS:
+   : 33
+   : <class 'str'>
+   : <class 'int'>
+
+9) A rule of thumb: when do you get a ~ValueError~ and when a
+   ~TypeError~? Could you come up with an example for each?
+   #+begin_quote
+   Wrong *type* for the operation -> ~TypeError~. Right type but an
+   unusable *value* -> ~ValueError~.
+   #+end_quote
+   #+begin_src python :results none :exports both :session *Python* :python python3 
+     print(2 + "2") # TypeError: unsupported operand type(s) for +: 'int' and 'str'
+   #+end_src
+   #+begin_src python :results output :exports both :session *Python* :python python3 
+     print(int("hello")) # ValueError: invalid literal for int() with base 10: 'hello'
+   #+end_src
+   
+10) Name the three families of Python errors and when each strikes.
+    #+begin_quote
+    - /syntax/ errors: bad grammar - caught *before* the code runs
+    - /runtime/ errors: a crash *during* execution, at the failing line
+      (~NameError~, ~TypeError~, ~ZeroDivisionError~, ~IndexError~, ...)
+    - /semantic/ errors: it runs and finishes, but the answer is wrong -
+      no message at all
+    #+end_quote
+
 ** Variables and statements (ch. 2)
 
 After completing this code-along lecture with practice, you can:
