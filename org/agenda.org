@@ -288,10 +288,12 @@ Videos).
 - Quiz 2 covering all content from this week (incl. the video)
 - Programming assignment: String Art
 
-* W3S1: Variables and statements 
+* W3S1: Variables and statements
+#+attr_html: :width 200px :float nil:
+[[../img/Programming_Variables_and_Statements_Guide.png]]
 ** Housekeeping
 
-- Video recording:
+- Video recording in Canvas-YuJa:
   1. Review of week 2
   2. String functions and a practice problem
   3. Practice problem solution
@@ -301,6 +303,8 @@ Videos).
 - You must upload the code-along notebook
   
 - New bonus assignment "Debug the Bill Splitter"
+
+- Infographic, slide deck, and video overview for this week
 
 ** Review: strings, values, types, and errors
 

@@ -39,9 +39,6 @@ Assignments:
     print(spam)
   #+end_src
 
-  #+RESULTS:
-  : 33
-
 - Now point =spam= at another value:
   #+begin_src python :results output :exports both :session *Python* :python python3
     spam = 3.14
