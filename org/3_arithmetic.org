@@ -12,9 +12,11 @@ Topics:
 - Expressions
 - String type
 - Values and types
+- Type conversion
 - Debugging
+- Python errors
 
-Source: Downey Think Python (3e)
+Source: Downey Think Python (3e), chapter 1
 
 * Illusions of the machine
 

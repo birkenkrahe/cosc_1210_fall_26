@@ -288,9 +288,31 @@ Videos).
 - Quiz 2 covering all content from this week (incl. the video)
 - Programming assignment: String Art
 
-* W3S1: Variables and statements
+* W3S1: Variables and statements 
+** Housekeeping
 
-* W3S2: ~print~ function and arguments
+- Video recording:
+  1. Review of week 2
+  2. String functions and a practice problem
+  3. Practice problem solution
+  4. Values, types, type conversion
+  5. Debugging and a gallery of Python errors
+
+- You must upload the code-along notebook
+  
+- New bonus assignment "Debug the Bill Splitter"
+
+** Variables and statements (ch. 2)
+
+After completing this code-along lecture with practice, you can:
+- Variables to store values
+- Importing a library
+- Expressions vs. statements
+- ~print~ function
+- Function arguments
+- Extended eample: Pythagoras' theorem
+- Home assignment: Pay stub calculator
+- Bonus assignments: Circle Calculator, Change Maker
 
 * Footnotes
 
