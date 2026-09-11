@@ -272,53 +272,6 @@ says what it does with them, then test both with ~help~:
 For =discount=, the docstring has to settle one real question: is
 =percent= the number =20= or the fraction =0.20=?
 
-** Solution                                                           :skip:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def hypotenuse(a, b):
-      """Print the hypotenuse of a right triangle.
-
-      a, b -- the lengths of the two legs (numbers)
-      Prints the hypotenuse; returns nothing.
-      """
-      c = (a**2 + b**2) ** 0.5
-      print(c)
-
-  def discount(price, percent):
-      """Print the sale price after taking a percentage off.
-
-      price   -- the original price (a number)
-      percent -- the discount as a whole number, so 20 means 20% off
-      Prints the reduced price; returns nothing.
-      """
-      print(price - price * percent / 100)
-
-  hypotenuse(3, 4)
-  help(hypotenuse)
-  discount(50, 20)
-  help(discount)
-#+end_src
-
-#+RESULTS:
-: 5.0
-: Help on function hypotenuse in module __main__:
-:
-: hypotenuse(a, b)
-:     Print the hypotenuse of a right triangle.
-:
-:     a, b -- the lengths of the two legs (numbers)
-:     Prints the hypotenuse; returns nothing.
-:
-: 40.0
-: Help on function discount in module __main__:
-:
-: discount(price, percent)
-:     Print the sale price after taking a percentage off.
-:
-:     price   -- the original price (a number)
-:     percent -- the discount as a whole number, so 20 means 20% off
-:     Prints the reduced price; returns nothing.
-
 * Calling one function from another
 
 Once a function exists, other functions can call it. Here ~notice~
@@ -421,51 +374,6 @@ Correct output:
 2 x coffee
 Total: $7.0
 ------------------------
-#+end_example
-
-** Solution                                                          :skip:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def rule():
-      """Print a line of 24 dashes."""
-      print("-" * 24)
-
-  def receipt(item, price, qty):
-      """Print a receipt for one item.
-
-      item  -- a sold item (a string)
-      price -- the item price (a number)
-      qty   -- the number of items sold (a number)
-      Prints the <qty> x <item> line and the Total line (price * qty);
-      returns nothing.
-      Calls rule() for the top and bottom lines.
-      """
-      rule()
-      print(f"{qty} x {item}\nTotal: ${price * qty}")
-      rule()
-
-  receipt("coffee", 3.5, 2)
-
-  help(receipt)
-#+end_src
-
-#+RESULTS:
-#+begin_example
-------------------------
-2 x coffee
-Total: $7.0
-------------------------
-Help on function receipt in module __main__:
-
-receipt(item, price, qty)
-    Print a receipt for one item.
-
-    item  -- a sold item (a string)
-    price -- the item price (a number)
-    qty   -- the number of items sold (a number)
-    Prints the <qty> x <item> line and the Total line (price * qty);
-    returns nothing.
-    Calls rule() for the top and bottom lines.
 #+end_example
 
 * Repetition: ~for~ and ~range()~
@@ -587,54 +495,6 @@ pass:
    #+end_example
 
    Use ~def~, a ~for~ loop, ~range~, ~*~ and ~print~. No ~if~.
-
-** Solution                                                          :skip:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def rectangle(char, width, height):
-      """Print a solid rectangle built from a repeated character.
-
-      char   -- the character to draw with, e.g. '#'
-      width  -- how many characters wide (a whole number)
-      height -- how many rows tall (a whole number)
-      Prints the block; returns nothing.
-      """
-      for row in range(height):
-          print(char * width)
-
-  rectangle('#', 5, 3)
-#+end_src
-
-#+RESULTS:
-: #####
-: #####
-: #####
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def triangle(char, height):
-      """Print a right triangle built from a repeated character.
-
-      char   -- the character to draw with, e.g. '#'
-      height -- how many rows tall; row k has k characters (a whole number)
-      Prints the triangle; returns nothing.
-      """
-      for row in range(height):
-          print(char * (row + 1))
-
-  rectangle("#", 5, 3)
-  print()
-  triangle("#", 4)
-#+end_src
-
-#+RESULTS:
-: #####
-: #####
-: #####
-: 
-: #
-: ##
-: ###
-: ####
 
 * Local variables live inside the function
 
@@ -787,44 +647,6 @@ was wrong.
 
 There is a bonus assignment "Debug Bill Splitter" available that asks
 for a similar thing.
-
-** Solution                                                          :skip:
-
-Bugs:
-
-1. ~def line(label, value)~ - missing the colon -> ~SyntaxError~, caught
-   before anything runs.
-2. ~report(18)~ - only one argument for two parameters ->
-   ~TypeError: report() missing 1 required positional argument: 'absent'~.
-   Call it ~report(18, 2)~.
-3. ~total~ is local to ~report~, so ~print("Total students:", total)~
-   outside it -> ~NameError~. There is no ~return~ yet, so the fix is to
-   print the total *inside* ~report~.
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def divider():
-      print("=" * 20)
-
-  def line(label, value):
-      print(label + ": " + str(value))
-
-  def report(present, absent):
-      divider()
-      line("Present", present)
-      line("Absent", absent)
-      total = present + absent
-      divider()
-      print("Total students:", total)
-
-  report(18, 2)
-#+end_src
-
-#+RESULTS:
-: ====================
-: Present: 18
-: Absent: 2
-: ====================
-: Total students: 20
 
 * Summary
 

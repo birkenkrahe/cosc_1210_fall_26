@@ -288,9 +288,10 @@ Videos).
 - Quiz 2 covering all content from this week (incl. the video)
 - Programming assignment: String Art
 
-* W3S1: Variables and statements
+* DONE W3S1: Variables and statements
 #+attr_html: :width 200px :float nil:
 [[../img/Programming_Variables_and_Statements_Guide.png]]
+
 ** Housekeeping
 
 - Video recording in Canvas-YuJa:
@@ -349,6 +350,9 @@ From week 2, part 2 (string functions onward) - the ground quiz 2 covers.
    #+begin_src python :results output :exports both :session *Python* :python python3 
      print(str(2) + " Spam " * 5)
    #+end_src
+
+   #+RESULTS:
+   : 2 Spam  Spam  Spam  Spam  Spam
    
 5) Python is *dynamically typed*, and every value has a type. Name the
    four basic types, with one value of each.
@@ -359,11 +363,21 @@ From week 2, part 2 (string functions onward) - the ground quiz 2 covers.
      print(type(True))     # bool  - True / False
    #+end_src
 
+   #+RESULTS:
+   : <class 'int'>
+   : <class 'float'>
+   : <class 'str'>
+   : <class 'bool'>
+
 6) What does =int(33.9)= give? And =int(-33.9)=? Is that rounding?
    #+begin_src python :results output :exports both :session *Python* :python python3
      print(int(33.9))   # 33  - drops the fraction, does NOT round
      print(int(-33.9))  # -33 - truncates towards zero
    #+end_src
+
+   #+RESULTS:
+   : 33
+   : -33
 
 7) =int("444")= works but =int("hello")= does not. What is the
    difference?
@@ -402,6 +416,8 @@ From week 2, part 2 (string functions onward) - the ground quiz 2 covers.
    #+begin_src python :results output :exports both :session *Python* :python python3 
      print(int("hello")) # ValueError: invalid literal for int() with base 10: 'hello'
    #+end_src
+
+   #+RESULTS:
    
 10) Name the three families of Python errors and when each strikes.
     #+begin_quote
@@ -409,7 +425,7 @@ From week 2, part 2 (string functions onward) - the ground quiz 2 covers.
     - /runtime/ errors: a crash *during* execution, at the failing line
       (~NameError~, ~TypeError~, ~ZeroDivisionError~, ~IndexError~, ...)
     - /semantic/ errors: it runs and finishes, but the answer is wrong -
-      no message at all
+      no message at all (use a debugger e.g. pythontutor.com)
     #+end_quote
 
 ** Variables and statements (ch. 2)
@@ -423,6 +439,21 @@ After completing this code-along lecture with practice, you can:
 - Extended eample: Pythagoras' theorem
 - Home assignment: Pay stub calculator
 - Bonus assignments: Circle Calculator, Change Maker
+
+* W3S2: Functions I
+
+Today:
+- Defining functions with ~def~
+- Telling parameters from arguments
+- Documenting functions
+
+Next assignments:
+- Pay stub calculator (submit your notebook by Sept 18)
+- Quiz 3 (Variables and statements and functions I) - by Sept 18
+- Bonus assignment: Change Maker (Oct 9)
+- Bonus assignment: Circle Calculator (Oct 9)
+
+* W4S1: Functions II
 
 * Footnotes
 
