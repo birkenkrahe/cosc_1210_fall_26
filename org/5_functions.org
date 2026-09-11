@@ -16,7 +16,7 @@ By the end of this lesson you can:
 - explain why a variable made inside a function is invisible outside it
 - read a traceback from the bottom up
 
-Three sessions:
+Sessions:
 1. Defining, documenting and calling functions
 2. Repetition: ~for~ and ~range()~
 3. Local variables and tracebacks
@@ -108,6 +108,9 @@ An argument can be a variable, not just a literal:
 #+RESULTS:
 : Hello, Joe!
 
+Parameter names follow the same rules as any other Python name: no
+reserved words, no spaces, and so on.
+
 ** Two parameters
 
 Two parameters, separated by commas (this time with an f-string):
@@ -136,6 +139,18 @@ Every definition has the same parts:
 
 *Parameters* live in the definition; *arguments* live in the call.
 
+Parameters do not have to be strings - here both are numbers:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def add(a, b):
+      print(a + b)
+
+  add(2, 2)
+#+end_src
+
+#+RESULTS:
+: 4
+
 ** Default parameters
 
 You've seen this in the Python documentation for built-in functions:
@@ -161,6 +176,21 @@ it is recognized: =number = 2.55=.
 
 The ~ndigits~ parameter for the number of digits to be kept after the
 decimal point is *named*.
+
+Try it: give only ~number~ and ~ndigits~ falls back to its default
+(~None~), so you get a whole number back; give ~ndigits~ too - by
+position or by name - and you get decimal places:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(round(3.1459))
+  print(round(3.1459, 2))
+  print(round(3.1459, ndigits=2))
+#+end_src
+
+#+RESULTS:
+: 3
+: 3.15
+: 3.15
 
 We could also create a greeting function with a named parameter. Then
 it could be called either with or without an argument:
@@ -272,432 +302,50 @@ says what it does with them, then test both with ~help~:
 For =discount=, the docstring has to settle one real question: is
 =percent= the number =20= or the fraction =0.20=?
 
-* Calling one function from another
-
-Once a function exists, other functions can call it. Here ~notice~
-calls ~rule~ twice and ~print~ once:
+** Solution                                                           :skip:
 
 #+begin_src python :results output :exports both :session *Python* :python python3
-  def rule():
-      print("-" * 24)
+  def hypotenuse(a, b):
+      """Print the hypotenuse of a right triangle.
 
-  def notice(text):
-      rule()
-      print(text)
-      rule()
+      a, b -- the lengths of the two legs (numbers)
+      Prints the hypotenuse; returns nothing.
+      """
+      c = (a**2 + b**2) ** 0.5
+      print(c)
 
-  notice("Class cancelled Friday")
+  def discount(price, percent):
+      """Print the sale price after taking a percentage off.
+
+      price   -- the original price (a number)
+      percent -- the discount as a whole number, so 20 means 20% off
+      Prints the reduced price; returns nothing.
+      """
+      print(price - price * percent / 100)
+
+  hypotenuse(3, 4)
+  help(hypotenuse)
+  discount(50, 20)
+  help(discount)
 #+end_src
 
 #+RESULTS:
-: ------------------------
-: Class cancelled Friday
-: ------------------------
+: 5.0
+: Help on function hypotenuse in module __main__:
+:
+: hypotenuse(a, b)
+:     Print the hypotenuse of a right triangle.
+:
+:     a, b -- the lengths of the two legs (numbers)
+:     Prints the hypotenuse; returns nothing.
+:
+: 40.0
+: Help on function discount in module __main__:
+:
+: discount(price, percent)
+:     Print the sale price after taking a percentage off.
+:
+:     price   -- the original price (a number)
+:     percent -- the discount as a whole number, so 20 means 20% off
+:     Prints the reduced price; returns nothing.
 
-* Generalizing a function
-
-=rule= always prints ~24~ dashes, whatever the text underneath. We can
-make it fit the text by giving it a =length= parameter - keeping ~24~
-as the default, so the plain =rule()= calls elsewhere still work:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def rule(length=24):
-      print("-" * length)
-
-  def notice(text):
-      rule(len(text))
-      print(text)
-      rule(len(text))
-
-  notice("Classes cancelled Friday and Monday!")
-#+end_src
-
-#+RESULTS:
-: ------------------------------------
-: Classes cancelled Friday and Monday!
-: ------------------------------------
-
-- =rule= now takes a =length= and prints that many dashes.
-- =notice= works out the width it needs with ~len(text)~ and passes it
-  in - once for each rule.
-- Nothing in =notice= is tied to one message any more: give it a longer
-  or shorter =text= and both rules follow.
-
-This is *refactoring*: same behaviour, more general code.
-
-* Stacking functions
-
-Functions can be stacked several deep. ~bulletin~ calls ~header~, which
-calls ~rule~, which calls ~print~:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def header():
-      rule()
-      print("COSC 1210 - Bulletin")
-      rule()
-
-  def bulletin(item):
-      header()
-      print("* " + item)
-      rule()
-
-  bulletin("Homework due Monday")
-#+end_src
-
-#+RESULTS:
-: ------------------------
-: COSC 1210 - Bulletin
-: ------------------------
-: * Homework due Monday
-: ------------------------
-
-- The call chain is ~bulletin~ -> ~header~ -> ~rule~ -> ~print~.
-- You could write this with fewer functions; the point is that they
-  fit together.
-
-* PRACTICE receipt
-
-Write two functions:
-
-1. ~rule()~ - prints a line of 24 dashes.
-2. ~receipt(item, price, qty)~ - prints, in order: a rule; the line
-   =<qty> x <item>=; the line =Total: $<price times qty>=; a rule. Use
-   ~rule()~ for the rules and an f-string for the two middle lines.
-3. Provide docstrings for both functions.
-
-Then call ~receipt("coffee", 3.5, 2)~.
-
-Correct output:
-
-#+begin_example
-------------------------
-2 x coffee
-Total: $7.0
-------------------------
-#+end_example
-
-* Repetition: ~for~ and ~range()~
-
-To repeat statements, use a ~for~ loop.
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  for i in range(3):
-      print(i)
-#+end_src
-
-#+RESULTS:
-: 0
-: 1
-: 2
-
-- ~for~ is a new keyword; ~i~ is a new variable; ~in~ is a keyword.
-- ~range(3)~ produces the numbers ~0, 1, 2~ - it *starts at 0* and
-  *stops before 3*:
-  #+begin_src python :results output :exports both :session *Python* :python python3
-    [print(i, end=' ') for i in range(10)];
-  #+end_src
-
-  #+RESULTS:
-  : 0 1 2 3 4 5 6 7 8 9
-
-- The header ends with ~:~ and the body is indented.
-- Each time round: run the body with the next value of ~i~, then go
-  back. When ~range~ runs out, the loop ends.
-
-The loop variable is usually part of the work:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  for n in range(5):
-      print(n, "squared is", n**2)
-#+end_src
-
-#+RESULTS:
-: 0 squared is 0
-: 1 squared is 1
-: 2 squared is 4
-: 3 squared is 9
-: 4 squared is 16
-
-But it does not have to be. Here the body ignores the counter - the
-loop just runs three times, and =_= stands for a "dummy" variable:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  for _ in range(3):
-      print("Welcome!")
-#+end_src
-
-#+RESULTS:
-: Welcome!
-: Welcome!
-: Welcome!
-
-* A loop inside a function
-
-Put the loop in a function's body and it runs on whatever argument you
-pass:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def stars(n):
-      for i in range(n):
-          print("*" * (i + 1))
-
-  stars(5)
-#+end_src
-
-#+RESULTS:
-: *
-: **
-: ***
-: ****
-: *****
-
-- The ~for~ body is indented twice: once for the function, once for the
-  loop.
-
-- ~i + 1~ because ~range~ starts at 0, so the first row gets one star.
-
-- You should always trace ~for~ loops out - you can do that with a
-  table like this, that shows loop counter and output:
-
-  #+begin_example
-  | i | output |
-  |---+--------|
-  | 0 | *      |
-  | 1 | **     |
-  | 2 | ***    |
-  | 3 | ****   |
-  | 4 | *****  |
-  #+end_example
-
-* PRACTICE rectangle and triangle
-
-1. Write ~rectangle(char, width, height)~ that prints a solid block:
-   ~height~ rows, each row ~char~ repeated ~width~ times. Don't forget the
-   docstring.
-
-   #+begin_example
-   rectangle("#", 5, 3)
-   #####
-   #####
-   #####
-   #+end_example
-
-2. Write ~triangle(char, height)~ that prints a right triangle: row ~k~
-   has ~k~ copies of ~char~, for ~k~ from 1 up to ~height~. Don't forget the
-   docstring.
-
-   #+begin_example
-   triangle("#", 4)
-   #
-   ##
-   ###
-   ####
-   #+end_example
-
-   Use ~def~, a ~for~ loop, ~range~, ~*~ and ~print~. No ~if~.
-
-* Local variables live inside the function
-
-A variable created inside a function is *local*: it exists only while
-the function runs. The part of the program where the variable exists
-is also called its *scope*. 
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def make_total(price, qty):
-      total = price * qty
-      print("Total:", total)
-
-  make_total(3.5, 2)
-#+end_src
-
-#+RESULTS:
-: Total: 7.0
-
-Ask for ~total~ outside the function and it is gone because it belonged
-to =make_total=:
-
-#+begin_src python :results none :session *Python* :python python3
-  print(total)   # total belonged to make_total, which has finished
-#+end_src
-
-#+begin_example
-NameError: name 'total' is not defined
-#+end_example
-
-- Parameters (~price~, ~qty~) are local too.
-
-- This is a feature: two functions can use the same name without
-  colliding.
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def show_square(n):
-      answer = n * n
-      print(n, "squared is", answer)
-
-  def show_cube(n):
-      answer = n * n * n      # a different 'answer', local to show_cube
-      print(n, "cubed is", answer)
-
-  show_square(3)
-  show_cube(3)
-#+end_src
-
-#+RESULTS:
-: 3 squared is 9
-: 3 cubed is 27
-
-* Reading a traceback
-
-When an error happens *inside* a function, Python prints the whole
-chain of calls that led there. That is a *traceback*.
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  def make_tag(name):
-      print("Hello, " + nme + "!")   # typo: nme
-
-  def welcome(name):
-      print("Welcome!")
-      make_tag(name)
-
-  welcome("Ada")
-#+end_src
-
-#+RESULTS:
-: Welcome!
-
-Run as a script, this prints:
-
-#+begin_example
-Welcome!
-Traceback (most recent call last):
-  File "functions.py", line 8, in <module>
-    welcome("Ada")
-  File "functions.py", line 6, in welcome
-    make_tag(name)
-  File "functions.py", line 2, in make_tag
-    print("Hello, " + nme + "!")   # typo: nme
-NameError: name 'nme' is not defined. Did you mean: 'name'?
-#+end_example
-
-*Read it bottom to top:*
-
-#+begin_example
-NameError: name 'nme' is not defined   <- what went wrong
-  make_tag(...)                         <- where it happened
-  welcome(...)                          <- who called it
-  <module>                              <- the top-level script
-#+end_example
-
-- The actual error is always the last line - start there.
-- Each line above is one step back up the chain of calls (the
-  "stack").
-- Python often suggests the fix: /Did you mean: ='name'=?/
-
-To see *why* a value is wrong, paste the code into [[https://pythontutor.com/python-debugger.html][pythontutor.com]] and
-step through it: ~welcome~ and ~make_tag~ appear as boxes stacked on top
-of the top-level code, each box showing the value of every variable at
-that moment, and you watch the error strike the top box - the
-traceback made visible. This is the tool to reach for when the numbers
-do not add up.
-
-(In a notebook, the magic command ~%xmode~ - ~Minimal~, ~Plain~, or the
-default ~Context~ - trims or restores how much of the traceback prints;
-it changes the display only, not the error.)
-
-(You will sometimes see ~if __name__ == "__main__":~ at the foot of a
-file. That is a topic for later, when programs span several files.)
-
-* PRACTICE debug the report
-
-The program below prints a short class report. It has *three* bugs: one
-stops it before it runs, one crashes it partway, one is a scope
-mistake.
-
-#+begin_example
-  def divider():
-      print("=" * 20)
-
-  def line(label, value)
-      print(label + ": " + str(value))
-
-  def report(present, absent):
-      divider()
-      line("Present", present)
-      line("Absent", absent)
-      total = present + absent
-      divider()
-
-  report(18)
-  print("Total students:", total)
-#+end_example
-
-When it works:
-
-#+begin_example
-====================
-Present: 18
-Absent: 2
-====================
-Total students: 20
-#+end_example
-
-Step through it in pythontutor.com, fix the first error it reports, run
-again, and repeat. For each bug, write a one-line comment saying what
-was wrong.
-
-There is a bonus assignment "Debug Bill Splitter" available that asks
-for a similar thing.
-
-* Summary
-
-- ~def name(parameters):~ starts a function; the body is indented.
-- Defining a function makes a value of type ~function~; nothing runs
-  until you *call* it.
-- A *parameter* is a name in the definition; an *argument* is a value
-  in the call. Calling is like assigning the argument to the parameter,
-  then running the body.
-- A parameter can carry a *default value* (=def rule(length=24)=); a
-  call may then leave that argument out.
-- A *docstring* - a string as the first line of the body - documents a
-  function: a one-line summary, one line per parameter, and a line
-  about the output. ~help(f)~ prints it.
-- Functions can call other functions; that is how small pieces build a
-  program.
-- *Refactoring* is rewriting working code to be cleaner or more general
-  - swapping a hard-coded =24= for a =length= parameter, say - without
-  changing what it does.
-- A ~for~ loop repeats its body. ~range(n)~ gives ~0, 1, ..., n-1~.
-- A variable made inside a function is *local* - invisible once the
-  function returns. Parameters are local too.
-- A *traceback* lists the calls from ~<module>~ down to the error. Read
-  it bottom to top.
-- Functions are worth it: naming, no repetition, separate testing,
-  reuse.
-- Chapter 3 functions only print. Handing a value back (~return~) is
-  chapter 6.
-
-* Glossary
-
-| Term                 | Meaning                                          |
-|----------------------+--------------------------------------------------|
-| ~def~                  | Keyword that starts a function definition        |
-| function definition  | The ~def~ statement that creates a function        |
-| header               | The first line of a definition (ends in ~:~)       |
-| body                 | The indented lines that run when it is called    |
-| function object      | The value a ~def~ creates; its type is ~function~    |
-| call                 | Running a function: its name followed by ~()~      |
-| parameter            | A name in the definition standing for an input   |
-| argument             | A value passed to the function in the call       |
-| positional parameter | Matched by where it sits in the call             |
-| named parameter      | Has a default, so the call may omit it           |
-| docstring            | A string as the first body line; ~help~ shows it   |
-| ~help(f)~              | Prints a function's signature and docstring      |
-| refactoring          | Rewriting working code cleaner, same behaviour   |
-| ~for~ loop             | Runs its body once per value in a sequence       |
-| ~range(n)~             | The sequence ~0, 1, ..., n-1~                      |
-| iteration            | One pass through the body of a loop              |
-| dummy variable       | A loop variable the body never uses (often ~_~)    |
-| local variable       | A variable that lives only inside its function   |
-| scope                | The part of a program where a name is usable     |
-| traceback            | The chain of calls that were running at an error |
-| stack                | The chain of active calls, innermost last        |
