@@ -440,21 +440,23 @@ After completing this code-along lecture with practice, you can:
 - Home assignment: Pay stub calculator
 - Bonus assignments: Circle Calculator, Change Maker
 
-* W3S2: Functions I
+* DONE W3S2: Functions I
 
-Today:
+*Today:*
 - Defining functions with ~def~
 - Telling parameters from arguments
 - Documenting functions
 
-Next assignments:
+*Next assignments:*
 - Pay stub calculator (submit your notebook by Sept 18)
 - Quiz 3 (Variables and statements and functions I) - by Sept 18
 - Bonus assignment: Change Maker (Oct 9)
 - Bonus assignment: Circle Calculator (Oct 9)
+* W4S1: Popquiz!
 
-* W4S1: Functions II
-
+- Popquiz: self-graded for extra credit (hand it in if you want)
+- Shorter session today (50 min) because I've got to give a talk
+  
 * Footnotes
 
 [fn:1]That's what we're doing all semester: Not just using tools, but
