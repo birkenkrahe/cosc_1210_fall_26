@@ -452,11 +452,25 @@ After completing this code-along lecture with practice, you can:
 - Quiz 3 (Variables and statements and functions I) - by Sept 18
 - Bonus assignment: Change Maker (Oct 9)
 - Bonus assignment: Circle Calculator (Oct 9)
-* W4S1: Popquiz!
+* DONE W4S1: Test (30 min)
 
-- Popquiz: self-graded for extra credit (hand it in if you want)
+- Popquiz: 30 min, self-graded for extra credit (optional)
+- Test for Midterm exam (50 min) 
 - Shorter session today (50 min) because I've got to give a talk
-  
+
+* W4S2: Functions II
+
+We now move from writing standalone functions to building small
+functions that call and adapt each other.
+
+What you can do now: write one small set of functions once and reuse
+it for a whole family of formatted output problems: notices, receipts,
+bulletins, just by changing what's passed in (= interface).
+
+- Calling one function from another
+- Generalizing a function
+- Stacking functions
+
 * Footnotes
 
 [fn:1]That's what we're doing all semester: Not just using tools, but
