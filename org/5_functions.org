@@ -658,36 +658,6 @@ To repeat statements, use a ~for~ loop.
 - Each time round: run the body with the next value of ~i~, then go
   back. When ~range~ runs out, the loop ends.
 
-** A warning: don't overwrite =range= with an assignment
-
-=range= is an ordinary *built-in function*, not a keyword - which means
-Python lets you assign something else to the name =range=. Do that by
-accident (say, =range = 3=, perhaps while testing something else) and
-=range= now means the number =3=, not the function:
-
-#+begin_src python :results output :exports both :session *Python* :python python3
-  range = 3
-  range(3)
-#+end_src
-
-#+begin_example
-TypeError: 'int' object is not callable
-#+end_example
-
-That error is *not* a special rule about =range= - "not callable" means
-exactly what it says: you tried to call something (with =(...)=) that
-is not a function. It happens to any name you overwrite this way, not
-just =range=. In a fresh session, =range(3)= called on its own works
-exactly the same as it does inside a ~for~ loop - there is no rule that
-it "can only be looped over."
-
-=del range= removes your overwritten variable and, in a plain Python
-script, restores access to the built-in. In a notebook, that is not
-always enough to reconstitute it cleanly - the reliable fix if =range=
-(or any built-in) starts misbehaving is to *restart the kernel* and
-rerun from the top, rather than trying to patch the name back into
-place.
-
 The loop variable is usually part of the work:
 
 #+begin_src python :results output :exports both :session *Python* :python python3
@@ -745,6 +715,52 @@ You can also write this as a "list comprehension":
 : welcome
 : welcome
 : welcome
+
+* A warning: don't overwrite =range= with an assignment
+
+=range= is an ordinary *built-in function*, not a keyword - which means
+Python lets you assign something else to the name =range=. Do that by
+accident (say, =range = 3=, perhaps while testing something else) and
+=range= now means the number =3=, not the function:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  range = 3
+  range(3)
+#+end_src
+
+#+begin_example
+TypeError: 'int' object is not callable
+#+end_example
+
+That error is *not* a special rule about =range= - "not callable" means
+exactly what it says: you tried to call something (with =(...)=) that
+is not a function. It happens to any name you overwrite this way, not
+just =range=. In a fresh session, =range(3)= called on its own works
+exactly the same as it does inside a ~for~ loop - there is no rule that
+it "can only be looped over."
+
+=del range= removes your overwritten variable and, in a plain Python
+script, restores access to the built-in. In a notebook, that is not
+always enough to reconstitute it cleanly - the reliable fix if =range=
+(or any built-in) starts misbehaving is to *restart the kernel* and
+rerun from the top, rather than trying to patch the name back into
+place.
+
+Without this misstep, ~range~ is callable and you can see the ~help~, too:
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  print(range(5)) # prints information about the `range` object
+  print(type(range(5))) # shows that `range` is in a class of its own
+#+end_src
+
+#+RESULTS:
+: range(0, 5)
+: <class 'range'>
+
+But ~range~ does not produce numbers, it produces a ~range~ object, which
+is a compact description of a sequence: "start at 0, stop before 5".
+
+It only computes actual numbers, when you iterate over it. Same "lazy"
+idea as the generator that I'll explain next.
 
 * Generators (preview)
 
