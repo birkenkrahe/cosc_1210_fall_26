@@ -349,3 +349,815 @@ For =discount=, the docstring has to settle one real question: is
 :     percent -- the discount as a whole number, so 20 means 20% off
 :     Prints the reduced price; returns nothing.
 
+* Calling one function from another
+
+Once a function exists, other functions can call it. Here ~notice~
+calls ~rule~ twice and ~print~ once:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def rule():
+      print("-" * 24)
+
+  def notice(text):
+      rule()
+      print(text)
+      rule()
+
+  notice("Class cancelled Friday")
+#+end_src
+
+#+RESULTS:
+: ------------------------
+: Class cancelled Friday
+: ------------------------
+
+* Generalizing a function
+
+=rule= always prints ~24~ dashes, whatever the text underneath. We can
+make it fit the text by giving it a =length= parameter - keeping ~24~
+as the default, so the plain =rule()= calls elsewhere still work:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def rule(length=24):
+      print("-" * length)
+
+  def notice(text):
+      rule(len(text))
+      print(text)
+      rule(len(text))
+
+  notice("Classes cancelled Friday and Monday!")
+#+end_src
+
+#+RESULTS:
+: ------------------------------------
+: Classes cancelled Friday and Monday!
+: ------------------------------------
+
+- =rule= now takes a =length= and prints that many dashes.
+- =notice= works out the width it needs with ~len(text)~ and passes it
+  in - once for each rule.
+- Nothing in =notice= is tied to one message any more: give it a longer
+  or shorter =text= and both rules follow.
+
+This is *generalizing* a function: same behaviour, more general code.
+
+- How can you make it even safer?
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    def rule(length=24):
+        print("-" * length)
+
+    def notice(text="No notice"):
+        rule(len(text))
+        print(text)
+        rule(len(text))
+
+    notice()
+    notice("Classes cancelled Friday and Monday!")
+  #+end_src
+
+  #+RESULTS:
+  : ---------
+  : No notice
+  : ---------
+  : ------------------------------------
+  : Classes cancelled Friday and Monday!
+  : ------------------------------------
+
+* Stacking functions
+
+Functions can be stacked several deep. ~bulletin~ calls ~header~, which
+calls ~rule~, which calls ~print~:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def header():
+      rule()
+      print("COSC 1210 - Bulletin")
+      rule()
+
+  def bulletin(item):
+      header()
+      print("* " + item)
+      rule()
+
+  bulletin("Homework due Monday")
+#+end_src
+
+#+RESULTS:
+: ------------------------
+: COSC 1210 - Bulletin
+: ------------------------
+: * Homework due Monday
+: ------------------------
+
+- The call chain is ~bulletin~ -> ~header~ -> ~rule~ -> ~print~.
+- You could write this with fewer functions; the point is that they
+  fit together.
+
+** Reading =help()= before you call
+
+Before calling an unfamiliar function, check its signature with
+~help()~ - it tells you what the function expects, and calling it any
+other way is a =TypeError=:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  help(rule)
+#+end_src
+
+#+RESULTS:
+: Help on function rule in module __main__:
+:
+: rule(length=24)
+
+=rule= wants a *number* for =length= - pass it a string instead and the
+error names the exact mismatch:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  rule('help')
+#+end_src
+
+#+begin_example
+TypeError: can't multiply sequence by non-int of type 'str'
+#+end_example
+
+=notice= wants a string, too - it calls ~len()~ on whatever you pass it,
+and ~len()~ does not work on numbers:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  help(notice)
+#+end_src
+
+#+RESULTS:
+: Help on function notice in module __main__:
+:
+: notice(text='')
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  notice(24)
+#+end_src
+
+#+begin_example
+TypeError: object of type 'int' has no len()
+#+end_example
+
+=header= takes *no* arguments at all - ~help()~ shows the empty
+parentheses, and giving it one anyway is a different kind of
+=TypeError=, about the *count* of arguments rather than their type:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  help(header)
+#+end_src
+
+#+RESULTS:
+: Help on function header in module __main__:
+:
+: header()
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  header(20)
+#+end_src
+
+#+begin_example
+TypeError: header() takes 0 positional arguments but 1 was given
+#+end_example
+
+- Same exception type, =TypeError=, in both cases - but two different
+  reasons: the *wrong type* of argument (=rule=, =notice=) versus the
+  *wrong number* of arguments (=header=).
+- ~help(f)~ always shows you =f='s signature first - check it before
+  guessing at a call.
+
+- You can also use fancy string functions:
+  #+begin_src python :results output :exports both :session *Python* :python python3 
+    help(str.center)
+  #+end_src
+
+  #+RESULTS:
+  : Help on method_descriptor:
+  : 
+  : center(self, width, fillchar=' ', /)
+  :     Return a centered string of length width.
+  :     
+  :     Padding is done using the specified fill character (default is a space).
+
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  def header():
+      rule()
+      print("COSC 1210 - Bulletin".center(24))
+      rule()
+
+  def bulletin(item):
+      header()
+      print(("* " + item).center(24))
+      rule()
+
+  bulletin("Popquiz today!")
+#+end_src
+
+#+RESULTS:
+: ------------------------
+:   COSC 1210 - Bulletin  
+: ------------------------
+:     * Popquiz today!    
+: ------------------------
+
+* PRACTICE receipt
+
+Write two functions:
+
+1. ~rule()~ - prints a line of 24 dashes.
+2. ~receipt(item, price, qty)~ - prints, in order:
+   1) a rule;
+   2) the line =[qty] x [item]=;
+   3) the line =Total: $[price times qty]=;
+   4) a rule.
+   Use ~rule()~ for the rules and an f-string for the two middle lines.
+3. Provide *docstrings* for both functions.
+
+Then call ~receipt("coffee", 3.5, 2)~.
+
+Correct output:
+
+#+begin_example
+------------------------
+2 x coffee
+Total: $7.0
+------------------------
+#+end_example
+
+** Solution                                                          :skip:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def rule():
+      """Print a line of 24 dashes."""
+      print("-" * 24)
+
+  def receipt(item, price, qty):
+      """Print a receipt for one item.
+
+      item  -- a sold item (a string)
+      price -- the item price (a number)
+      qty   -- the number of items sold (a number)
+      Prints the <qty> x <item> line and the Total line (price * qty);
+      returns nothing.
+      Calls rule() for the top and bottom lines.
+      """
+      rule()
+      print(f"{qty} x {item}\nTotal: ${price * qty}")
+      rule()
+
+  receipt("coffee", 3.5, 2)
+
+  help(receipt)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+------------------------
+2 x coffee
+Total: $7.0
+------------------------
+Help on function receipt in module __main__:
+
+receipt(item, price, qty)
+    Print a receipt for one item.
+
+    item  -- a sold item (a string)
+    price -- the item price (a number)
+    qty   -- the number of items sold (a number)
+    Prints the <qty> x <item> line and the Total line (price * qty);
+    returns nothing.
+    Calls rule() for the top and bottom lines.
+#+end_example
+
+* Repetition: ~for~ and ~range()~
+
+To repeat statements, use a ~for~ loop.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  for i in range(3):
+      print(i)
+#+end_src
+
+#+RESULTS:
+: 0
+: 1
+: 2
+
+- ~for~ is a new keyword; ~i~ is a new variable; ~in~ is a keyword.
+- ~range(3)~ produces the numbers ~0, 1, 2~ - it *starts at 0* and
+  *stops before 3*:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    [print(i, end=' ') for i in range(10)];
+  #+end_src
+
+  #+RESULTS:
+  : 0 1 2 3 4 5 6 7 8 9
+
+- The header ends with ~:~ and the body is indented.
+- Each time round: run the body with the next value of ~i~, then go
+  back. When ~range~ runs out, the loop ends.
+
+** A warning: don't overwrite =range= with an assignment
+
+=range= is an ordinary *built-in function*, not a keyword - which means
+Python lets you assign something else to the name =range=. Do that by
+accident (say, =range = 3=, perhaps while testing something else) and
+=range= now means the number =3=, not the function:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  range = 3
+  range(3)
+#+end_src
+
+#+begin_example
+TypeError: 'int' object is not callable
+#+end_example
+
+That error is *not* a special rule about =range= - "not callable" means
+exactly what it says: you tried to call something (with =(...)=) that
+is not a function. It happens to any name you overwrite this way, not
+just =range=. In a fresh session, =range(3)= called on its own works
+exactly the same as it does inside a ~for~ loop - there is no rule that
+it "can only be looped over."
+
+=del range= removes your overwritten variable and, in a plain Python
+script, restores access to the built-in. In a notebook, that is not
+always enough to reconstitute it cleanly - the reliable fix if =range=
+(or any built-in) starts misbehaving is to *restart the kernel* and
+rerun from the top, rather than trying to patch the name back into
+place.
+
+The loop variable is usually part of the work:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  for n in range(5):
+      print(n, "squared is", n**2)
+#+end_src
+
+#+RESULTS:
+: 0 squared is 0
+: 1 squared is 1
+: 2 squared is 4
+: 3 squared is 9
+: 4 squared is 16
+
+But it does not have to be. Here the body ignores the counter - the
+loop just runs three times, and =_= stands for a "dummy" variable:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  for _ in range(3):
+      print("Welcome!")
+#+end_src
+
+#+RESULTS:
+: Welcome!
+: Welcome!
+: Welcome!
+
+You can also write this as a "list comprehension":
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  [print(i) for i in range(3)];
+#+end_src
+
+#+RESULTS:
+: 0
+: 1
+: 2
+
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  print(type([print(i) for i in range(3)]))
+#+end_src
+
+#+RESULTS:
+: 0
+: 1
+: 2
+: <class 'list'>
+
+#+begin_src python :results output :exports both :session *Python*
+  [print("welcome") for _ in range(5)]
+#+end_src
+
+#+RESULTS:
+: welcome
+: welcome
+: welcome
+: welcome
+: welcome
+
+* Generators (preview)
+
+If you exchange the list brackets ~[]~ by parentheses ~()~, you turn the
+list comprehension into a generator expression. Here is the difference:
+
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  [print("welcome") for _ in range(3)] # square brackets: runs
+                                       # immediately
+
+  (print("welcome") for _ in range(3)) # parentheses: waits, prints
+                                       # nothing yet
+#+end_src
+
+#+RESULTS:
+: welcome
+: welcome
+: welcome
+
+~[...]~ builds the whole ~list~ right away, so each ~print()~ fires
+immediately - that's why you see "welcome" 3 times.
+
+~(...)~ just hands back a *generator* object (if you print its ~type~, you
+get ~<class generator>~. It's "lazy", so none of the ~print~ calls run
+until you actually pull values out of it, e.g. with a ~for~ loop or a
+~list()~:
+
+#+begin_src python :results output :exports both :session *Python* :python python3 
+  g = (print("welcome") for _ in range(3))
+
+  list(g) # now it runs but generator is exhausted
+
+  g = (print("welcome") for _ in range(3))
+
+  for _ in g: 
+      pass    # prints 3 x welcome
+  for _ in g:
+      pass    # prints nothing, generator is exhausted
+#+end_src
+
+#+RESULTS:
+: welcome
+: welcome
+: welcome
+: welcome
+: welcome
+: welcome
+
+
+
+* A loop inside a function
+
+Put the loop in a function's body and it runs on whatever argument you
+pass:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def stars(n):
+      for i in range(n):
+          print("*" * (i + 1))
+
+  stars(5)
+#+end_src
+
+#+RESULTS:
+: *
+: **
+: ***
+: ****
+: *****
+
+- The ~for~ body is indented twice: once for the function, once for the
+  loop.
+
+- ~i + 1~ because ~range~ starts at 0, so the first row gets one star.
+
+- You should always trace ~for~ loops out - you can do that with a
+  table like this, that shows loop counter and output:
+
+  #+begin_example
+  | i | output |
+  |---+--------|
+  | 0 | *      |
+  | 1 | **     |
+  | 2 | ***    |
+  | 3 | ****   |
+  | 4 | *****  |
+  #+end_example
+
+* PRACTICE rectangle and triangle
+
+1. Write ~rectangle(char, width, height)~ that prints a solid block:
+   ~height~ rows, each row ~char~ repeated ~width~ times. Don't forget the
+   docstring.
+
+   #+begin_example
+   rectangle("#", 5, 3)
+   #####
+   #####
+   #####
+   #+end_example
+
+2. Write ~triangle(char, height)~ that prints a right triangle: row ~k~
+   has ~k~ copies of ~char~, for ~k~ from 1 up to ~height~. Don't forget the
+   docstring.
+
+   #+begin_example
+   triangle("#", 4)
+   #
+   ##
+   ###
+   ####
+   #+end_example
+
+   Use ~def~, a ~for~ loop, ~range~, ~*~ and ~print~. No ~if~.
+
+** Solution                                                          :skip:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def rectangle(char, width, height):
+      """Print a solid rectangle built from a repeated character.
+
+      char   -- the character to draw with, e.g. '#'
+      width  -- how many characters wide (a whole number)
+      height -- how many rows tall (a whole number)
+      Prints the block; returns nothing.
+      """
+      for row in range(height):
+          print(char * width)
+
+  rectangle('#', 5, 3)
+#+end_src
+
+#+RESULTS:
+: #####
+: #####
+: #####
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def triangle(char, height):
+      """Print a right triangle built from a repeated character.
+
+      char   -- the character to draw with, e.g. '#'
+      height -- how many rows tall; row k has k characters (a whole number)
+      Prints the triangle; returns nothing.
+      """
+      for row in range(height):
+          print(char * (row + 1))
+
+  rectangle("#", 5, 3)
+  print()
+  triangle("#", 4)
+#+end_src
+
+#+RESULTS:
+: #####
+: #####
+: #####
+:
+: #
+: ##
+: ###
+: ####
+
+* Local variables live inside the function
+
+A variable created inside a function is *local*: it exists only while
+the function runs. The part of the program where the variable exists
+is also called its *scope*.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def make_total(price, qty):
+      total = price * qty
+      print("Total:", total)
+
+  make_total(3.5, 2)
+#+end_src
+
+#+RESULTS:
+: Total: 7.0
+
+Ask for ~total~ outside the function and it is gone because it belonged
+to =make_total=:
+
+#+begin_src python :results none :session *Python* :python python3
+  print(total)   # total belonged to make_total, which has finished
+#+end_src
+
+#+begin_example
+NameError: name 'total' is not defined
+#+end_example
+
+- Parameters (~price~, ~qty~) are local too.
+
+- This is a feature: two functions can use the same name without
+  colliding.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def show_square(n):
+      answer = n * n
+      print(n, "squared is", answer)
+
+  def show_cube(n):
+      answer = n * n * n      # a different 'answer', local to show_cube
+      print(n, "cubed is", answer)
+
+  show_square(3)
+  show_cube(3)
+#+end_src
+
+#+RESULTS:
+: 3 squared is 9
+: 3 cubed is 27
+
+* Reading a traceback
+
+When an error happens *inside* a function, Python prints the whole
+chain of calls that led there. That is a *traceback*.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def make_tag(name):
+      print("Hello, " + nme + "!")   # typo: nme
+
+  def welcome(name):
+      print("Welcome!")
+      make_tag(name)
+
+  welcome("Ada")
+#+end_src
+
+#+RESULTS:
+: Welcome!
+
+Run as a script, this prints:
+
+#+begin_example
+Welcome!
+Traceback (most recent call last):
+  File "functions.py", line 8, in <module>
+    welcome("Ada")
+  File "functions.py", line 6, in welcome
+    make_tag(name)
+  File "functions.py", line 2, in make_tag
+    print("Hello, " + nme + "!")   # typo: nme
+NameError: name 'nme' is not defined. Did you mean: 'name'?
+#+end_example
+
+*Read it bottom to top:*
+
+#+begin_example
+NameError: name 'nme' is not defined   <- what went wrong
+  make_tag(...)                         <- where it happened
+  welcome(...)                          <- who called it
+  <module>                              <- the top-level script
+#+end_example
+
+- The actual error is always the last line - start there.
+- Each line above is one step back up the chain of calls (the
+  "stack").
+- Python often suggests the fix: /Did you mean: ='name'=?/
+
+To see *why* a value is wrong, paste the code into [[https://pythontutor.com/python-debugger.html][pythontutor.com]] and
+step through it: ~welcome~ and ~make_tag~ appear as boxes stacked on top
+of the top-level code, each box showing the value of every variable at
+that moment, and you watch the error strike the top box - the
+traceback made visible. This is the tool to reach for when the numbers
+do not add up.
+
+(In a notebook, the magic command ~%xmode~ - ~Minimal~, ~Plain~, or the
+default ~Context~ - trims or restores how much of the traceback prints;
+it changes the display only, not the error.)
+
+(You will sometimes see ~if __name__ == "__main__":~ at the foot of a
+file. That is a topic for later, when programs span several files.)
+
+* PRACTICE debug the report
+
+The program below prints a short class report. It has *three* bugs: one
+stops it before it runs, one crashes it partway, one is a scope
+mistake.
+
+#+begin_example
+  def divider():
+      print("=" * 20)
+
+  def line(label, value)
+      print(label + ": " + str(value))
+
+  def report(present, absent):
+      divider()
+      line("Present", present)
+      line("Absent", absent)
+      total = present + absent
+      divider()
+
+  report(18)
+  print("Total students:", total)
+#+end_example
+
+When it works:
+
+#+begin_example
+====================
+Present: 18
+Absent: 2
+====================
+Total students: 20
+#+end_example
+
+Step through it in pythontutor.com, fix the first error it reports, run
+again, and repeat. For each bug, write a one-line comment saying what
+was wrong.
+
+There is a bonus assignment "Debug Bill Splitter" available that asks
+for a similar thing.
+
+** Solution                                                          :skip:
+
+Bugs:
+
+1. ~def line(label, value)~ - missing the colon -> ~SyntaxError~, caught
+   before anything runs.
+2. ~report(18)~ - only one argument for two parameters ->
+   ~TypeError: report() missing 1 required positional argument: 'absent'~.
+   Call it ~report(18, 2)~.
+3. ~total~ is local to ~report~, so ~print("Total students:", total)~
+   outside it -> ~NameError~. There is no ~return~ yet, so the fix is to
+   print the total *inside* ~report~.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def divider():
+      print("=" * 20)
+
+  def line(label, value):
+      print(label + ": " + str(value))
+
+  def report(present, absent):
+      divider()
+      line("Present", present)
+      line("Absent", absent)
+      total = present + absent
+      divider()
+      print("Total students:", total)
+
+  report(18, 2)
+#+end_src
+
+#+RESULTS:
+: ====================
+: Present: 18
+: Absent: 2
+: ====================
+: Total students: 20
+
+* Summary
+
+- ~def name(parameters):~ starts a function; the body is indented.
+- Defining a function makes a value of type ~function~; nothing runs
+  until you *call* it.
+- A *parameter* is a name in the definition; an *argument* is a value
+  in the call. Calling is like assigning the argument to the parameter,
+  then running the body.
+- A parameter can carry a *default value* (=def rule(length=24)=); a
+  call may then leave that argument out.
+- A *docstring* - a string as the first line of the body - documents a
+  function: a one-line summary, one line per parameter, and a line
+  about the output. ~help(f)~ prints it.
+- Functions can call other functions; that is how small pieces build a
+  program.
+- ~help(f)~ shows a function's signature before you call it; calling it
+  with the wrong *type* or the wrong *number* of arguments both raise
+  ~TypeError~, for different reasons.
+- *Generalizing* a function is rewriting it to fit more cases - swapping
+  a hard-coded =24= for a =length= parameter, say - while keeping its
+  behaviour for the calls that already worked.
+- A ~for~ loop repeats its body. ~range(n)~ gives ~0, 1, ..., n-1~.
+  ~range~ is an ordinary function, not a keyword - don't reuse its name
+  for a variable, or calling ~range(...)~ later raises
+  ~TypeError: 'int' object is not callable~ (or whatever type you
+  assigned).
+- A *list comprehension* (=[expr for x in seq]=) writes a loop as one
+  expression, building a list of results as it goes.
+- A variable made inside a function is *local* - invisible once the
+  function returns. Parameters are local too.
+- A *traceback* lists the calls from ~<module>~ down to the error. Read
+  it bottom to top.
+- Functions are worth it: naming, no repetition, separate testing,
+  reuse.
+- Chapter 3 functions only print. Handing a value back (~return~) is
+  chapter 6.
+
+* Glossary
+
+| Term                 | Meaning                                          |
+|----------------------+--------------------------------------------------|
+| ~def~                  | Keyword that starts a function definition        |
+| function definition  | The ~def~ statement that creates a function        |
+| header               | The first line of a definition (ends in ~:~)       |
+| body                 | The indented lines that run when it is called    |
+| function object      | The value a ~def~ creates; its type is ~function~    |
+| call                 | Running a function: its name followed by ~()~      |
+| parameter            | A name in the definition standing for an input   |
+| argument             | A value passed to the function in the call       |
+| positional parameter | Matched by where it sits in the call             |
+| named parameter      | Has a default, so the call may omit it           |
+| docstring            | A string as the first body line; ~help~ shows it   |
+| ~help(f)~              | Prints a function's signature and docstring      |
+| generalizing         | Rewriting a function to fit more cases           |
+| ~for~ loop             | Runs its body once per value in a sequence       |
+| ~range(n)~             | The sequence ~0, 1, ..., n-1~                      |
+| iteration            | One pass through the body of a loop              |
+| list comprehension   | ~[expr for x in seq]~ - a loop written as a list   |
+| dummy variable       | A loop variable the body never uses (often ~_~)    |
+| local variable       | A variable that lives only inside its function   |
+| scope                | The part of a program where a name is usable     |
+| traceback            | The chain of calls that were running at an error |
+| stack                | The chain of active calls, innermost last        |

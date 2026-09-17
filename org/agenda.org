@@ -471,6 +471,8 @@ bulletins, just by changing what's passed in (= interface).
 - Generalizing a function
 - Stacking functions
 
+** Checkout
+
 * Footnotes
 
 [fn:1]That's what we're doing all semester: Not just using tools, but
