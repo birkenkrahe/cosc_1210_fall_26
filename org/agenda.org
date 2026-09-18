@@ -488,9 +488,6 @@ Four weeks in, here's the tally:
 | Class attendance index               | 98% |
 |--------------------------------------+-----|
 
-- [ ] How to really learn this stuff
-- [ ] Review...
-
 ** How to really learn this stuff
 
 Your activities:
@@ -537,16 +534,20 @@ I'm going to make a video on this, I think, because it's important:
 
 1) Predict the output:
    #+begin_src python :results output :exports both :session *Python* :python python3
-     def rule(length=24):
+     def rule(length=24):  # need not provide an argument - rule() is OK
          print("-" * length)
 
-     def notice(text):
+     def notice(text): # must have a text argument
          rule(len(text))
          print(text)
          rule(len(text))
 
-     notice()
+     #notice() # must provide an argument!
+     notice(1000)
    #+end_src
+
+   #+RESULTS:
+
    #+begin_quote
    TypeError: notice() missing 1 required positional argument: 'text'
    #+end_quote   
@@ -557,22 +558,26 @@ I'm going to make a video on this, I think, because it's important:
      def header():
          print("COSC 1210 - Bulletin")
 
-     header(20)
+     header(20) # same with header("announcement")
    #+end_src
+
+   #+RESULTS:
 
    #+begin_quote
    TypeError: header() takes 0 positional arguments but 1 was given
    #+end_quote
    
-
 3) ~rule~ expects a number for =length=. What happens if you call it
    with a string instead?
    #+begin_src python :results output :exports both :session *Python* :python python3
-     def rule(length=24):
+     def rule(length=24):  # default parameter is a number
          print("-" * length)
 
      rule("five")
    #+end_src
+
+   #+RESULTS:
+   : -----
 
    #+begin_quote
    TypeError: can't multiply sequence by non-int of type 'str'
@@ -585,7 +590,8 @@ I'm going to make a video on this, I think, because it's important:
    #+end_src
 
    #+RESULTS:
-   : TypeError: 'int' object is not callable
+
+
    #+begin_quote
    =range= is an ordinary built-in function, not a keyword - assigning
    to it (=range = 3=) overwrites it with the integer =3=. The name =range=
@@ -611,6 +617,13 @@ I'm going to make a video on this, I think, because it's important:
 
      bulletin("Test")
    #+end_src
+
+   #+RESULTS:
+   : ----------
+   :     Hi    
+   : ----------
+   : * Test
+   : ----------
 
 ** Functions III: loops inside functions and functions inside loops
 
