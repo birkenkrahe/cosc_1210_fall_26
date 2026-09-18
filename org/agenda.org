@@ -3,6 +3,7 @@
 #+SUBTITLE: COSC 1210 (CS I) FA26 | Augustana U.
 #+STARTUP: overview hideblocks indent entitiespretty
 #+OPTIONS: toc:nil num:nil ^:nil
+
 * DONE W1S1: Overview
 #+attr_html: :width 600px :float nil:
 [[../img/Flammarion.jpg]]
@@ -440,7 +441,7 @@ After completing this code-along lecture with practice, you can:
 - Home assignment: Pay stub calculator
 - Bonus assignments: Circle Calculator, Change Maker
 
-* DONE W3S2: Functions I
+* DONE W3S2: Functions I - defining and calling functions
 
 *Today:*
 - Defining functions with ~def~
@@ -458,7 +459,7 @@ After completing this code-along lecture with practice, you can:
 - Test for Midterm exam (50 min) 
 - Shorter session today (50 min) because I've got to give a talk
 
-* W4S2: Functions II
+* DONE W4S2: Functions II - functions calling functions & loops
 
 We now move from writing standalone functions to building small
 functions that call and adapt each other.
@@ -470,8 +471,160 @@ bulletins, just by changing what's passed in (= interface).
 - Calling one function from another
 - Generalizing a function
 - Stacking functions
+- Loops with ~for~ and ~range~
 
-** Checkout
+** Checkout - what do you remember from today?
+
+
+* W4S3: Functions III - loops inside functions and functions inside loops
+
+Four weeks in, here's the tally:
+
+|--------------------------------------+-----|
+| Class sessions so far                | 10  |
+| Pages of material covered            | ~50 |
+| Lines of Python code you've seen     | 568 |
+| Lines of it you ran live in class    | 526 |
+| Class attendance index               | 98% |
+|--------------------------------------+-----|
+
+- [ ] How to really learn this stuff
+- [ ] Review...
+
+** How to really learn this stuff
+
+Your activities:
+- Coding alongside me (Jupyter)
+- Solving weekly programming problems (Canvas)
+- Solving bonus problems (Canvas)
+- Reading the textbook (online)
+- Reading my lectures (GitHub)
+
+You need all of these to really learn how to program, which comes down
+to: building a habit (you do it routinely) and intuition (you feel it).
+
+** How to read, how to study, how to learn programming
+
+I'm going to make a video on this, I think, because it's important:
+
+1) You don't learn by *grazing* (like a cow eat grass)
+
+2) You don't learn by *gorging* (like a shark)
+
+3) You don't learn by *gallivanting* (like a tourist)
+
+4) You only learn by *grappling* with the material (like a wrestler)
+
+5) How does one immerse oneself deeply (in CS)?
+   #+begin_quote
+   - Read the same passage (or code) again and again until it makes
+     sense to you (or until you understand why it does not make sense)
+   - Practice in small daily doses rather than cramming once a week --
+   - Write code every day, even for ten minutes, the way you'd
+     practice an instrument.
+   - Struggle with a problem for a while before looking up (or asking
+     AI for) the answer: the friction is where the learning happens,
+     not the solution itself.
+   - Produce, don't just consume -- reading someone else's code or
+     watching a video feels like progress but doesn't build the same
+     muscle as typing it yourself, breaking it, and fixing it.
+   - Explain what you wrote to someone else, or out loud to yourself,
+     or to the AI: if you can't explain it, you haven't actually
+     learned it yet, no matter how cleanly it compiles.
+   #+end_quote
+
+** Review
+
+1) Predict the output:
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     def rule(length=24):
+         print("-" * length)
+
+     def notice(text):
+         rule(len(text))
+         print(text)
+         rule(len(text))
+
+     notice()
+   #+end_src
+   #+begin_quote
+   TypeError: notice() missing 1 required positional argument: 'text'
+   #+end_quote   
+
+2) ~header~ is defined with no parameters. What happens when you call
+   it with an argument anyway?
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     def header():
+         print("COSC 1210 - Bulletin")
+
+     header(20)
+   #+end_src
+
+   #+begin_quote
+   TypeError: header() takes 0 positional arguments but 1 was given
+   #+end_quote
+   
+
+3) ~rule~ expects a number for =length=. What happens if you call it
+   with a string instead?
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     def rule(length=24):
+         print("-" * length)
+
+     rule("five")
+   #+end_src
+
+   #+begin_quote
+   TypeError: can't multiply sequence by non-int of type 'str'
+   #+end_quote
+
+4) What happens here, and why?
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     range = 3
+     print(range(5))
+   #+end_src
+
+   #+RESULTS:
+   : TypeError: 'int' object is not callable
+   #+begin_quote
+   =range= is an ordinary built-in function, not a keyword - assigning
+   to it (=range = 3=) overwrites it with the integer =3=. The name =range=
+   no longer refers to the function at all, so trying to *call* it
+   fails: you can't call an =int=. Nothing here is special to =range= -
+   the same thing happens to any name you reassign this way.
+   #+end_quote
+
+5) Trace the call chain and predict the output:
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     def rule():
+         print("-" * 10)
+
+     def header():
+         rule()
+         print("Hi".center(10))
+         rule()
+
+     def bulletin(item):
+         header()
+         print("* " + item)
+         rule()
+
+     bulletin("Test")
+   #+end_src
+
+** Functions III: loops inside functions and functions inside loops
+
+- the ~range~ trap
+- generators
+- explain why a variable made inside a function is invisible outside it
+- read a traceback from the bottom up
+- two practice problems
+
+** Assignments
+
+- Home programming assignment: Certificate Printer (easy)
+- Bonus program: personal savings growth calculator (medium)
+- Bonus program: build a toolkit for enzyme analysis (hard)
 
 * Footnotes
 
