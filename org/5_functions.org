@@ -799,7 +799,7 @@ list comprehension into a generator expression. Here is the difference:
 immediately - that's why you see "welcome" 3 times.
 
 ~(...)~ just hands back a *generator* object (if you print its ~type~, you
-get ~<class generator>~. It's "lazy", so none of the ~print~ calls run
+get ~<class 'generator'>~). It's "lazy", so none of the ~print~ calls run
 until you actually pull values out of it, e.g. with a ~for~ loop or a
 ~list()~:
 
@@ -1064,7 +1064,7 @@ mistake.
       print(label + ": " + str(value))
 
   def report(present, absent):
-nnn      divider()
+      divider()
       line("Present", present)
       line("Absent", absent)
       total = present + absent
@@ -1167,11 +1167,35 @@ Bugs:
 - A *list comprehension* (=[expr for x in seq]=) writes a loop as one
   expression, building a list of results as it goes.
 
+- Exchange the brackets for parentheses and you get a *generator*
+  expression (=(expr for x in seq)=). It is *lazy*: nothing runs until
+  you pull values out of it, and it is used up after one pass. (A
+  preview.)
+
+- A loop can sit inside a function's body and then runs on whatever
+  argument you pass: ~stars(5)~ prints five rows. The body is indented
+  twice - once for the function, once for the loop. ~range~ starts at
+  0, so a count that starts at 1 needs ~i + 1~; trace a loop with a
+  table of loop counter and output.
+
 - A variable made inside a function is *local* - invisible once the
-  function returns. Parameters are local too.
+  function returns. Parameters are local too. Two functions can use the
+  same local name without colliding.
 
 - A *traceback* lists the calls from ~<module>~ down to the error. Read
   it bottom to top.
+
+- Debug one error at a time. A ~SyntaxError~ (a missing colon, say)
+  stops the program before it runs; a ~TypeError~ can mean the wrong
+  number of arguments; a ~NameError~ can mean a local variable used
+  outside its function. Fix the first error reported, run again, and
+  repeat.
+
+- *pythontutor.com* steps through a program one line at a time. Each
+  call shows up as a box stacked on top of the top-level code, with the
+  value of every variable at that moment - so you can see why a value
+  is wrong, and watch an error strike, the traceback made visible.
+  Reach for it when the numbers do not add up.
 
 - Functions are worth it: naming, no repetition, separate testing,
   reuse.
@@ -1181,27 +1205,37 @@ Bugs:
 
 * Glossary
 
-| Term                 | Meaning                                          |
-|----------------------+--------------------------------------------------|
-| ~def~                  | Keyword that starts a function definition        |
-| function definition  | The ~def~ statement that creates a function        |
-| header               | The first line of a definition (ends in ~:~)       |
-| body                 | The indented lines that run when it is called    |
-| function object      | The value a ~def~ creates; its type is ~function~    |
-| call                 | Running a function: its name followed by ~()~      |
-| parameter            | A name in the definition standing for an input   |
-| argument             | A value passed to the function in the call       |
-| positional parameter | Matched by where it sits in the call             |
-| named parameter      | Has a default, so the call may omit it           |
-| docstring            | A string as the first body line; ~help~ shows it   |
-| ~help(f)~              | Prints a function's signature and docstring      |
-| generalizing         | Rewriting a function to fit more cases           |
-| ~for~ loop             | Runs its body once per value in a sequence       |
-| ~range(n)~             | The sequence ~0, 1, ..., n-1~                      |
-| iteration            | One pass through the body of a loop              |
-| list comprehension   | ~[expr for x in seq]~ - a loop written as a list   |
-| dummy variable       | A loop variable the body never uses (often ~_~)    |
-| local variable       | A variable that lives only inside its function   |
-| scope                | The part of a program where a name is usable     |
-| traceback            | The chain of calls that were running at an error |
-| stack                | The chain of active calls, innermost last        |
+|    | Term                 | Meaning                                          |
+|----+----------------------+--------------------------------------------------|
+|  1 | ~def~                  | Keyword that starts a function definition        |
+|  2 | function definition  | The ~def~ statement that creates a function        |
+|  3 | header               | The first line of a definition (ends in ~:~)       |
+|  4 | body                 | The indented lines that run when it is called    |
+|  5 | function object      | The value a ~def~ creates; its type is ~function~    |
+|  6 | call                 | Running a function: its name followed by ~()~      |
+|  7 | parameter            | A name in the definition standing for an input   |
+|  8 | argument             | A value passed to the function in the call       |
+|  9 | positional parameter | Matched by where it sits in the call             |
+| 10 | named parameter      | Has a default, so the call may omit it           |
+| 11 | default value        | Value a parameter takes when the call omits it   |
+| 12 | docstring            | A string as the first body line; ~help~ shows it   |
+| 13 | ~help(f)~              | Prints a function's signature and docstring      |
+| 14 | generalizing         | Rewriting a function to fit more cases           |
+| 15 | stacking             | One function calling another, and so on          |
+| 16 | ~for~ loop             | Runs its body once per value in a sequence       |
+| 17 | ~range(n)~             | The sequence ~0, 1, ..., n-1~                      |
+| 18 | iteration            | One pass through the body of a loop              |
+| 19 | loop counter         | The loop variable; takes each ~range~ value        |
+| 20 | trace table          | Loop counter and output, one row per iteration   |
+| 21 | list comprehension   | ~[expr for x in seq]~ - a loop written as a list   |
+| 22 | generator            | Object that hands out values only when asked     |
+| 23 | lazy                 | Computes a value only when it is needed          |
+| 24 | dummy variable       | A loop variable the body never uses (often ~_~)    |
+| 25 | local variable       | A variable that lives only inside its function   |
+| 26 | scope                | The part of a program where a name is usable     |
+| 27 | traceback            | The chain of calls that were running at an error |
+| 28 | stack                | The chain of active calls, innermost last        |
+| 29 | pythontutor.com      | Steps through code, showing calls and variables  |
+| 30 | ~SyntaxError~          | Code Python cannot parse; caught before running  |
+| 31 | ~TypeError~            | Wrong type or number of arguments in a call      |
+| 32 | ~NameError~            | A name used outside its scope, or misspelled     |
