@@ -475,8 +475,7 @@ bulletins, just by changing what's passed in (= interface).
 
 ** Checkout - what do you remember from today?
 
-
-* W4S3: Functions III - loops inside functions and functions inside loops
+* DONE W4S3: Functions III - loops inside functions and functions inside loops
 
 Four weeks in, here's the tally:
 
