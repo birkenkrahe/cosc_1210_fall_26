@@ -1,0 +1,132 @@
+#+TITLE: In-class quiz 1: Cafe orders
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+OPTIONS: toc:nil num:nil ^:nil
+#+STARTUP: overview hideblocks indent entitiespretty:
+* How this works
+
+- This is an ungraded in-class test covering Python functions.
+
+- You create and complete a notebook with five tasks, plus a bonus task if you are fast.
+
+- When you're done, download your ~.ipynb~ file and upload it to Canvas.
+
+- You have got 25 minutes. No AI use or any other materials permitted.
+
+- I'll give you a 2 min warning: then you must finish & submit.
+
+* Setup
+
+- *Open* JupyterLite in Canvas -> =Test (2026-09-21)=
+
+- *Launch* a =Python (Pyodided)= notebook.
+
+- *Rename* the notebook from =Untitled= to =Test (2026-09-21)=.
+
+- *Create* a level-1 headline that says =Function test (2026-09-21)=.
+
+- *Work* through the following tasks. Complete as many as you can.
+
+- *Follow the instructions* to the letter. No messing about.
+
+* Task 1: Welcome
+
+- *Create* a level-2 headline that says =Task 1: Welcome=.
+
+- *Write* a function =welcome(name)= that prints =Welcome to the cafe,
+  name!=, using an f-string.
+
+- *Call* the function in the next cell on the names =Mei= and =Tomas=.
+
+- Expected output:
+  #+begin_example
+  Welcome to the cafe, Mei!
+  Welcome to the cafe, Tomas!
+  #+end_example
+
+* Task 2: Latte size
+
+- *Create* a level-2 headline that says =Task 2: Latte size=.
+
+- *Write* a function =latte(size)= with the default size of medium that
+  prints =One size latte=.
+
+- *Call* the function once with no argument and once with large.
+
+- Expected output:
+  #+begin_example
+  One medium latte
+  One large latte
+  #+end_example
+
+* Task 3: Stamp card
+
+- *Create* a level-2 headline that says =Task 3: stamp card=.
+
+- *Write* a function =stamp_card(number)= that prints one line per stamp,
+  using a ~for~ loop. Each line prints =Stamp num of number=, counting
+  from 1.
+
+- *Call* the function with the argument 3.
+
+- Expected output:
+  #+begin_example
+  Stamp 1 of 3
+  Stamp 2 of 3
+  Stamp 3 of 3
+  #+end_example
+
+* Task 4: A visit
+
+- *Create* a level-2 headline that says =Task 4: a visit=.
+
+- *Write* a function =visit(name, number)= that calls =welcome(name)= and
+  then =stamp_card(number)=. Give it a *docstring* (one summary line, then
+  one line each for each input parameter. Call it on Mei and 2.
+
+- Expected output:
+  #+begin_example
+  Welcome to the cafe, Mei!
+  Stamp 1 of 2
+  Stamp 2 of 2
+  #+end_example
+
+* Task 5: Fix the bill
+
+- *Create* a level-2 headline that says =Task 5: fix the bill=
+
+- The code below should print =Total: 12=.
+
+- *Enter* it, *run* it, and *fix* the code.
+
+- In a *text cell*, answer in one sentence: why did the original code
+  fail? Be specific, don't just repeat the error message.
+
+  #+begin_src python :noeval
+    def total_cost(price, quantity):
+        total = price * quantity
+
+    total_cost(4, 3)
+    print(f"Total: {total}")
+  #+end_src
+
+* Task 6: Muffin tray (bonus)
+
+- *Create* a level-2 headline that says =Task 6: muffin tray=.
+
+- *Write* a function =tray(rows, columns)= that prints a rectangle of
+  the letter =o=, with =rows= lines of =columns= letters each. Use two
+  nested ~for~ loops: the outer loop for the rows, the inner loop for
+  the letters in one row. Don't use ~*~ to repeat the letter.
+
+- Hint: =print("o", end="")= stays on the same line, and =print()= on
+  its own ends the line.
+
+- *Call* the function with 3 rows and 5 columns.
+
+- Expected output:
+  #+begin_example
+  ooooo
+  ooooo
+  ooooo
+  #+end_example
