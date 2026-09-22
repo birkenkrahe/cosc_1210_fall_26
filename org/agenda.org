@@ -638,6 +638,158 @@ I'm going to make a video on this, I think, because it's important:
 - Bonus program: personal savings growth calculator (medium)
 - Bonus program: build a toolkit for enzyme analysis (hard)
 
+* W5S1: Ultimate Function Test
+
+- [X] Late quiz policy
+- [X] Code along uploads
+- [X] Programming assignments
+- [X] Review: Paysstub Calculator
+- [X] In-class test: functions
+- [ ] Review (last class)
+- [ ] Conditionals and recursion
+
+** Late quiz policy
+
+- Quizzes state that you lose 50% for late submission.
+
+- I have been lenient for Quiz 1 + 2 to ensure that everybody
+  understands the rules.
+
+- From Quiz 3, the policy will be applied rigorously.
+
+- Quizzes have a deadline and will be open for another week.
+
+** Code along uploads
+
+- Similarly for the code alongs: I've been lenient at the start.
+
+- But the numbers aren't great.
+
+- Class performance index so far:
+
+  |       Date | Code-along / assignment              | Index       |     % |
+  |------------+--------------------------------------+-------------+-------|
+  | 2026-09-04 | String functions (video)             | 96.5 / 126  | 76.6% |
+  | 2026-09-09 | Variables and statements (final)     | 133 / 190   | 70.0% |
+  | 2026-09-11 | Programming assignment 1: String Art | 75 / 105    | 71.4% |
+  | 2026-09-18 | Functions, whole week (final)        | 133.5 / 228 | 58.6% |
+
+  Only students who submitted count in the index; missing submissions
+  are not included.
+
+- There will only be code-along uploads at the end of the week for
+  whatever we've done that week. The upload will be open for one week.
+
+- There will be point reductions for incomplete sections.
+
+- So if you're missing, or if you didn't do a practice (i.e. did not
+  participate), this is going to hurt your grade.
+
+- You have to check using the recording or my GitHub record and update
+  your code along files before submitting them.
+
+- You should know if your notebooks are incomplete. If you're unsure
+  where you are in my participation ranking, ask me.
+
+** Programming assignments
+
+- When I ask you to submit a notebook, I want you to submit a
+  notebook, and not a blob of script. Machines write blobs, humans
+  write notebooks.
+
+- Example: I asked for you to check the length of a string with
+  ~len()~. That's not part of the final program but it should be part of
+  your process (instead of counting the length by hand).
+
+- The assignments are split into tasks for a reason. You should
+  discipline yourself to write the programs in that same way. 
+
+- When I ask for a write-up, I am asking for a text cell.
+
+- When an output contains double spaces, your result should also
+  contain double spaces. I only subtracted points for missing parts.
+
+- Your future submissions will have to include a header (title,
+  author, and a statement on how you used AI if you did at all).
+
+- See my sample solution (PDF) for what I mean by "notebook
+  solution". My solution also includes a few extensions:
+  [[https://tinyurl.com/string-art-2][tinyurl.com/string-art-2]] (in Google Colab)
+
+- Several of you did not submit: Use the calendar!
+
+- The class performance overall according to AI is 71%.
+
+- Assignments also carry a 50% penalty for late submission.
+  
+** Review: Paystub Calculator (home assignment)
+
+- Detailed sample solution: [[https://tinyurl.com/paystub-calculator-solution][tinyurl.com/paystub-calculator-solution]]
+
+** In-class test: functions
+
+- Open the test page in Canvas
+- Follow the instructions
+- Upload solution to Canvas
+- Time: 25 minutes
+
+** Review (last class)
+
+Self-check as usual.
+
+1) What is the difference between a parameter and an argument?
+   #+begin_quote
+   A parameter is a name in the function definition; an argument is
+   the value you pass in the call. Calling ~greet("Jim")~ works as if
+   ~name = "Jim"~ ran first.
+   #+end_quote
+
+2) A function computes ~total = price * qty~ and prints it. You then
+   run ~print(total)~ outside the function. What happens?
+   #+begin_quote
+   ~NameError~ - ~total~ is local to the function and gone once it
+   has finished.
+   #+end_quote
+
+3) What values does ~i~ take in ~for i in range(3):~?
+   #+begin_quote
+   0, 1, 2.
+   #+end_quote
+
+4) Which line of a traceback do you read first?
+   #+begin_quote
+   The last one: it names the error. The lines above it show how the
+   program got there.
+   #+end_quote
+
+5) What is a docstring for, and how do you read one?
+   #+begin_quote
+   It documents what a function does and what its parameters mean;
+   ~help(f)~ prints it.
+   #+end_quote
+
+
+* W5S2: Viking 1: Mission Control (Conditionals & Recursion)
+
+- [ ] Function test debrief
+
+** Test debrief
+#+attr_html: :width 400px :float nil:
+#+caption: Rome: Not built in one day (2775 BC)
+[[../img/roma.png]]
+
+- If you achieved < 30%, I recommend you try the same exercise again
+  without peeking. Just massage that code memory once more. See me for
+  office hours any time for a Python booster.
+
+- If you achieved 30% - 70%, try the new batch of function exercises
+  (built just like the first one, slight changes) and earn bonus
+  points (solutions link at the bottom of the assignment).
+
+- If you achieved 80%-100%, you're already on top of your game, and
+  all you need to do is keep going & keep me on my toes! Try some of
+  the other open exercises to keep yourself interested.
+
 * Footnotes
 
 [fn:1]That's what we're doing all semester: Not just using tools, but
