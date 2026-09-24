@@ -1,0 +1,330 @@
+#+TITLE: Conditionals and Recursion
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:1 num:1 ^:nil
+
+* Objectives
+
+Source: Downey, Think Python (3e), chapter 5.
+
+By the end of this lesson you can:
+- split a number into quotient and remainder with ~//~ and ~%~
+- write *boolean expressions* with comparison operators and ~and~, ~or~, ~not~
+- choose between actions with ~if~, ~else~ and ~elif~
+- flatten a nested conditional
+- tell when one parameterized function is enough and when you need
+  several separate ones
+- read a number from the keyboard with ~input~ and ~int~
+- write a function that calls itself, with a *base case*
+- draw a stack diagram for a recursive call
+- read a ~RecursionError~
+
+Sessions:
+1. Go / No-Go: ~//~ and ~%~, booleans, ~if~ and ~else~
+2. More than two outcomes: ~elif~, nested conditionals, ~input~
+3. Countdown: recursion
+
+Chapter 5 functions still only *print* - they do not hand a value back
+yet. Giving a value back (~return~) is chapter 6.
+
+The story for the week: *Viking 1* is on the launch pad. Over three
+sessions you build the software for its control room.[fn:1]
+
+* Session 1: Go / No-Go
+** DONE Mission Control
+
+*Viking 1* is on the pad. In the control room, every station answers
+one question when the flight director polls the room: *GO* or
+*NO-GO*? One NO-GO and the launch does not happen.
+
+- Session 1 - the poll: each station reports GO or NO-GO
+- Session 2 - the launch decision: weather, fuel, and what to do if
+  something is wrong
+- Session 3 - the countdown: a function that counts itself down
+
+Everything you write this week is a function that *prints*. That is
+enough for a control room - and it will show you exactly what is
+missing, which is chapter 6.
+
+** DONE Integer division and modulus
+
+The countdown clock in mission control shows minutes and seconds, but
+the rocket only knows seconds. Two operators turn one into the other:
+
+- ~//~ (floor division) gives the whole number of times one number
+  fits into another
+- ~%~ (modulus) gives what is left over
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(125 // 60)   # whole minutes in 125 seconds
+  print(125 % 60)    # seconds left over
+#+end_src
+
+#+RESULTS:
+: 2
+: 5
+
+You met ~divmod~ earlier - it does both at once:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  minutes, secs = divmod(125, 60)
+  print(minutes, secs)
+#+end_src
+
+#+RESULTS:
+: 2 5
+
+~divmod~ hands back two values, and the two names on the left of the ~=~
+receive one each (this is also called a ~tuple~).
+
+Put it in a function. The format specifier ~:02d~ pads a whole number
+with a leading zero to two digits (compare ~:.2f~ for decimals):
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(f"{5:02d}")
+  print(f"{45:02d}")
+#+end_src
+
+#+RESULTS:
+: 05
+: 45
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def clock(seconds):
+      """Print a number of seconds as a T-minus clock, e.g. T-2:05."""
+      minutes = seconds // 60
+      secs = seconds % 60
+      print(f"T-{minutes}:{secs:02d}")
+
+  clock(125)
+  clock(59)
+  clock(600)
+#+end_src
+
+#+RESULTS:
+: T-2:05
+: T-0:59
+: T-10:00
+
+The modulus operator is more useful than it looks:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(10 % 2)     # 0 - even numbers leave no remainder
+  print(7 % 2)      # 1 - odd numbers leave 1
+  print(1234 % 10)  # the last digit
+  print(2026 % 100) # the last two digits
+#+end_src
+
+#+RESULTS:
+: 0
+: 1
+: 4
+: 26
+
+#+begin_src python :results output :exports both :session *Python* 
+  import time
+  print(time())
+#+end_src
+
+#+RESULTS:
+
+Bonus: how long ago was January 1, 1970? The ~time~ module counts the
+seconds since then. Take a fixed value:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  seconds = 1716394001          # seconds since January 1, 1970
+  days = seconds // 86400       # 86400 seconds in a day
+  rest = seconds % 86400        # seconds since midnight
+  hours = rest // 3600
+  minutes = rest % 3600 // 60
+  secs = rest % 60
+  print(days, "days,", hours, "h,", minutes, "min,", secs, "s")
+#+end_src
+
+#+RESULTS:
+: 19865 days, 16 h, 6 min, 41 s
+
+** DONE Boolean expressions
+
+A *boolean expression* is an expression that is either ~True~ or
+~False~. The comparison operators produce them:
+
+| Operator | Means                    |
+|----------+--------------------------|
+| ~==~       | equal to                 |
+| ~!=~       | not equal to             |
+| ~<~ ~>~      | less than, greater than  |
+| ~<=~ ~>=~    | at most, at least        |
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(2 + 2 == 4)
+  print(3 != 3)
+  print(7 > 10)
+  print(7 <= 7)
+  print("GO" == "GO")
+#+end_src
+
+#+RESULTS:
+: True
+: False
+: False
+: True
+: True
+
+Watch out: ~=~ *assigns*, ~==~ *compares*. Mixing them up is a classic
+mistake - Python usually catches it:
+
+#+begin_src python :results none :session *Python* :python python3
+  fuel = 96
+  if fuel = 90:
+      print("exactly 90")
+#+end_src
+
+#+begin_example
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+#+end_example
+
+The readings from the pad (fuel in percent, wind in km/h):
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel = 96
+  wind = 12
+  print(fuel >= 90)
+  print(wind < 25)
+  print(type(fuel >= 90))
+#+end_src
+
+#+RESULTS:
+: True
+: True
+: <class 'bool'>
+
+The result of a comparison is a value of type ~bool~ - you can store
+it in a variable like any other value.
+
+*** PRACTICE
+
+Before you run the block, write down ~True~ or ~False~ for each of the
+four lines. Then run it and check your predictions:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel = 96
+  wind = 12
+  print(fuel != 96)
+  print(wind * 2 > 23)
+  print(fuel // 10 == 9)
+  print(fuel % 2 == 1)
+#+end_src
+
+#+RESULTS:
+: False
+: True
+: True
+: False
+
+*** Solution                                                         :skip:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel = 96
+  wind = 12
+  print(fuel != 96)          # 96 != 96 is False
+  print(wind * 2 > 23)       # 24 > 23 is True
+  print(fuel // 10 == 9)     # 96 // 10 is 9, so True
+  print(fuel % 2 == 1)       # 96 % 2 is 0, so False
+#+end_src
+
+#+RESULTS:
+: False
+: True
+: True
+: False
+
+** DONE Logical operators
+
+Three operators combine booleans:
+
+- ~A and B~ is ~True~ only if both are
+- ~A or B~ is ~True~ if at least one is
+- ~not A~ is the opposite of ~A~
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  print(fuel >= 90 and wind < 25)   # GO only if BOTH are fine
+  print(fuel >= 90 or wind < 5)     # at least one is fine
+  print(not wind < 25)              # the opposite
+#+end_src
+
+#+RESULTS:
+: True
+: True
+: False
+
+All four combinations at a glance:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  for a in (True, False):
+      for b in (True, False):
+          print(f"{a} and {b} = {a and b} | {a} or {b} = {a or b}")
+#+end_src
+
+#+RESULTS:
+: True and True = True | True or True = True
+: True and False = False | True or False = True
+: False and True = False | False or True = True
+: False and False = False | False or False = False
+
+*** PRACTICE
+
+The launch is allowed if fuel *and* engines are both GO, *or* if the
+flight director has given a manual override. Complete the expression
+for ~launch_ok~ and run the block twice: once with ~override = True~,
+once with ~override = False~.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel, engines = 96, 88
+  fuel_ok = fuel >= 90
+  engines_ok = engines >= 95
+  override = True
+  launch_ok = ...        # replace the dots
+  print(launch_ok)
+#+end_src
+
+Expected output for the two runs:
+
+#+begin_example
+True
+False
+#+end_example
+
+*** Solution                                                         :skip:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel, engines = 96, 88
+  fuel_ok = fuel >= 90
+  engines_ok = engines >= 95
+  override = True
+  launch_ok = (fuel_ok and engines_ok) or override
+  print(launch_ok)
+#+end_src
+
+#+RESULTS:
+: True
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel, engines = 96, 88
+  fuel_ok = fuel >= 90
+  engines_ok = engines >= 95
+  override = False
+  launch_ok = (fuel_ok and engines_ok) or override
+  print(launch_ok)
+#+end_src
+
+#+RESULTS:
+: False
+
+
+* Footnotes
+
+[fn:1] [[https://science.nasa.gov/mission/viking-1/][Viking 1: NASA's first Mars mission (1975).]] First spacecraft to
+land successfully on Mars and send data back from the surface. Fixing
+spacecraft software from Earth is a realistic software scenario.
