@@ -1,0 +1,172 @@
+#+TITLE: Pay Stub Calculator
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil: 
+* Pay Stub Calculator
+
+This assignment uses only chapter 2 material: variables and assignment,
+arithmetic, ~type()~, ~round()~, ~str()~, ~len()~, string repetition
+with ~*~, comparison operators, and ~print~. No ~if~, no loops, no
+function definitions.
+
+The whole program is driven by two values:
+
+#+begin_example
+  hourly_rate  = 15.0    # dollars per hour
+  hours_worked = 40      # hours this week
+#+end_example
+
+Each step in parts 1-4 below builds on the variables from the step
+before - that is the point of the exercise: a program is a chain of
+statements, each one using the results of the last. In part 5, you are
+then asked to put together a Python script.
+
+Open a new Jupyter notebook and title it =Pay_Stub_Calculator.ipynb=.
+
+** Part 1 - Gross pay
+
+- Assign =hourly_rate= and =hours_worked= as above.
+- Compute =gross_pay = hourly_rate * hours_worked=.
+- Print =gross_pay= and its ~type()~ on two labelled lines, e.g.
+  =Gross pay = 600.0= then =Type = <class 'float'>.=
+
+You should see =600.0=, not =600=. Make sure =hourly_rate= is written
+with a decimal point (=15.0=, not =15=) so the result is a ~float~.
+
+** Part 2 - Tax and net pay
+
+- Assign =tax_rate = 0.20= (20% written as a decimal - *not* =20=).
+- Compute =tax_amount = gross_pay * tax_rate=.
+- Compute =net_pay = gross_pay - tax_amount=.
+- Wrap =tax_amount= and =net_pay= in ~round()~ with =2= decimal places
+  (the tax rate is not money - leave it as =0.20=). These numbers are already clean, so
+  nothing visible changes - but rounding money to the nearest cent is
+  the habit to build.
+
+** Part 3 - A readable pay stub
+
+Print three labelled lines so the ~$~ signs line up:
+
+#+begin_example
+Gross pay: $600.0
+Tax (20%): $120.0
+Net pay:   $480.0
+#+end_example
+
+Build each line with ~+~ and ~str()~ - the numbers must come from your
+variables, not be typed inside the quotes.
+
+Then add a *title* and a *separator* rule above and below it. Define
+
+#+begin_example
+  title = "Weekly Pay Stub"
+#+end_example
+
+and make the separator a row of dashes *exactly as long as the title*,
+using ="-" * len(title)=. The finished output:
+
+#+begin_example
+---------------
+Weekly Pay Stub
+---------------
+Gross pay: $600.0
+Tax (20%): $120.0
+Net pay:   $480.0
+---------------
+#+end_example
+
+** Part 4 - Sanity checks
+
+Comparison operators return a ~bool~ (~True~ or ~False~). Print the
+result of each:
+
+- Is =net_pay= greater than zero?
+- Is =net_pay= greater than =gross_pay=?
+- Does =tax_amount= equal =gross_pay * tax_rate=?
+
+The output should look like this:
+#+begin_example
+Is net_pay greater than zero? True
+Is net_pay greater than gross_pay? False
+Does tax_amount equal gross_pay * tax_rate? True
+#+end_example
+  
+** Part 5 - Overtime
+
+Parts 1-4 assume the worker did exactly 40 hours. Now suppose they
+worked *more*. Any hours beyond a standard 40-hour week are paid at
+*1.5 times* the hourly rate.
+
+Extend your program for a worker who did *46* hours:
+
+- the first 40 hours are paid at the normal rate;
+- the extra hours are paid at 1.5x the rate;
+- gross pay is the sum of the two;
+- tax and net pay follow exactly as before;
+- the stub gains a =Regular:= line and an =Overtime:= line above
+  =Gross pay:=.
+
+The "no bare numbers" rule still holds: the =40= and the =1.5= need
+their own named variables. Assume the worker always does at least 40
+hours - you have not covered ~if~ yet.
+
+Expected output (for =hourly_rate = 15.0=, =hours_worked = 46=):
+
+#+begin_example
+---------------
+Weekly Pay Stub
+---------------
+Regular:   $600.0
+Overtime:  $135.0
+Gross pay: $735.0
+Tax (20%): $147.0
+Net pay:   $588.0
+---------------
+#+end_example
+
+*Write Part 5 as a single code cell.* Put a comment header at the top
+giving the script's purpose, your name as =Author=, and the =Input= and
+=Output= variables.
+
+* Write-up
+
+At the bottom of your notebook, answer in one sentence each:
+
+1) Why does =gross_pay= print as =600.0= and not =600=? What would you
+   change to get =600= instead?
+
+2) What does =len(title)= return here, and what could break if you build
+   the separator as ="-" * 15= instead (hard-coding =15=)?
+
+3) In Part 4, =net_pay > gross_pay= is ~False~. With a positive tax
+   rate, could it ever be ~True~? Why or why not?
+
+4) In Part 5, the overtime pay is =overtime_hours * hourly_rate * 1.5=,
+   not =hours_worked * hourly_rate * 1.5=. Why does the difference
+   matter?
+
+* Constraints
+
+- Do not use AI to solve this problem.
+- Use only: variables, ~=~, arithmetic operators, ~type~, ~round~,
+  ~str~, f-strings, ~len~, ~*~ for string repetition, comparison
+  operators (~>~, ~<~, ~==~), and ~print~.
+- No ~if~, no loops, no function definitions.
+- Every value the formulas use must be a named variable - no bare
+  numbers inside a computation.
+- Submit the program with the values given above (=hourly_rate = 15.0=,
+  =hours_worked = 40=; =46= for part 5) so its output matches the key.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- Late submission (within one week from the deadline) carries a 50% penalty.
+
+* Glossary
+
+Money terms used in this assignment:
+
+| Term      | Meaning                                     |
+|-----------+--------------------------------------------|
+| gross pay | Total pay before any deductions             |
+| net pay   | Take-home pay after deductions              |
+| tax rate  | Fraction of pay taken as tax (=0.20= means 20%) |

@@ -1,0 +1,172 @@
+#+TITLE: De Morgan's Laws
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* De Morgan's Laws
+
+*Bonus exercise - worth 5 points.* It is available until midterm.
+
+In class you combined booleans with ~and~, ~or~ and ~not~. Two rules
+tell you how ~not~ moves through a combination. They are named after
+the logician Augustus De Morgan:
+
+1. ~not (A and B)~ is the same as ~(not A) or (not B)~
+2. ~not (A or B)~ is the same as ~(not A) and (not B)~
+
+In words: /"not both" means "at least one is missing"/, and /"not
+even one" means "both are missing"/. In this exercise you *prove* the
+two laws - with the computer as your helper - and then use one of them.
+
+** Setup
+
+- *Open* a new Jupyter notebook and *rename* it =De_Morgan.ipynb=.
+- *Create* a Markdown cell at the top with a level-1 headline that says
+  =De Morgan's laws=. Below it write your name and your AI-use
+  statement (see Constraints).
+- *Work* through the tasks in order. For each task, create a Markdown
+  cell with a level-2 headline that says exactly what is written in
+  the task.
+- *Before you upload*, restart the kernel and run all cells, so that
+  the notebook shows the real output.
+
+** Task 1: First law
+
+- *Create* a level-2 headline that says =Task 1: First law=.
+- *Write* a truth table for the first law. Loop over both values of
+  =a= and both values of =b= with two nested ~for~ loops (as in the
+  lecture: ~for a in (True, False):~). For each combination, print
+  =a=, =b=, the value of ~not (a and b)~ and the value of
+  ~(not a) or (not b)~ with one ~print~ call.
+- Expected output (the last two columns must be the same in every
+  row):
+
+#+begin_example
+True True False False
+True False True True
+False True True True
+False False True True
+#+end_example
+
+** Task 2: Second law
+
+- *Create* a level-2 headline that says =Task 2: Second law=.
+- *Write* the same truth table for the second law: ~not (a or b)~ and
+  ~(not a) and (not b)~.
+- Expected output:
+
+#+begin_example
+True True False False
+True False False False
+False True False False
+False False True True
+#+end_example
+
+** Task 3: Proof by checking
+
+- *Create* a level-2 headline that says =Task 3: Proof by checking=.
+- Two booleans have only 2 x 2 = 4 combinations. If two expressions
+  agree in all four, they are the same - that is a proof. But you
+  should not have to compare the columns with your eyes.
+- *Write* a check for the first law. Complete this skeleton: =ok= starts
+  as ~True~ and is set to ~False~ if the two sides *differ* in any
+  combination (~!=~ means "is not equal"). Never set it back to ~True~
+  inside the loops.
+
+  #+begin_src python :eval no
+    ok = True
+    for a in (True, False):
+        for b in (True, False):
+            if ...:            # the two sides differ
+                ok = False
+    print("First law holds:", ok)
+  #+end_src
+
+- *Do* the same for the second law.
+- Expected output:
+
+#+begin_example
+First law holds: True
+Second law holds: True
+#+end_example
+
+** Task 4: In your own words
+
+- *Create* a level-2 headline that says =Task 4: In your own words=.
+- In a *text cell*, explain in two or three sentences why the first
+  law is true. Hint: when is ~A and B~ *False*? Which combinations of
+  =A= and =B= make ~not (A and B)~ True?
+
+** Task 5: Use it
+
+- *Create* a level-2 headline that says =Task 5: Use it=.
+- Mission control holds the launch unless the fuel is at least 90 *and*
+  the wind is below 25.
+- *Write* a function =hold(fuel, wind)= that prints =HOLD= if
+  ~not (fuel >= 90 and wind < 25)~ is true, and =GO= otherwise. Give
+  it a *docstring* (see Constraints).
+- *Call* it with these four pairs of readings, one call after the
+  other: =(96, 12)=, =(85, 12)=, =(96, 30)=, =(85, 30)=.
+- Expected output:
+
+#+begin_example
+GO
+HOLD
+HOLD
+HOLD
+#+end_example
+
+** Task 6: Without not (optional)
+
+- *Create* a level-2 headline that says =Task 6: Without not=.
+- *Write* a second function =hold2(fuel, wind)= that does the same as
+  =hold=, but *without* ~not~: use the first law to rewrite the
+  condition, and turn each comparison around (~>=~ becomes ~<~, ~<~
+  becomes ~>=~).
+- *Call* it with the same four pairs of readings.
+- Expected output: the same four lines as in Task 5.
+
+** Task 7: A tempting mistake (optional)
+
+- *Create* a level-2 headline that says =Task 7: A tempting mistake=.
+- A common mistake is to change only the operator and forget the rest:
+  ~not (A and B)~ is /not/ the same as ~(not A) and (not B)~.
+- *Write* a loop over =a= and =b= that prints only those combinations
+  where the two expressions *differ*.
+- Expected output:
+
+#+begin_example
+True False
+False True
+#+end_example
+
+* Constraints
+
+- Start your notebook with a header cell (Markdown) that gives the
+  title (De Morgan's laws), your name, and a *specific* statement about
+  your AI use: name each AI tool you used, if any, and say exactly what
+  you used it for - or write "No AI tools used." For example, "I asked
+  ChatGPT what ~!=~ does; I wrote all the code myself" is specific; "I
+  used AI a little" is not.
+- Use only: ~print~, ~for~ loops (also over ~(True, False)~), ~if~ and
+  ~else~, comparison operators, ~and~, ~or~, ~not~, function
+  definitions with docstrings. No ~return~, no lists, no ~while~.
+- Every function needs a docstring: one summary line, then one line for
+  each parameter. For example, for a function =farewell(name)=:
+
+  #+begin_src python :eval no
+    def farewell(name):
+        """Print a goodbye message.
+
+        name -- the visitor's name (string)
+        """
+        print(f"Goodbye, {name}!")
+  #+end_src
+
+- Submit with the exact values given above, so your output matches the
+  expected output.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- This bonus exercise is worth 5 points. It is available until
+  midterm.

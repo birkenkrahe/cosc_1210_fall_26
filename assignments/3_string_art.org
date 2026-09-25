@@ -1,0 +1,90 @@
+#+TITLE: String Art
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+
+* String Art
+
+This assignment uses only what we covered this week: string literals,
+the ~+~ and ~*~ operators, ~str~, ~int~, ~len~, the ~.upper()~ and
+~.lower()~ methods, and ~print~. No variables - that is next week.
+
+** Part 1 - Build the poster
+
+Reproduce this sign *exactly*, one ~print~ statement per line:
+
+#+begin_example
+==============================
+          BAKE  SALE
+       Friday  at  3  pm
+          Room  204
+==============================
+#+end_example
+
+Rules:
+
+- The top and bottom rows are one character repeated with ~*~. Do not
+  type thirty ~=~ signs by hand.
+- Indent each middle line by adding spaces in front with ~" " * n~.
+- Before you run it, write down how many characters you think the top
+  row has. Then confirm with =print(len(...))= on that same string.
+
+** Part 2 - Add a count line
+
+Add one more ~print~ below "Room 204" that produces:
+
+#+begin_example
+       12  dozen  for  $5
+#+end_example
+
+The =12= and the =5= must come from numbers, not from typing them
+inside the quotes - use ~str~ to join them to the rest of the line.
+
+** Part 3 - Shout it
+
+Add a final ~print~ that outputs
+
+#+begin_example
+SEE YOU THERE
+#+end_example
+
+by starting from the *lowercase* string ="see you there"= and turning
+it uppercase in your code.
+
+The final result should look like this:
+#+begin_example
+==============================
+          BAKE  SALE          
+       Friday  at  3  pm
+          Room  204
+==============================
+      12 dozen  for  $5
+        SEE YOU THERE
+#+end_example
+
+* Write-up
+
+At the bottom of your notebook, answer in one sentence each:
+
+1) In the count line from Part 2, does the ~*~ or the ~+~ happen first?
+   How can you tell from the output?
+
+2) Why does ="dozen for $" + 12= fail, while ="dozen for $" + str(12)=
+   works?
+
+* Constraints
+
+- Do not use AI to solve this problem.
+- No variables, no ~if~, no loops - only string literals, ~+~, ~*~,
+  ~str~, ~int~, ~len~, ~.upper()~, ~.lower()~, and ~print~.
+- One ~print~ statement per line of output.
+- Sketch the poster on paper first, marking where the spaces go.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- Late submission (within one week from the deadline) carries a 50% penalty.
+
+
+
+
+
+

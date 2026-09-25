@@ -1,0 +1,81 @@
+#+TITLE: The Change Maker
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil: 
+* The Change Maker
+
+A cashier owes a customer some change and wants to hand it back using
+as few bills and coins as possible. Write a Python program that does
+the arithmetic.
+
+Your program starts from three values:
+
+#+begin_example
+  amount_owed = 17.63   # dollars
+  amount_paid = 50.00   # dollars
+  # bills and coins available: $20, $10, $5, $1, 25c, 10c, 5c, 1c
+#+end_example
+
+Your task:
+
+1) Compute the *change due* (what the customer gets back).
+
+2) Convert the change to a whole number of *cents*. Before you round,
+   print =change_due * 100= on its own line and look at it. Then use
+   ~round~ to turn it into a whole number of cents.
+
+3) Using only ~//~ and ~%~, work out how many $20 bills fit into the
+   change, then how many $10 bills fit into what is left, and so on
+   down to single cents. Print one line per denomination, *including
+   the ones that come out to zero*.
+
+4) Also print the change due as a dollar amount with exactly two
+   decimal places.
+
+5) Put a one-line comment above each section of your program saying
+   what that section does.
+
+For the values above, a correct program prints:
+
+#+begin_example
+Amount owed:  $17.63
+Amount paid:  $50.00
+Change due:   $32.37
+
+  1 x $20
+  1 x $10
+  0 x $5
+  2 x $1
+  1 x 25c
+  1 x 10c
+  0 x 5c
+  2 x 1c
+#+end_example
+
+Check it yourself: 20 + 10 + 2 + 0.25 + 0.10 + 0.02 = 32.37.
+
+* Write-up
+
+At the bottom of your notebook, in a comment or a text cell, answer in
+one sentence each:
+
+1) What did =change_due * 100= print before you rounded it, and why was
+   ~round~ needed?
+
+2) What would go wrong if you used ~/~ instead of ~//~ when counting the
+   $20 bills?
+
+* Bonus (optional)
+
+Redo step 3 using ~divmod~ instead of a separate ~//~ and ~%~ for each
+denomination. Look up ~help(divmod)~ first.
+
+* Constraints
+
+- Do not use AI to solve this problem.
+- No ~if~ statements and no loops - you have not covered them yet. Use
+  only arithmetic operators, ~//~, ~%~, ~round~, ~str~, and f-strings.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- This bonus program is available until midterm - it carries extra credit.

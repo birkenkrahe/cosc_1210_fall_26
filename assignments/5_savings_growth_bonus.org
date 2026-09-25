@@ -1,0 +1,101 @@
+#+TITLE: Savings Growth Calculator
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* Savings Growth Calculator
+
+A bank offers two ways of growing a deposit over time: *simple
+interest*, where you earn the same amount every year on your original
+deposit, and *compound interest*, where each year's interest is added
+to the balance before the next year's interest is calculated - so you
+earn interest on your interest. Over a long enough time, the
+difference is dramatic.
+
+You're building a small toolkit of functions that reports both, for a
+given deposit, rate, and number of years. Unlike the certificate
+printer, this one doesn't tell you the internal steps - you'll need to
+work out the arithmetic (and the right parameters) yourself. Look up
+"simple interest formula" and "compound interest formula" if you don't
+already know them; this is exactly the kind of thing programmers look
+up rather than memorize.
+
+Open a new Jupyter notebook and title it =Savings_Growth.ipynb=.
+
+** What to build
+
+Three functions, each with a docstring that states the formula it
+uses in words:
+
+- A function that computes and prints the value of a deposit after
+  some number of years, growing at *simple* interest.
+- A function that computes and prints the value of the same deposit,
+  growing at *compound* interest, compounded once per year. Give its
+  "number of years" parameter a sensible default, so it can be called
+  either way.
+- A function that takes a deposit, a rate, and a number of years, and
+  calls both of the above to print a side-by-side comparison -
+  showing the starting numbers first, then both results.
+
+Money should always print rounded to two decimal places, with a
+dollar sign; the rate should print as a percentage, not a decimal
+fraction.
+
+For a deposit of =$1000=, a rate of =5%=, and =10= years, calling your
+comparison function should produce exactly:
+
+#+begin_example
+Starting balance:  $1000.00 at 5.0% for 10 years
+Simple interest:   $1500.00 after 10 years
+Compound interest: $1628.89 after 10 years
+#+end_example
+
+Then call your compound-interest function on its own, on the same
+deposit and rate, *without* specifying the number of years, and
+confirm it falls back to the same =10=-year result.
+
+** Bonus-within-the-bonus (optional)
+
+Call your comparison function a second time for the same deposit and
+years, but at a much higher rate (say =8%=, a risky stock fund, versus
+the =5%= CD above). By how many dollars does the compound-interest gap
+between the two rates differ after =10= years? Answer in a comment.
+
+* Write-up
+
+At the bottom of your notebook, answer in one or two sentences each:
+
+1) Where does the *generalizing* lesson from class show up in this
+   assignment - which parameter did you give a default, and what
+   would break for your comparison function if it didn't have one?
+
+2) Simple and compound interest give the *same* result in year 1 but
+   diverge afterward. Why does that make sense from the two formulas?
+
+3) Your comparison function calls your two interest functions rather
+   than recomputing the arithmetic itself. What would you have to
+   change in *three* places instead of one if you'd copy-pasted the
+   formulas into it directly instead?
+
+* Constraints
+
+- Start your notebook with a header cell (Markdown) that gives the
+  title (Savings Growth Calculator), your name, and a *specific*
+  statement about your AI use: name each AI tool you used, if any,
+  and say exactly what you used it for - or write "No AI tools
+  used." For example, "I asked ChatGPT what a NameError is; I wrote
+  and fixed all the code myself" is specific; "I used AI a little"
+  is not.
+- Use only: function definitions, parameters (positional and
+  default), docstrings, arithmetic operators (including =**=),
+  ~round~, f-strings, and ~print~. No ~if~, no loops, no ~return~ (we
+  haven't covered it yet - every function here prints its own
+  result).
+- Every function needs a docstring stating its formula in words.
+- Submit with the exact values given above (=$1000=, =5%=, =10= years)
+  so your output matches the key.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- This bonus program is available until midterm - it carries extra
+  credit.

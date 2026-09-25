@@ -1,0 +1,304 @@
+#+TITLE: Certificate Printer
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* Certificate Printer
+
+This assignment uses only what we've covered on functions so far:
+defining functions with ~def~, parameters (positional and default),
+docstrings, calling one function from another, and generalizing a
+function instead of hard-coding a value into it. Part 4 adds a ~for~
+loop with ~range()~ inside a function.
+
+You are building three functions that call each other, the same
+pattern as =rule/notice/header/bulletin= from class - just for a new
+purpose: printing a certificate of completion.
+
+Open a new Jupyter notebook and title it =Certificate_Printer.ipynb=.
+
+** Part 1 - =rule=
+
+Write a function =rule= that prints a line of =length= dashes, defaulting
+to =24= if no argument is given. Give it a one-line docstring. Test it
+two ways: =rule()= and =rule(10)=.
+
+** Part 2 - =banner=
+
+Write a function =banner(text, width=24)= that:
+
+1. calls =rule(width)=,
+2. prints =text= centered in a field of =width= characters
+3. calls =rule(width)= again.
+
+Give =banner= a docstring that says what it prints and names its two
+parameters. Test it with =banner("CERTIFICATE", 40)= - expected output:
+
+#+begin_example
+----------------------------------------
+              CERTIFICATE
+----------------------------------------
+#+end_example
+
+*Why a =width= parameter on =banner= and not just a fixed number?*
+#+begin_quote
+This is the same generalizing move as =rule(length=24)= in class: without
+it, =banner= could only ever produce one size of certificate.
+#+end_quote
+
+** Part 3 - =certificate=
+
+Write a function =certificate(name, course, grade)= that:
+
+1. calls =banner("CERTIFICATE", 40)=,
+2. prints =This certifies that {name}=,
+3. prints =completed {course} with a grade of {grade}.= (one line, an
+   f-string),
+4. calls =rule(40)= to close it off.
+
+Give =certificate= a docstring naming all three parameters. Then call
+the function on the student Elizabeth Bennet, who earned an A in the
+course COSC 1210.
+
+Expected output:
+
+#+begin_example
+----------------------------------------
+              CERTIFICATE
+----------------------------------------
+This certifies that Elizabeth Bennet
+completed COSC 1210 with a grade of A.
+----------------------------------------
+#+end_example
+
+** Part 4 - =print_copies=
+
+Write a function =print_copies(name, course, grade, copies)= that uses a
+~for~ loop with ~range()~ inside its body to call =certificate= for =copies=
+times, printing a blank line after each certificate. Give =print_copies=
+a docstring naming all four parameters.
+
+Then print two copies of the certificate for Fitzwilliam Darcy, who
+got a B in COSC 1220 using =print_copies=.
+
+Expected output:
+
+#+begin_example
+----------------------------------------
+              CERTIFICATE
+----------------------------------------
+This certifies that Fitzwilliam Darcy
+completed COSC 1220 with a grade of B.
+----------------------------------------
+
+----------------------------------------
+              CERTIFICATE
+----------------------------------------
+This certifies that Fitzwilliam Darcy
+completed COSC 1220 with a grade of B.
+----------------------------------------
+
+#+end_example
+
+* Write-up
+
+At the bottom of your notebook, answer in one or two sentences each:
+
+1) =rule= is called from three different places (=rule()= directly,
+   inside =banner=, inside =certificate=). What has to be true about
+   =rule= for that to work cleanly?
+
+2) Suppose you had written =banner= without a =width= parameter,
+   always centering in a fixed =40=. What would go wrong if someone
+   later wanted a =20=-character banner - and how would they have to
+   fix it, versus how the current version handles it?
+
+3) Trace the call chain for =certificate("Elizabeth Bennet", "COSC 1210",
+   "A")=, the same way we did for =notice= in class: which function
+   calls which, in what order, back to where the program started?
+
+4) What is the difference between a *parameter* and an *argument* in
+   =certificate(name, course, grade)=? Use one specific example from
+   your own test call.
+
+5) In =print_copies=, what values does the loop counter of the ~for~
+   loop assume, in what order, when =copies= is 2?
+
+* Constraints
+
+- Start your notebook with a header cell (Markdown) that gives the
+  title (Certificate Printer), your name, and a *specific*
+  statement about your AI use: name each AI tool you used, if any,
+  and say exactly what you used it for - or write "No AI tools
+  used." For example, "I asked ChatGPT what a NameError is; I wrote
+  and fixed all the code myself" is specific; "I used AI a little"
+  is not.
+- Use only: function definitions, parameters (positional and
+  default), docstrings, ~print~, f-strings, the ~*~ operator for
+  repeating a string, string ~.center()~, ~len()~, and (Part 4 only) a
+  ~for~ loop with ~range()~.
+- Every function needs a docstring.
+- =rule= and =banner= must each work with *and* without their optional
+  argument - test both ways, and include both test calls in your
+  notebook.
+- Submit with the exact values given above so the output matches the
+  key.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- Late submission (within one week from the deadline) carries a 50%
+  penalty.
+
+* Glossary
+
+| Term              | Meaning                                                          |
+|-------------------+------------------------------------------------------------------|
+| default parameter | A parameter with a fallback value, used when the call omits it   |
+| docstring         | A string as the first line of a function body; ~help()~ shows it   |
+| generalizing      | Rewriting a function to fit more cases instead of one fixed case |
+| stacking          | One function calling another, which calls another, and so on     |
+
+
+* Solution
+
+** Part 1 - =rule=
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def rule(length=24):
+      """Prints a rule of (default) length 24 characters"""
+      print('-' * length)
+
+  rule()
+  rule(10)
+#+end_src
+
+#+RESULTS:
+: ------------------------
+: ----------
+
+** Part 2 - =banner=
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # function definition
+  def banner(text, width=24):
+      """Prints a rule, a centered text and another rule of width
+
+      width -- width of rule and text field - default=24 (number)
+      text  -- input text for the banner (string)
+      returns: nothing
+      """
+      rule(width)
+      print(text.center(width))
+      rule(width)
+
+  # function calls: with and without the optional argument
+  banner("CERTIFICATE", 40)
+  banner("CERTIFICATE")
+#+end_src
+
+#+RESULTS:
+: ----------------------------------------
+:               CERTIFICATE               
+: ----------------------------------------
+: ------------------------
+:       CERTIFICATE       
+: ------------------------
+
+** Part 3 - =certificate=
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def certificate(name, course, grade):
+      """Prints named course certificate with grade
+
+      name   -- student name (string)
+      course -- course title (string)
+      grade  -- student's course grade (string)
+
+      returns: nothing
+      """
+      banner("CERTIFICATE", 40)
+      print(f"This certifies that {name}")
+      print(f"completed {course} with a grade of {grade}.")
+      rule(40)
+
+  certificate("Elizabeth Bennet", "COSC 1210", "A")
+#+end_src
+
+#+RESULTS:
+: ----------------------------------------
+:               CERTIFICATE               
+: ----------------------------------------
+: This certifies that Elizabeth Bennet
+: completed COSC 1210 with a grade of A.
+: ----------------------------------------
+
+** Part 4 - =print_copies=
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  # function definition
+  def print_copies(name, course, grade, copies):
+      """Print named course certificates with grade
+
+      name -- Name of the student (string)
+      course -- Course the student completed (string)
+      grade -- Grade the student received (string)
+      copies -- Number of certificates printed (whole number)
+      Returns: nothing
+      """
+      for _ in range(copies):
+          certificate(name, course, grade)
+          print()
+
+  # function call
+  print_copies("Fitzwilliam Darcy", "COSC 1220", "B", 2)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+----------------------------------------
+              CERTIFICATE               
+----------------------------------------
+This certifies that Fitzwilliam Darcy
+completed COSC 1220 with a grade of B.
+----------------------------------------
+
+----------------------------------------
+              CERTIFICATE               
+----------------------------------------
+This certifies that Fitzwilliam Darcy
+completed COSC 1220 with a grade of B.
+----------------------------------------
+
+#+end_example
+
+** Write-up
+
+1) =rule= has to work the same way regardless of who calls it or how
+   many arguments they give it. Since it has a default
+   (~length=24~), every caller can either pass a length or not, and
+   =rule= does not need to know or care which function is calling it.
+
+2) A fixed =40= inside =banner= would mean the *only* way to get a
+   =20=-character banner is to edit the source code of =banner= and
+   change every existing call that relied on =40=. With the =width=
+   parameter, a caller just passes a different number -
+   =banner("...", 20)= - and =banner= itself never changes.
+
+3) =certificate("Elizabeth Bennet", "COSC 1210", "A")= calls =banner=,
+   which calls =rule= twice (once before, once after printing the
+   centered text); control returns to =banner=, which returns to
+   =certificate=; =certificate= then prints two lines directly and
+   calls =rule= once more before returning to whatever called it (the
+   main program): main -> certificate -> banner -> rule -> banner ->
+   rule -> banner -> certificate -> rule -> certificate -> main.
+
+4) =name=, =course=, and =grade= are *parameters* - names that belong
+   to the function's definition. ="Elizabeth Bennet"=, ="COSC 1210"=,
+   and ="A"= are the *arguments* - the actual values supplied in this
+   particular call. Calling =certificate= again with different
+   arguments reuses the same three parameters.
+
+5) With =copies= = 2, =range(2)= produces 0 and 1, in that order, so the
+   loop body runs twice - once per certificate. The loop counter is
+   never used inside the body, it's a dummy variable; only the *number*
+   of repetitions matters.

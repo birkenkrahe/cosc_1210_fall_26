@@ -1,0 +1,29 @@
+#+TITLE: Tip Calculator Exercise 
+#+AUTHOR: Marcus Birkenkrahe 
+#+SUBTITLE: COSC 1210Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+
+* Tip Calculator
+
+Write a Python program that computes the share of a bill given the
+total bill amount, the tip percentage, and the size of the party.
+
+Sample input: total bill = $45.50, tip = 15%, party size = 4
+#+begin_example
+45.50 15 4
+#+end_example
+
+Sample output:
+#+begin_example
+Your share: $13.08
+#+end_example
+
+* Constraints
+
+- Do not use AI to solve this problem.
+- Start with pseudocode
+- Save your solution to PC as an .ipynb file
+- Submit you solution file in Canvas
+- Late submission (within one week from the deadline) carries a 50% penalty.
+
+

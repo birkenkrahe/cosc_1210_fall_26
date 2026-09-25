@@ -1,0 +1,110 @@
+#+TITLE: Enzyme Kinetics Calculator
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* Enzyme Kinetics Calculator
+
+An enzyme speeds up a reaction by converting a substrate into
+product. How fast it does that - the *reaction velocity* - depends on
+how much substrate is available, and on two constants that describe
+the enzyme itself: =Vmax=, the fastest the enzyme can possibly go (once
+it's completely saturated with substrate), and =Km=, a constant with
+units of concentration that describes how much substrate it takes to
+get the enzyme going at a reasonable clip.
+
+You're building a small toolkit of functions that reports reaction
+velocity for a given enzyme and substrate concentration. As with the
+savings calculator, this one doesn't hand you the arithmetic - look up
+the *Michaelis-Menten equation* if you don't already know it. It's one
+line, and it's exactly the kind of formula a working scientist looks
+up rather than memorizes.
+
+Open a new Jupyter notebook and title it =Enzyme_Kinetics.ipynb=.
+
+** What to build
+
+Three functions, each with a docstring naming its parameters and
+stating what it computes:
+
+- A function that computes and prints the reaction velocity for a
+  given =Vmax=, =Km=, and substrate concentration, using the
+  Michaelis-Menten equation.
+- A function that takes just =Vmax= and =Km=, and calls the function
+  above at the *one specific substrate concentration* where a
+  well-known fact about this equation kicks in: when substrate
+  concentration equals =Km=, the velocity is always exactly half of
+  =Vmax=, no matter what =Vmax= and =Km= actually are. (You should be
+  able to see why, once you have the formula in front of you.)
+- A function that takes =Vmax=, =Km=, and a substrate concentration
+  (give this last parameter a sensible default), and calls both
+  functions above to print a full report: the enzyme's constants
+  first, then the velocity at the given substrate concentration, then
+  the half-saturation check as confirmation.
+
+Print velocities rounded to two decimal places; include units
+(=mM= for concentration) in your output.
+
+For =Vmax = 100.0=, =Km = 5.0= mM, and a substrate concentration of
+=10.0= mM, calling your report function should produce exactly:
+
+#+begin_example
+Enzyme kinetics: Vmax = 100.0, Km = 5.0 mM
+Reaction velocity: 66.67 at [S] = 10.0 mM
+Check: at [S] = Km, velocity should be half of Vmax (50.00):
+Reaction velocity: 50.00 at [S] = 5.0 mM
+#+end_example
+
+Then call your report function again on the same enzyme, *without*
+specifying a substrate concentration, and confirm your default kicks
+in cleanly (any reasonable default value is fine, as long as the
+velocity line and the half-saturation check both still print
+correctly).
+
+** Bonus-within-the-bonus (optional)
+
+Call your velocity function directly at three increasingly large
+substrate concentrations for the same enzyme - say =50=, =500=, and
+=5000= mM. What happens to the velocity as substrate keeps climbing,
+and why does it make biological sense that the enzyme can never quite
+reach =Vmax=, no matter how much substrate you throw at it? Answer in
+a comment.
+
+* Write-up
+
+At the bottom of your notebook, answer in one or two sentences each:
+
+1) Why does it make sense that the half-saturation function only
+   needs =Vmax= and =Km= as parameters, and not a substrate
+   concentration at all?
+
+2) What would happen to your report function's output if someone
+   passed =Km = 0=? (You don't need to handle this case - just say
+   what goes wrong and why, based on the formula.)
+
+3) Your report function calls your velocity function twice - once for
+   the requested substrate concentration, once inside the
+   half-saturation check. What's the argument that changes between
+   those two calls, and what stays the same?
+
+* Constraints
+
+- Start your notebook with a header cell (Markdown) that gives the
+  title (Enzyme Kinetics Calculator), your name, and a *specific*
+  statement about your AI use: name each AI tool you used, if any,
+  and say exactly what you used it for - or write "No AI tools
+  used." For example, "I asked ChatGPT what a NameError is; I wrote
+  and fixed all the code myself" is specific; "I used AI a little"
+  is not.
+- Use only: function definitions, parameters (positional and
+  default), docstrings, arithmetic operators, ~round~, f-strings, and
+  ~print~. No ~if~, no loops, no ~return~ (we haven't covered it yet -
+  every function here prints its own result).
+- Every function needs a docstring stating what it computes.
+- Submit with the exact values given above (=Vmax = 100.0=,
+  =Km = 5.0=, substrate =10.0=) so your output matches the key.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- This bonus program is available until midterm - it carries extra
+  credit.

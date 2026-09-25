@@ -1,0 +1,116 @@
+#+TITLE: Circle Calculator
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil: 
+* Circle Calculator
+
+This assignment uses only chapter 2 material: variables, ~import~, the
+~math~ module and the dot operator, ~**~, ~round~, ~type~, comparisons,
+and ~print~. No ~if~, no loops, no function definitions - those come
+later.
+
+Everything is driven by one variable:
+
+#+begin_example
+  r = 5   # circle radius, in centimetres
+#+end_example
+
+** Part 1 - Area and circumference
+
+- ~import~ the ~math~ module so you can use ~math.pi~.
+- Compute the *area* (~math.pi * r**2~) and store it in a variable.
+- Compute the *circumference* (~2 * math.pi * r~) and store it in a
+  variable.
+- Print both, each rounded to 2 decimal places.
+- On the next line, print ~type(area)~.
+
+** Part 2 - Labelled output
+
+Print three lines that name each value, for example:
+
+#+begin_example
+Radius:         5 cm
+Area:           78.54 cm^2
+Circumference:  31.42 cm
+#+end_example
+
+The numbers must come from your variables, not from re-typing them
+inside the quotes.
+
+** Part 3 - Compare them
+
+The area counts square centimetres; the circumference counts
+centimetres. For ~r = 5~, which number is bigger?
+
+- Print the result of ~area > circumference~ (this is a ~bool~).
+- Then change ~r~ to ~1~ and run the whole program again. What does the
+  comparison print now?
+
+** Given - draw the circle
+
+Paste this cell *after* your Part 1 code and run it. You are not
+expected to understand it yet - it just draws a circle of radius ~r~
+with your numbers in the title.
+
+#+begin_example
+  # --- given: run this cell, you'll learn how it works in a later chapter ---
+  import matplotlib.pyplot as plt
+
+  fig, ax = plt.subplots()
+  ax.add_patch(plt.Circle((0, 0), r, fill=False, linewidth=2))
+  ax.set_xlim(-r - 1, r + 1)
+  ax.set_ylim(-r - 1, r + 1)
+  ax.set_aspect("equal")                 # so it's a circle, not an ellipse
+  ax.set_title("r = " + str(r) +
+               "   area = " + str(area) +
+               "   circumference = " + str(circumference))
+  plt.show()
+#+end_example
+
+If the title shows a long decimal, round ~area~ and ~circumference~ in
+your Part 1 code and it tidies up here too.
+
+* Write-up
+
+At the bottom of your notebook, answer in one sentence each:
+
+1) Where does ~math.pi~ come from, and what does the dot in ~math.pi~
+   do?
+
+2) In ~math.pi * r**2~, does the ~**~ or the ~*~ happen first? How can
+   you tell from the answer?
+
+3) What does ~type(area)~ print? Pick an ~r~ that makes the area look
+   like a whole number - is it an ~int~ now?
+
+* Bonus (optional)
+
+Print ~circumference / (2 * r)~, rounded to 5 decimal places, and
+compare it with ~math.pi~. Explain in one sentence why you get that
+number.
+
+* Constraints
+
+- Do not use AI to solve this problem.
+- Use only: ~import~, ~math.pi~, arithmetic operators, ~**~, ~round~,
+  ~type~, comparisons, ~str~, f-strings, and ~print~.
+- No ~if~, no loops, no function definitions.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- This bonus program is available until midterm - it carries extra credit.
+
+* Correct output (for =r = 5=)
+
+#+begin_example
+78.54
+31.42
+<class 'float'>
+Radius:         5 cm
+Area:           78.54 cm^2
+Circumference:  31.42 cm
+True
+#+end_example
+
+...plus a plot of a circle of radius 5. With ~r = 1~ the last line
+prints ~False~.

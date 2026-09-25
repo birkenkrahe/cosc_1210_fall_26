@@ -1,0 +1,161 @@
+#+TITLE: Library Desk
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* Library Desk
+
+*Bonus exercise - worth 5 points.* It is available until midterm.
+
+This exercise is a second run of the in-class function test: the same
+skills, a new story. You practice functions with parameters and default
+values, a loop inside a function, one function calling others,
+docstrings, and reading an error.
+
+The rule is the same as in the test in class: *follow the instructions
+to the letter*. Names, texts and cells are exactly as given, and your
+output matches the expected output character for character.
+
+** Setup
+
+- *Open* a new Jupyter notebook and *rename* it =Library_Desk.ipynb=.
+- *Create* a Markdown cell at the top with a level-1 headline that says
+  =Library desk=. Below it write your name and your AI-use statement
+  (see Constraints).
+- *Work* through the tasks in order. For each task, create a Markdown
+  cell with a level-2 headline that says exactly what is written in
+  the task.
+- *Put* every function definition in its own code cell and *call* it in
+  the next code cell.
+- *Before you upload*, restart the kernel and run all cells, so that
+  the notebook shows the real output. The only cell that may show an
+  error is the failing code in Task 5.
+
+** Task 1: Greeting
+
+- *Create* a level-2 headline that says =Task 1: Greeting=.
+- *Write* a function =greet(name)= that prints
+  =Welcome to the library, <name>!=, using an f-string. (=<name>=
+  stands for the value of the parameter.)
+- *Call* the function in the next cell on the names =Ana= and =Omar=.
+- Expected output:
+
+#+begin_example
+Welcome to the library, Ana!
+Welcome to the library, Omar!
+#+end_example
+
+** Task 2: Loan period
+
+- *Create* a level-2 headline that says =Task 2: Loan period=.
+- *Write* a function =loan(book, days)= where =days= has the default
+  value =14=. It prints =<book>: due in <days> days=.
+- *Call* the function once with only a book, =Dune=, and once with the
+  book =Emma= and =7= days.
+- Expected output:
+
+#+begin_example
+Dune: due in 14 days
+Emma: due in 7 days
+#+end_example
+
+** Task 3: Shelf
+
+- *Create* a level-2 headline that says =Task 3: Shelf=.
+- *Write* a function =shelf(number)= that prints one line per book,
+  using a ~for~ loop. Each line prints =Book <num> of <number>=,
+  counting from 1.
+- *Call* the function with the argument =4=.
+- Expected output:
+
+#+begin_example
+Book 1 of 4
+Book 2 of 4
+Book 3 of 4
+Book 4 of 4
+#+end_example
+
+** Task 4: A visit
+
+- *Create* a level-2 headline that says =Task 4: A visit=.
+- *Write* a function =visit(name, number)= that calls =greet(name)=
+  and then =shelf(number)=. Give it a *docstring* (see Constraints).
+- *Call* it on =Ana= and =2=.
+- Expected output:
+
+#+begin_example
+Welcome to the library, Ana!
+Book 1 of 2
+Book 2 of 2
+#+end_example
+
+** Task 5: Fix the fine
+
+- *Create* a level-2 headline that says =Task 5: Fix the fine=.
+- The code below should print =Fine: 6=.
+
+  #+begin_src python :eval no
+    def fine(days_late, rate):
+        amount = days_late * rate
+
+    fine(3, 2)
+    print(f"Fine: {amount}")
+  #+end_src
+
+- *Enter* it in one cell and *run* it. Keep this failing cell.
+- *Fix* the code in the next cell, so that it prints =Fine: 6=. Do not
+  use ~return~: the function prints the fine itself.
+- In a *text cell*, answer in one sentence: why did the original code
+  fail? Be specific, don't just repeat the error message.
+
+** Task 6: Book stairs (optional)
+
+- *Create* a level-2 headline that says =Task 6: Book stairs=.
+- *Write* a function =stairs(n)= that prints a staircase of the letter
+  =B= with =n= rows: one =B= in the first row, two in the second, and
+  so on. Use two nested ~for~ loops: the outer loop for the rows, the
+  inner loop for the letters in one row. Don't use =*= to repeat the
+  letter.
+- Hint: ~print("B", end="")~ stays on the same line, and ~print()~ on
+  its own ends the line. The inner loop runs as many times as the
+  number of the current row.
+- *Call* the function with =4= rows.
+- Expected output:
+
+#+begin_example
+B
+BB
+BBB
+BBBB
+#+end_example
+
+* Constraints
+
+- Start your notebook with a header cell (Markdown) that gives the
+  title (Library desk), your name, and a *specific* statement about
+  your AI use: name each AI tool you used, if any, and say exactly what
+  you used it for - or write "No AI tools used." For example, "I asked
+  ChatGPT what a NameError is; I wrote and fixed all the code myself"
+  is specific; "I used AI a little" is not.
+- Use only: function definitions, parameters (positional and default),
+  docstrings, ~print~, f-strings, and ~for~ loops with ~range~. No
+  ~if~, no ~return~, no lists, no ~while~.
+- Every function needs a docstring: one summary line, then one line for
+  each parameter. For example, for a function =farewell(name)=:
+
+  #+begin_src python :eval no
+    def farewell(name):
+        """Print a goodbye message.
+
+        name -- the visitor's name (string)
+        """
+        print(f"Goodbye, {name}!")
+  #+end_src
+
+- Submit with the exact values given above, so your output matches the
+  expected output.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- This bonus exercise is worth 5 points. It is available until
+  midterm.

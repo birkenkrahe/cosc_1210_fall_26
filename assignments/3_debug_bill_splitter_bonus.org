@@ -1,0 +1,78 @@
+#+TITLE: Debug the Bill Splitter
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+
+* Debug the Bill Splitter
+
+The program below is meant to split a restaurant bill three ways after
+adding a 20% tip. It contains *three* bugs. Two of them stop the
+program with an error message; the third lets it run but produces a
+result that makes no sense.
+
+#+begin_example
+  # Three friends split a restaurant bill and add a 20% tip.
+  bill = 80.00
+  people = 3
+  tip_rate = 20
+
+  tip = bill * tip_rate
+  total = bill + tip
+  share = total / people
+
+  print("Bill:  $" + str(bill))
+  print("Tip:   $" + tip)
+  print("Total: $" + str(total))
+  print("Each person pays: $" + str(shate))
+#+end_example
+
+Your task:
+
+1) Start a new Jupyter notebook.
+2) Summarize the problem in your own words at the top of the notebook.
+3) Use markdown headlines throughout.
+4) Copy the program into a new Jupyter notebook and run it.
+5) Copy it into [[https://pythontutor.com][pythontutor.com]] as well and step through it one line
+   at a time to see where it breaks.
+6) Fix the first bug, run it again in Visualization mode in
+   pythontutor.com to find the next one, and repeat until it runs.
+7) Each time you fix an error do not just fix the same code cell but
+   instead copy the code cell with the error below, fix it there, and
+   run it again. In this way, your notebook shows the error-fixing
+   process. You can also add a comment in the program.
+8) Once the program runs without errors, check the numbers. If they do
+   not make sense, work out why and fix that too.
+9) At the end, in a separate ~Debugging Analysis~, for each of the three
+   bugs, write a one-line comment in your notebook saying what was
+   wrong and how you fixed it.
+
+Your notebook should be a *record of how you got there*, not just the
+final working version. Keep each attempt in its own cell, together with
+the error message it produced, so your three fixes can be followed step
+by step.
+
+A correct program prints:
+#+begin_example
+Bill:  $80.0
+Tip:   $16.0
+Total: $96.0
+Each person pays: $32.0
+#+end_example
+
+* Constraints
+
+- Do not use AI to solve this problem.
+- Use pythontutor.com to locate each bug.
+- Save your solution to your PC as an .ipynb file.
+- Submit your solution file in Canvas.
+- This bonus program is available until midterm - it carries extra credit.
+
+* Solution
+
+5) Copy it into [[https://pythontutor.com][pythontutor.com]] as well and step through it one line
+   at a time to see where it breaks.
+
+#+attr_html: :width 400px :float nil:
+[[../img/3_debug_bill_splitter.png]]
+
+
