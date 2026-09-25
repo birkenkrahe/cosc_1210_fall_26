@@ -12,7 +12,7 @@ By the end of this lesson you can:
 - split a number into quotient and remainder with ~//~ and ~%~
 - write *boolean expressions* with comparison operators and ~and~, ~or~, ~not~
 - choose between actions with ~if~, ~else~ and ~elif~
-- flatten a nested conditional
+- simplify a nested conditional
 - tell when one parameterized function is enough and when you need
   several separate ones
 - read a number from the keyboard with ~input~ and ~int~
@@ -31,7 +31,7 @@ yet. Giving a value back (~return~) is chapter 6.
 The story for the week: *Viking 1* is on the launch pad. Over three
 sessions you build the software for its control room.[fn:1]
 
-* Session 1: Go / No-Go
+* 1. Go / No-Go
 ** DONE Mission Control
 
 *Viking 1* is on the pad. In the control room, every station answers
@@ -122,7 +122,7 @@ The modulus operator is more useful than it looks:
 : 4
 : 26
 
-#+begin_src python :results output :exports both :session *Python* 
+#+begin_src python :results output :exports both :session *Python*
   import time
   print(time())
 #+end_src
@@ -223,7 +223,7 @@ four lines. Then run it and check your predictions:
 : True
 : False
 
-*** Solution                                                         :skip:
+*** Solution                                                          :skip:
 
 #+begin_src python :results output :exports both :session *Python* :python python3
   fuel = 96
@@ -296,7 +296,7 @@ True
 False
 #+end_example
 
-*** Solution                                                         :skip:
+*** Solution                                                          :skip:
 
 #+begin_src python :results output :exports both :session *Python* :python python3
   fuel, engines = 96, 88
@@ -321,6 +321,481 @@ False
 
 #+RESULTS:
 : False
+
+** The if statement
+
+A conditional statement runs code only when a condition is ~True~:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel = 96
+  if fuel >= 90:
+      print("Fuel: GO")
+#+end_src
+
+#+RESULTS:
+: Fuel: GO
+
+- The first line is the *header*; it ends with a colon.
+- The indented lines below are the *body*. The body runs only if the
+  condition is ~True~.
+- The first unindented line is not part of the ~if~.
+
+Change the reading and run it again - now nothing is printed for the
+fuel, but the last line still runs:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel = 85
+  if fuel >= 90:
+      print("Fuel: GO")
+      print("(poll finished)")
+#+end_src
+
+#+RESULTS:
+: (poll finished)
+
+Forget the colon and Python refuses to run the code at all - the same
+kind of error you found in the debug-the-report practice:
+
+#+begin_src python :results none :session *Python* :python python3
+  if fuel >= 90
+  print("Fuel: GO")
+#+end_src
+
+#+begin_example
+SyntaxError: expected ':'
+#+end_example
+
+** PRACTICE
+
+Write an ~if~ statement that prints ~Wind: NO-GO~ when =wind= is between 0
+and 25 km/h. After the ~if~, add a line that always prints =(wind poll
+finished)=. Run it first with =wind= at 30 km/h and again with =wind= at 12
+km/h.
+
+#+begin_example
+Wind: GO
+(wind poll finished)
+#+end_example
+
+and
+
+#+begin_example
+(wind poll finished)
+#+end_example
+
+*** Solution                                                          :skip:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  wind = 30
+  if 0 < wind < 25:
+      print("Wind: GO")
+  print("(wind poll finished)")
+#+end_src
+
+#+RESULTS:
+: (wind poll finished)
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  wind = 12
+  if 0 < wind < 25:
+      print("Wind: GO")
+  print("(wind poll finished)")
+#+end_src
+
+#+RESULTS:
+: Wind: GO
+: (wind poll finished)
+
+** The else clause
+
+Silence is not an answer. Mission control needs *NO-GO* when the
+condition is ~False~:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel = 85
+  if fuel >= 90:
+      print("Fuel: GO")
+  else:
+      print("Fuel: NO-GO")
+#+end_src
+
+#+RESULTS:
+: Fuel: NO-GO
+
+Exactly one of the two bodies runs. Now poll three stations, the
+copy-and-paste way ("guidance" systems include the onboard computer
+and sensors that steer the rocket along its trajectory):
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  fuel, engines, guidance = 96, 88, 100     # readings in percent
+
+  if fuel >= 90:
+      print("Fuel: GO")
+  else:
+      print("Fuel: NO-GO")
+
+  if engines >= 95:
+      print("Engines: GO")
+  else:
+      print("Engines: NO-GO")
+
+  if guidance >= 99:
+      print("Guidance: GO")
+  else:
+      print("Guidance: NO-GO")
+#+end_src
+
+#+RESULTS:
+: Fuel: GO
+: Engines: NO-GO
+: Guidance: GO
+
+Can we replace this with one statement?
+#+begin_src python :results output :exports both :session *Python* :python python3
+  if fuel >= 90 and engines >= 95 and guidance >= 99:
+      print("GO")
+  else:
+      print("NO-GO")
+#+end_src
+
+#+RESULTS:
+: NO-GO
+
+Three copies of the same steps, differing only in the values: the
+station name, the reading and the minimum. Whenever the steps stay the
+same and only *values* change, you can *refactor* - reorganize working
+code without changing what it does - into one function with
+parameters:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def go_nogo(system, reading, minimum):
+      """Print GO if the reading reaches the minimum, else NO-GO.
+
+      system  -- name of the station (string)
+      reading -- current value (number)
+      minimum -- lowest acceptable value (number)
+      Prints one line; returns nothing.
+      """
+      if reading >= minimum:
+          print(f"{system}: GO")
+      else:
+          print(f"{system}: NO-GO")
+
+  go_nogo("Fuel", 96, 90)
+  go_nogo("Engines", 88, 95)
+  go_nogo("Guidance", 100, 99)
+#+end_src
+
+#+RESULTS:
+: Fuel: GO
+: Engines: NO-GO
+: Guidance: GO
+
+Same output, and a fourth station now costs one line. Fix a bug in the
+poll once, and every station gets the fix.
+
+** Value change or step change?
+
+Whenever you see code that looks repeated, you have to decide: one
+function with parameters, or several separate functions? The rule that
+decides it is one question:
+
+*The design rule:* when you decide between one parameterized function
+and several functions, ask: does the variation between cases change a
+*value*, or does it change the *steps*? Here only values change - one
+function. (More on the other case in session 2.)
+
+What does that mean? Look at the three copies again. Put them side by
+side and mark what is *the same* in all three, and what *differs*:
+
+| What happens       | Fuel           | Engines        | Guidance       |
+|--------------------+----------------+----------------+----------------|
+| Steps (all three)  | compare, print | compare, print | compare, print |
+| Value: the name    | ~"Fuel"~         | ~"Engines"~      | ~"Guidance"~     |
+| Value: the reading | ~fuel~ (96)      | ~engines~ (88)   | ~guidance~ (100) |
+| Value: the minimum | ~90~             | ~95~             | ~99~             |
+
+#+begin_example
+| What happens       | Fuel           | Engines        | Guidance         |
+|--------------------|----------------|----------------|------------------|
+| Steps (all three)  | compare, print | compare, print | compare, print   |
+| Value: the name    | `"Fuel"`       | `"Engines"`    | `"Guidance"`     |
+| Value: the reading | `fuel` (96)    | `engines` (88) | `guidance` (100) |
+| Value: the minimum | `90`           | `95`           | `99`             |
+#+end_example
+
+The first row is identical in every column: that is the *steps* - the
+things the code does. The other three rows differ - those are the
+*values* the steps work on. Values can be turned into *parameters*
+(~system~, ~reading~, ~minimum~), and the steps are written once, in the
+function body. That is all ~go_nogo~ does.
+
+A test that works for any code: describe what the copies do in *one
+sentence with blanks*.
+
+- "Compare a ~___~ reading with a minimum of ~___~ and print
+  ~___: GO~ or ~___: NO-GO~." Every blank is a value - one function
+  with three parameters.
+
+If you cannot write such a sentence - if the description has to
+change, not just its blanks - the steps differ, and you need
+separate functions.
+
+*Another example with values:* you have already written ~discount~.
+Three shop items, three prices, three percentages - the steps (take the
+percentage off the price, print the result) never change:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def discount(price, percent):
+      print(price - price * percent / 100)
+
+  discount(50, 20)
+  discount(80, 25)
+  discount(200, 10)
+#+end_src
+
+#+RESULTS:
+: 40.0
+: 60.0
+: 180.0
+
+The sentence with blanks: "Take ~___~ percent off the price ~___~ and
+print the result." Two blanks, two values, two parameters.
+
+*An example where the steps change:* converting a temperature. Celsius
+to Fahrenheit multiplies first and then adds; Fahrenheit to Celsius
+subtracts first and then multiplies. Both take one number and print one
+number, so they look alike - but the *calculation* differs, and no
+values can express that:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def to_fahrenheit(celsius):
+      """Print a Celsius temperature in Fahrenheit."""
+      print(celsius * 9 / 5 + 32)
+
+  def to_celsius(fahrenheit):
+      """Print a Fahrenheit temperature in Celsius."""
+      print((fahrenheit - 32) * 5 / 9)
+
+  to_fahrenheit(100)
+  to_celsius(212)
+#+end_src
+
+#+RESULTS:
+: 212.0
+: 100.0
+
+You could squeeze both into one function ~convert(number, direction)~
+with an ~if~ on ~direction~. But then the two calculations are simply
+sitting side by side in one body, sharing nothing, and the ~if~ only
+decides which of them to run. Two clearly named functions are easier to
+read, test and fix. We will see this problem again in session 2.
+
+Now you decide. For each pair, is the difference a *value* or the
+*steps*?
+
+1. Three stations checking a reading against a minimum.
+2. Printing =Hello, Ada!= and printing =Hello, Bo!=.
+3. Adding two numbers and multiplying two numbers.
+4. Printing a row of 3 stars and printing a row of 5 stars.
+
+#+begin_quote
+1) Values (the reading and the minimum): one function, as in ~go_nogo~.
+2) A value (the name): one function ~hello(name)~.
+3) The steps (~+~ versus ~*~): two functions.
+4) A value (the number of stars): one function with a parameter.
+#+end_quote
+
+** PRACTICE Write the sentence (5 min)
+
+For each case, write *one sentence with blanks* that describes all the
+copies. If you can, name the blanks as parameters and write the
+function. If you cannot, say *why not*.
+
+The pad weather board prints three lines:
+
+#+begin_example
+Wind: 12 km/h
+Temperature: 20 degrees
+Humidity: 60 percent
+#+end_example
+
+Which parts are the same in all three lines, and which differ? Write
+the sentence, then the function, then the three calls.
+
+*** Solution                                                         :skip:
+
+The steps are the same - print a label, a colon, a number and a
+unit. Only the label, the number and the unit differ, so they are
+all *values*. The sentence: "Print ~___~: ~___~ ~___~."
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def report(label, value, unit):
+      """Print one line of the weather board.
+
+      label -- what is measured (string)
+      value -- the reading (number)
+      unit  -- the unit of the reading (string)
+      Prints one line; returns nothing.
+      """
+      print(f"{label}: {value} {unit}")
+
+  report("Wind", 12, "km/h")
+  report("Temperature", 20, "degrees")
+  report("Humidity", 60, "percent")
+#+end_src
+
+#+RESULTS:
+: Wind: 12 km/h
+: Temperature: 20 degrees
+: Humidity: 60 percent
+
+** PRACTICE Write the sentence, part 2 (5 min)
+
+2. Fuel must be at least =90=, and the temperature must be between =0=
+   and =35= (limits included). Both stations print =<system>: GO= or
+   =<system>: NO-GO=. Try to write one sentence with blanks that covers
+   *both* checks. Does it work? If not, what is different, and what does
+   that mean for the functions?
+
+*** Solution                                                         :skip:
+
+2. The fuel check fits the sentence "Compare a ~___~ reading with a
+   minimum of ~___~ and print GO or NO-GO" - that is ~go_nogo~. The
+   temperature check does not: it needs *two* limits and two
+   comparisons joined by one condition, not one minimum. Adding blanks
+   for a second limit does not help either, because fuel has no upper
+   limit. The *steps* differ, so write two functions:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def go_nogo_range(system, reading, low, high):
+      """Print GO if the reading is between low and high, else NO-GO.
+
+      system  -- name of the station (string)
+      reading -- current value (number)
+      low     -- lowest acceptable value (number)
+      high    -- highest acceptable value (number)
+      Prints one line; returns nothing.
+      """
+      if low <= reading <= high:
+          print(f"{system}: GO")
+      else:
+          print(f"{system}: NO-GO")
+
+  go_nogo("Fuel", 96, 90)
+  go_nogo_range("Temperature", 20, 0, 35)
+  go_nogo_range("Temperature", 40, 0, 35)
+#+end_src
+
+#+RESULTS:
+: Fuel: GO
+: Temperature: GO
+: Temperature: NO-GO
+
+* PRACTICE Go / No-Go (15 min)
+
+1. Write ~is_even(n)~. It prints ~n is even~ or ~n is odd~, using ~%~.
+   Test it with 7 and 10.
+
+   #+begin_example
+   7 is odd
+   10 is even
+   #+end_example
+
+2. Write ~range_check(system, reading, low, high)~. It prints ~GO~ if
+   the reading lies between ~low~ and ~high~ (both included) and
+   ~NO-GO~ otherwise. Use a logical operator. Test it:
+
+   #+begin_example
+   Cabin pressure: GO
+   Cabin pressure: NO-GO
+   #+end_example
+
+   for ~("Cabin pressure", 101, 95, 105)~ and
+   ~("Cabin pressure", 110, 95, 105)~.
+
+3. Refactor. The code below polls three more stations. Replace the
+   three ~if/else~ blocks by three calls of ~go_nogo~.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  battery, comms, tracking = 82, 97, 93     # readings in percent
+
+  if battery >= 80:
+      print("Battery: GO")
+  else:
+      print("Battery: NO-GO")
+
+  if comms >= 95:
+      print("Comms: GO")
+  else:
+      print("Comms: NO-GO")
+
+  if tracking >= 96:
+      print("Tracking: GO")
+  else:
+      print("Tracking: NO-GO")
+#+end_src
+
+#+RESULTS:
+: Battery: GO
+: Comms: GO
+: Tracking: NO-GO
+
+** Solution                                                          :skip:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def is_even(n):
+      """Print whether n is even or odd.
+
+      n -- a whole number
+      Prints one line; returns nothing.
+      """
+      if n % 2 == 0:
+          print(n, "is even")
+      else:
+          print(n, "is odd")
+
+  is_even(7)
+  is_even(10)
+#+end_src
+
+#+RESULTS:
+: 7 is odd
+: 10 is even
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def range_check(system, reading, low, high):
+      """Print GO if low <= reading <= high, else NO-GO.
+
+      system  -- name of the station (string)
+      reading -- current value (number)
+      low     -- lowest acceptable value (number)
+      high    -- highest acceptable value (number)
+      Prints one line; returns nothing.
+      """
+      if reading >= low and reading <= high:
+          print(f"{system}: GO")
+      else:
+          print(f"{system}: NO-GO")
+
+  range_check("Cabin pressure", 101, 95, 105)
+  range_check("Cabin pressure", 110, 95, 105)
+#+end_src
+
+#+RESULTS:
+: Cabin pressure: GO
+: Cabin pressure: NO-GO
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  go_nogo("Battery", 82, 80)
+  go_nogo("Comms", 97, 95)
+  go_nogo("Tracking", 93, 96)
+#+end_src
+
+#+RESULTS:
+: Battery: GO
+: Comms: GO
+: Tracking: NO-GO
 
 
 * Footnotes
