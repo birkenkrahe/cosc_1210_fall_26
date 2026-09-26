@@ -1,0 +1,124 @@
+#+TITLE: Pay Stub Practice: A Coffee Shop Receipt
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This practice trains the same skills as the Pay Stub Calculator, on a
+smaller problem: variables and assignment, arithmetic, ~type()~,
+~round()~, ~str()~, ~len()~, string repetition with ~*~, comparison operators,
+and ~print~. No ~if~, no loops, no function definitions.
+
+A program is a chain of statements: each step uses the results of the
+one before. So do the parts *in order*, run the cell after each part,
+and compare your output with the expected output *before* you go on.
+
+Open a new Jupyter notebook and title it =Receipt_Practice.ipynb=. The
+first cell is a Markdown cell with a title, your name and an AI-use
+statement.
+
+The program is driven by two values:
+
+#+begin_example
+  price    = 4.50    # dollars per coffee
+  quantity = 6       # cups
+#+end_example
+
+** Part 1 - Subtotal
+
+- Assign =price= and =quantity= as above.
+- Compute =subtotal = price * quantity=.
+- Print =subtotal= and its ~type()~ on two labelled lines:
+
+#+begin_example
+Subtotal = 27.0
+Type = <class 'float'>.
+#+end_example
+
+** Part 2 - Tax and total
+
+- Assign =tax_rate = 0.07= (7% as a decimal - *not* =7=).
+- Compute =tax_amount = subtotal * tax_rate= and
+  =total = subtotal + tax_amount=.
+- Wrap =tax_amount= and =total= in ~round()~ with =2= decimals: money
+  is rounded to the cent. Leave the tax rate alone - it is not money.
+
+** Part 3 - A readable receipt
+
+Define =title = "Coffee Shop Receipt"= and make a separator of dashes
+*exactly as long as the title* with ="-" * len(title)=. Build each line
+with ~+~ and ~str()~ - the numbers must come from your variables, not
+be typed inside the quotes. Expected output:
+
+#+begin_example
+-------------------
+Coffee Shop Receipt
+-------------------
+Subtotal: $27.0
+Tax (7%): $1.89
+Total:    $28.89
+-------------------
+#+end_example
+
+Then print the results of two checks (a comparison gives ~True~ or
+~False~):
+
+#+begin_example
+Is total greater than zero? True
+Is total greater than subtotal? True
+#+end_example
+
+** Part 4 - Bulk price
+
+The first 10 cups cost the full price. Every cup *beyond* 10 costs only
+0.8 of the price. Extend your program for an order of *14* cups:
+
+- the first 10 cups are paid at full price;
+- the extra cups are paid at 0.8 times the price;
+- the subtotal is the sum of the two;
+- tax and total follow exactly as before;
+- the receipt gains a =Full price:= line and a =Bulk price:= line above
+  =Subtotal:=.
+
+The 10 and the 0.8 need their own named variables (=bulk_limit=,
+=bulk_rate=). Assume the customer always orders at least 10 cups - you
+have not covered ~if~ yet. Expected output:
+
+#+begin_example
+-------------------
+Coffee Shop Receipt
+-------------------
+Full price: $45.0
+Bulk price: $14.4
+Subtotal:   $59.4
+Tax (7%):   $4.16
+Total:      $63.56
+-------------------
+#+end_example
+
+*Write Part 4 as a single code cell,* with a comment header at the top:
+the script's purpose, your name as =Author=, and the =Input= and
+=Output= variables.
+
+* Write-up
+
+At the bottom of your notebook, answer in one sentence each:
+
+1) Why does =subtotal= print as =27.0= and not =27=?
+
+2) What does =len(title)= return here, and what could break if you
+   type the separator as ="-" * 19= instead?
+
+3) In Part 4, the bulk price applies to the cups *beyond* 10, not to
+   =quantity=. Why does the difference matter?
+
+* Constraints
+
+- Do not use AI to solve this problem.
+- Use only what is listed at the top of this page.
+- Every value a formula uses must be a named variable - no bare numbers
+  inside a computation.
+- Use the values given above (=quantity = 6= for Parts 1-3, =14= for
+  Part 4), so that your output matches the expected output.
+- Save your notebook as an .ipynb file. If you want feedback, bring it
+  to office hours.
