@@ -347,7 +347,7 @@ fuel, but the last line still runs:
   fuel = 85
   if fuel >= 90:
       print("Fuel: GO")
-      print("(poll finished)")
+  print("(poll finished)")
 #+end_src
 
 #+RESULTS:
@@ -367,7 +367,7 @@ SyntaxError: expected ':'
 
 ** PRACTICE
 
-Write an ~if~ statement that prints ~Wind: NO-GO~ when =wind= is between 0
+Write an ~if~ statement that prints ~Wind: GO~ when =wind= is between 0
 and 25 km/h. After the ~if~, add a line that always prints =(wind poll
 finished)=. Run it first with =wind= at 30 km/h and again with =wind= at 12
 km/h.
