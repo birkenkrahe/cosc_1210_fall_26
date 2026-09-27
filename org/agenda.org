@@ -823,8 +823,10 @@ Self-check as usual.
 * DONE W5S3: Viking 1: Mission Decisions (=if=, =else=, =elif=)
 
 - [ ] It's ~time.time~ to ~datetime.datetime~
+- [X] Miscellaneous student questions on programming
+- [X] ~if~ and ~else~, and refactoring functions
 
-** Taking (Unix) time
+** Taking (Unix) time (see Google Space)
 
 #+begin_src python :results output :exports both :session *Python* :python python3
   import time
@@ -840,113 +842,6 @@ Self-check as usual.
 : Unix time (secs): 1790219293.0934997
 : Human-readable: 2026-09-23 22:08:13.093500
 
-** New assignments
-
-- Bonus: prove the XOR formula:
-  #+begin_example python
-  (a and not b) or (not a and b) == a != b
-  #+end_example
-- Bonus: prove the De Morgan laws:
-  #+begin_example python
-  not (a and b) == (not a) or (not b)
-  not (a or b)  == (not a) and (not b)
-  #+end_example
-- Assignment for the week:
-
-** Review (Wednesday)
-
-Self-check: what is wrong with this code?
-
-1) You want to check whether =2 + 2= is =4=. Python refuses to run this:
-   #+begin_src python :eval no
-     print(2 + 2 = 4)
-   #+end_src
-   #+begin_quote
-   ~SyntaxError~: ~=~ *assigns* a value to a name, but a comparison
-   needs ~==~, which *compares* two values and gives ~True~ or ~False~.
-   Fixed:
-   #+end_quote
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     print(2 + 2 == 4)
-   #+end_src
-
-   #+RESULTS:
-   : True
-
-2) What does this print?
-
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     print(5 > 3 and 2 > 4)
-     print(5 > 3 or 2 > 4)
-     print(not (3 == 3))
-   #+end_src
-
-3) What does this print:
-
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     a = True
-     b = False
-     print(a ^ b)
-   #+end_src
-
-   #+RESULTS:
-   : False
-
-   #+begin_quote
-   Did you recognise the operator? That is bitwise shift, or ~xor~ for
-   binary values! And =a xor b= is true only if =a= and =b= have different
-   boolean values.
-   #+end_quote
-
-4) You want to check whether the fuel level is between 90 and 100
-   (both included). Python refuses to run this:
-   #+begin_src python :eval no
-     fuel = 96
-     print(fuel >= 90 and < 100)
-   #+end_src
-   #+begin_quote
-   ~SyntaxError~: each side of ~and~ must be a complete comparison, and
-   ~< 100~ has no left-hand side. Repeat the name, and use ~<=~ to
-   include the 100. Fixed:
-   #+end_quote
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     fuel = 96
-     print(fuel >= 90 and fuel <= 100)
-   #+end_src
-
-   #+RESULTS:
-   : True
-
-5) The clock should print =T-2:05= for 125 seconds, but it prints
-   =T-5:02=:
-   #+begin_src python :eval no
-     def clock(seconds):
-         minutes = seconds % 60
-         secs = seconds // 60
-         print(f"T-{minutes}:{secs:02d}")
-
-     clock(125)
-   #+end_src
-   #+begin_quote
-   The operators are swapped: ~//~ (floor division) gives the whole
-   minutes (125 // 60 = 2), ~%~ (modulus) gives the seconds left over
-   (125 % 60 = 5). Fixed:
-   #+end_quote
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     def clock(seconds):
-         minutes = seconds // 60
-         secs = seconds % 60
-         print(f"T-{minutes}:{secs:02d}")
-
-     clock(125)
-   #+end_src
-
-   #+RESULTS:
-   : T-2:05
-
-
-* W6S1:
-
 ** Miscellaneous questions on programming
 
 - [[https://github.com/birkenkrahe/org/blob/master/FAQ.org#how-can-i-get-faster-at-writing-code-without-ai][How can you get faster at writing code (without AI)?]]
@@ -958,31 +853,72 @@ Self-check: what is wrong with this code?
 You find the answers, and much more, in my FAQ.org file in GitHub
 (2021-2026): https://tinyurl.com/birkenkrahe-faq
 
-** Review
+* W6S1: Assignment review / assignments / lab / popquiz
 
-1) What does this print, and why?
+- [ ] Assignment review - 5 min
+- [ ] New bonus and mandatory assignments
+- [ ] Review (last week) - 20 min
+- [ ] Lab exercises (coding) - 30 min
+- [ ] Midterm LEQs (Learning Experience Questions) - 15 min
 
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     x = 4
-     if x % 2 == 0:
-         print("even")
-     else:
-         print("odd")
-     print("done")
-   #+end_src
+** Assignment review: Paystub Calculator & Certificate Printer
+#+attr_html: :width 600px :float nil: 
+[[../img/paystub_calculator.png]]
 
-   #+RESULTS:
-   : even
+Language: variables/statements and built-in functions
+- Sample solution [[https://tinyurl.com/paystub-calculator-solution][tinyurl.com/paystub-calculator-solution]]
 
-   #+begin_quote
-   ~even~, then ~done~ - the last line is not indented, so it is not
-   part of the ~if~ and always runs.
-   #+end_quote
+#+attr_html: :width 600px :float nil: 
+[[../img/certificate_printer.png]]
 
-2) Why does ~if x = 3:~ fail?
-   #+begin_quote
-   ~=~ assigns, ~==~ compares. A condition needs a comparison.
-   #+end_quote
+- Language: user-defined functions and refactoring
+- Sample solution: [[https://tinyurl.com/certificate-solution][tinyurl.com/certificate-printer-solution]]
+
+Purpose of these exercises (apart from the language):
+- Can you work exactly to specifications?
+- Are you reviewing your submission diligently before submitting?
+- Are you using AI, and if you are, are you reflecting on your use?
+
+Tips:
+- *Keep wrong code in your notebook* - but comment it and turn it into
+  markdown (text) cells so that the notebook runs from top to bottom.
+- *Repeat the problem and the constraints* in your own words at the top,
+  before your solution, and also the sample output (easier to follow).
+- *Be specific when you use AI* - submit your exact prompts or describe
+  in detail what it is that you did and how you benefitted (or not).
+
+** New assignments (this week / bonus)
+
+- Assignments for the week: Pick (at least) one of the three problems
+  and submit a ~.py~ (Python) file for each problem solved.
+
+- Bonus: prove the XOR formula - open until Oct 9:
+  #+begin_example python
+  ((a and not b) or (not a and b)) == (a != b)
+  #+end_example
+
+- Bonus: prove the De Morgan laws - open until Oct 9:
+  #+begin_example python
+  (not (a and b)) == ((not a) or (not b))
+  (not (a or b))  == ((not a) and (not b))
+  #+end_example
+
+** Review (last week) - 20 min
+
+- Take out pen and paper.
+- Put your name on the sheet. 
+- Solve as many problems as you can in 20 minutes.
+- Hand in your test at the end.
+- This will be your participation trophy for today.
+- I will publish the solution as a PDF later
+
+** Lab exercises - graduating from notebook to scripts - 30 min
+
+- We will solve a problem together focusing on the process.
+- The example is designed just like the home assignments.
+- I introduce onecompiler.com to you as well as ~input()~.
+
+** Midterm Learning Experience Questions (10 min if there's time)
 
 * Footnotes
 
