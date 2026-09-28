@@ -1,0 +1,395 @@
+#+TITLE: Lab: Crew capsules (Script)
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+* Introduce onecompiler.com next to Jupyter notebook
+
+- Open =onecompiler.com/python=
+
+- Click on ~LogIn~ and make an account with your Augie email
+
+- Change the ~Settings~ of the editor (no autocomplete)
+
+- ~Run~ the hello world program =print("Hello, World!")=
+
+- Add ~input()~:
+  #+begin_example python
+  name = input()
+  print("Hello, ", name)
+  #+end_example
+
+- Enter a name (without apostrophes) in the I/O field and Run.
+
+- Move this into a function:
+  #+begin_example python
+  def hello(name="there"):
+      print("Hello, ", name)
+
+  hello()
+  hello("Alice")
+  #+end_example
+
+- Save the program as =helloworld.py=
+
+- Save the file as =unlisted=, with the title "Hello world in Python"
+  with description and a tag (=COSC_1210=)
+
+- Open ~Account and Settings~
+
+- Open ~<Codes>~ to show the file ([[https://onecompiler.com/python/454fd46rk][also has a link]])
+
+- Show how to ~Download~ the file
+
+- You see how this is very similar to the notebook, except that you
+  cannot try out little things without messing up your code.
+
+* Lab: Crew capsules (30 min, live coding)
+
+Goal: show the *process*, not only the result. Students type along in
+their own editor. You type slowly and think out loud, and you make
+three mistakes on purpose.
+
+* The 10 solution steps
+
+1) Setup: python, editor, notebook
+2) Understand the problem
+3) Build a program header (in the editor) (~"""~)
+4) Solve the problem away from the computer
+5) Build a function with a fixed value (~def~)
+6) Build a decision tree (~if~ ... ~else~)
+7) Test with a second fixed value to expose the bug, then remove the fixed value
+8) Replace the fixed value with ~input()~
+9) Loop over multiple inputs (~for~ loop)
+10) Try edge cases and compare exactly against the samples
+
+* The problem (put it on screen)
+
+- Open in a browser: [[https://tinyurl.com/crew-capsules]]
+  #+begin_example
+    """
+    Title:  Crew capsules
+    Name:   Lastname, Firstname
+    Input:  one integer: the number of crew members
+    Output: <n> crew: <c> capsules, all aboard   (if nobody is left over)
+            <n> crew: <c> capsules, <w> waiting  (otherwise)
+    AI use: none
+    """
+  #+end_example
+
+- Enter <CTRL> + s to save, enter title =Crew capsules=, description,
+  =tag= (COSC_1210):
+  #+begin_quote
+  A capsule seats 4 crew. Only full capsules launch. The rest wait for
+  the next flight.
+  #+end_quote
+
+- The sample output table is already contained in the
+  | Input | Output                          |
+  |-------+---------------------------------|
+  | ~12~    | ~12 crew: 3 capsules, all aboard~ |
+  | ~14~    | ~14 crew: 3 capsules, 2 waiting~  |
+
+* Script
+
+** 0–4 min: Read before you type
+
+- Read the header aloud. Ask the class: what goes *in*, what comes
+  *out*? (One number in, one line out.)
+
+- Solve 14 *by hand* on the board: 14 crew, 4 seats per capsule → 3
+  full capsules, 2 left over. Ask: which operators did I just use?
+  (~//~ and ~%~)
+
+- If you can't do it by hand, you can't program it. Always start with
+  one example on paper.
+
+- Use pseudocode notation inside the editor to plan the problem:
+  #+begin_example python
+  # SET crew
+  # COMPUTE capsules: 4 crew members per capsule
+  # COMPUTE waiting: remaining crew members
+  #+end_example
+
+- Solve the problem in Python: this is worth trying in a Jupyter
+  notebook or on the Python console - the notebook is your sketchpad.
+
+- Copy the pseudocode into the notebook and fill in the code:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    # SET crew
+    crew = 14
+    # COMPUTE capsules: 4 crew members per capsule
+    print("capsules: ", crew // 4)
+    # COMPUTE waiting: remaining crew members
+    print("waiting: ", crew % 4)
+  #+end_src
+
+  #+RESULTS:
+  : capsules:  3
+  : waiting:  2
+
+** 4–10 min: The function, with a fixed value
+
+- The sample output shows that besides the input =crew=, we have two
+  outputs, =capsules=, and =waiting=, for the number of =crew= members who
+  are in a capsule, or still waiting to be boarded.
+
+- Code below the header:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    # SET crew
+    crew = 14
+    # COMPUTE capsules: 4 crew members per capsule
+    capsules = crew // 4
+    # COMPUTE waiting: remaining crew members
+    waiting = crew % 4
+    print(crew, capsules, waiting)
+  #+end_src
+
+  #+RESULTS:
+  : 14 3 2
+
+- Are we done?
+  #+begin_quote
+  No, we are not done! we should turn this into a function.
+
+  Show how inflexible the code is - what if we have a crew of 12 or 20
+  members?  We need to change the function in three places every time!
+  #+end_quote
+
+- First attempt:
+  #+begin_src python :results none :exports both :session *Python* :python python3
+    # board the crew
+    def board(crew)
+    capsules = crew // 4
+    waiting = crew % 4
+    print(crew, capsules, waiting)
+
+    # main
+    board(14)
+  #+end_src
+
+- Run it - error:
+  ~SyntaxError: expected ':'~. Point to the line number. Fix it.
+
+- Now we'll get ~IndentationError~. Fix it.
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    # board the crew
+    def board(crew)
+    capsules = crew // 4
+    waiting = crew % 4
+    print(crew, capsules, waiting)
+
+    # main
+    board(14)
+  #+end_src
+
+- Run again → ~14 3 2~. Ugly, but correct. First correct, then pretty.
+
+- We test with a fixed value first: no typing input on every run, and
+  you can compare the result with your hand calculation right away.
+
+- We have not solved the problem yet:
+  #+begin_quote
+  Only full capsules launch. The rest wait for the next flight.
+  #+end_quote
+
+** 10–18 min: The decision: function with variable value
+
+- When do we print "all aboard"? (When ~waiting~ is 0.)
+
+- We have a decision to make = two branches = ~if~ and ~else~
+
+- First attempt:
+  #+begin_src python
+    if waiting = 0:
+  #+end_src
+
+- Run it: ~SyntaxError: invalid syntax. Maybe you meant '==' ...~
+
+- Python even tells you the fix. Read the whole message.
+
+- Complete the stand-alone if statement with a ~print~ statement.
+
+- Python throws a =NameError: name 'waiting' is not defined.=
+
+- Where does the decision go? When =waiting= is defined, after the
+  computations.
+
+- Leave =crew = 14= in there.
+
+- f-strings: copy the strings from the header, then replace the =<>=
+  with ={}=.
+
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    def board(crew):
+        # SET crew
+        crew = 14
+        # COMPUTE capsules: 4 crew members per capsule
+        capsules = crew // 4
+        # COMPUTE waiting: remaining crew members
+        waiting = crew % 4
+        if waiting == 0:
+            print(f"{crew} crew: {capsules} capsules, all aboard")
+        else:
+            print(f"{crew} crew: {capsules} capsules, {waiting} waiting")
+
+    board(12)
+    board(14)
+  #+end_src
+
+  #+RESULTS:
+  : 14 crew: 3 capsules, 2 waiting
+  : 14 crew: 3 capsules, 2 waiting
+
+- We get the same input every time - why?
+  #+begin_quote
+  What kills us is the fixed value for =crew=, which we have not
+  eliminated. Remove it!
+  #+end_quote
+
+- Remove the fixed value - now the function actually uses its parameter:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    def board(crew):
+        # COMPUTE capsules: 4 crew members per capsule
+        capsules = crew // 4
+        # COMPUTE waiting: remaining crew members
+        waiting = crew % 4
+        if waiting == 0:
+            print(f"{crew} crew: {capsules} capsules, all aboard")
+        else:
+            print(f"{crew} crew: {capsules} capsules, {waiting} waiting")
+
+    board(14)
+    board(12)
+  #+end_src
+
+  #+RESULTS:
+  : 14 crew: 3 capsules, 2 waiting
+  : 12 crew: 3 capsules, all aboard
+
+- Compare the output with the sample output (table) *character by
+  character*: spaces, commas, colon. 
+
+*- Checkpoint:* both lines match the table.
+
+** 18–24 min: Generalization: allow external input (and loop over it)
+
+- Next step: make the function more general by allowing external input
+
+- Replace the two test calls with input. Leave out ~int()~ on purpose:
+
+  #+begin_src python
+    board(input())
+  #+end_src
+
+- Run it and type ~14~:
+  ~TypeError: unsupported operand type(s) for //: 'str' and 'int'~
+
+- Ask: what type does ~input()~ give us? (A string.)
+
+- Or: Use AI ~"Debug error"~:
+  #+attr_html: :width 550px :float nil:
+  [[../img/debug.png]]
+
+- Fix it:
+  #+begin_src python
+    board(int(input()))
+  #+end_src
+
+- Run it twice, with 12 and with 14. There is no prompt text: ~input()~
+  stays empty because only the output line may appear.
+
+- In OneCompiler, you have to put the input into the I/O (STDIN) field
+  first.
+
+- Extension (if there's time): How can we avoid having to replicate
+  the command =board(int(input()))=?
+  #+begin_quote
+  Answer: use a ~for~ loop!
+  #+end_quote
+
+- Change the function call to include a loop (with a dummy variable):
+  #+begin_example python
+  for _ in range(2):
+      board(int(input()))
+  #+end_example
+
+- See what happens when you use =range(3)=:
+  #+attr_html: :width 550px :float nil:
+  [[../img/debug_EOFError.png]]
+
+** 24–28 min: Try to break it (test for edge cases)
+
+- Ask the class for inputs that are not in the table. Take 3 and 0:
+
+  #+begin_example
+  3 crew: 0 capsules, 3 waiting
+  0 crew: 0 capsules, all aboard
+  #+end_example
+
+- Is "0 crew: all aboard" right? Let them argue for 30 seconds. The
+  point: the samples don't cover everything, and you have to test the
+  edges yourself.
+
+- Fill in the ~AI use~ line and show the finished file:
+  #+begin_quote
+  AI use: Debugged TypeError (str input co
+  #+end_quote
+
+** 28–30 min: The recipe (leave it on the board)
+
+1. Solve one example by hand -> algorithm
+2. Write the function and call it with a fixed value.
+3. Add the decision and test every branch.
+4. Add ~input()~ last.
+5. Compare against the samples exactly, then try edge cases.
+
+* Final program with edge case guardrail                               :skip:
+
+[[https://onecompiler.com/python/454fendhr][Onecompiler link]]
+
+(Remove ~:noeval~ before running this)
+#+begin_src python :noeval :results output :exports both :session *Python* :python python3
+  """
+  Title:  Crew capsules
+  Name:   Birkenkrahe, Marcus
+  Input:  one integer: the number of crew members
+  Output: <n> crew: <c> capsules, all aboard (if nobody is left over)
+          <n> crew: <c> capsules, <w> waiting (otherwise)
+  AI use: used to interpret one runtime error message (TypeError on
+          unconverted input()); no AI-generated code
+  """
+
+  # board the crew
+  def board(crew):
+      if crew == 0:
+          print("There must be > 0 crew members")
+          exit()
+          # COMPUTE capsules: 4 crew members per capsule
+      capsules = crew // 4
+      # COMPUTE waiting: remaining crew members
+      waiting = crew % 4
+      if waiting == 0:
+          print(f"{crew} crew: {capsules} capsules, all aboard")
+      else:
+          print(f"{crew} crew: {capsules} capsules, {waiting} waiting")
+
+  # main
+  for _ in range(2):
+      board(int(input()))
+#+end_src
+
+* Another extension: getting multiple inputs with a loop
+
+- Student asked if one could make the loop independent of the ~range~
+  argument.
+
+- One way to do that: put =crew= numbers in a =crewlist= and loop over it
+  not by index but by value:
+  #+begin_example python
+  crewlist = [3,5,12,9]
+  for crew in crewlist:
+      board(crew)
+  #+end_example
+
+* Upload your final program to =Code-along: lab - crew capsules=
