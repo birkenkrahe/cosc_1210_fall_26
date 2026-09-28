@@ -1,4 +1,4 @@
-#+TITLE: Lab: Crew capsules (Script)
+#+TITLE: Lab: Crew capsules
 #+AUTHOR: Marcus Birkenkrahe
 #+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
 #+STARTUP: overview hideblocks indent entitiespretty
@@ -39,16 +39,15 @@
 
 - Open ~<Codes>~ to show the file ([[https://onecompiler.com/python/454fd46rk][also has a link]])
 
-- Show how to ~Download~ the file
+- ~Download~ the file
 
 - You see how this is very similar to the notebook, except that you
   cannot try out little things without messing up your code.
 
-* Lab: Crew capsules (30 min, live coding)
+* Lab: Crew capsules (live coding)
 
-Goal: show the *process*, not only the result. Students type along in
-their own editor. You type slowly and think out loud, and you make
-three mistakes on purpose.
+Goal: showing the *process*, not only the result. Students type along in
+their own editor - we make three mistakes on purpose.
 
 * The 10 solution steps
 
@@ -63,7 +62,7 @@ three mistakes on purpose.
 9) Loop over multiple inputs (~for~ loop)
 10) Try edge cases and compare exactly against the samples
 
-* The problem (put it on screen)
+* The problem
 
 - Open in a browser: [[https://tinyurl.com/crew-capsules]]
   #+begin_example
@@ -84,22 +83,21 @@ three mistakes on purpose.
   the next flight.
   #+end_quote
 
-- The sample output table is already contained in the
+- The sample output table:
   | Input | Output                          |
   |-------+---------------------------------|
   | ~12~    | ~12 crew: 3 capsules, all aboard~ |
   | ~14~    | ~14 crew: 3 capsules, 2 waiting~  |
 
-* Script
+* Walkthrough
 
-** 0–4 min: Read before you type
+** Read before you type
 
-- Read the header aloud. Ask the class: what goes *in*, what comes
-  *out*? (One number in, one line out.)
+- Check the header: what goes *in*, what comes *out*? (One number in, one
+  line out.)
 
-- Solve 14 *by hand* on the board: 14 crew, 4 seats per capsule → 3
-  full capsules, 2 left over. Ask: which operators did I just use?
-  (~//~ and ~%~)
+- Solve 14 *by hand*: 14 crew, 4 seats per capsule → 3 full capsules,
+  2 left over. Which operators did you just use? (~//~ and ~%~)
 
 - If you can't do it by hand, you can't program it. Always start with
   one example on paper.
@@ -128,7 +126,7 @@ three mistakes on purpose.
   : capsules:  3
   : waiting:  2
 
-** 4–10 min: The function, with a fixed value
+** The function, with a fixed value
 
 - The sample output shows that besides the input =crew=, we have two
   outputs, =capsules=, and =waiting=, for the number of =crew= members who
@@ -152,7 +150,7 @@ three mistakes on purpose.
   #+begin_quote
   No, we are not done! we should turn this into a function.
 
-  Show how inflexible the code is - what if we have a crew of 12 or 20
+  The code is inflexible - what if we have a crew of 12 or 20
   members?  We need to change the function in three places every time!
   #+end_quote
 
@@ -169,7 +167,7 @@ three mistakes on purpose.
   #+end_src
 
 - Run it - error:
-  ~SyntaxError: expected ':'~. Point to the line number. Fix it.
+  ~SyntaxError: expected ':'~. Find the line number in the message and fix it.
 
 - Now we'll get ~IndentationError~. Fix it.
   #+begin_src python :results output :exports both :session *Python* :python python3
@@ -193,7 +191,7 @@ three mistakes on purpose.
   Only full capsules launch. The rest wait for the next flight.
   #+end_quote
 
-** 10–18 min: The decision: function with variable value
+** The decision: function with variable value
 
 - When do we print "all aboard"? (When ~waiting~ is 0.)
 
@@ -272,7 +270,7 @@ three mistakes on purpose.
 
 *- Checkpoint:* both lines match the table.
 
-** 18–24 min: Generalization: allow external input (and loop over it)
+** Generalization: allow external input (and loop over it)
 
 - Next step: make the function more general by allowing external input
 
@@ -285,7 +283,7 @@ three mistakes on purpose.
 - Run it and type ~14~:
   ~TypeError: unsupported operand type(s) for //: 'str' and 'int'~
 
-- Ask: what type does ~input()~ give us? (A string.)
+- What type does ~input()~ give us? (A string.)
 
 - Or: Use AI ~"Debug error"~:
   #+attr_html: :width 550px :float nil:
@@ -302,7 +300,7 @@ three mistakes on purpose.
 - In OneCompiler, you have to put the input into the I/O (STDIN) field
   first.
 
-- Extension (if there's time): How can we avoid having to replicate
+- Extension: How can we avoid having to replicate
   the command =board(int(input()))=?
   #+begin_quote
   Answer: use a ~for~ loop!
@@ -318,25 +316,25 @@ three mistakes on purpose.
   #+attr_html: :width 550px :float nil:
   [[../img/debug_EOFError.png]]
 
-** 24–28 min: Try to break it (test for edge cases)
+** Try to break it (test for edge cases)
 
-- Ask the class for inputs that are not in the table. Take 3 and 0:
+- Try inputs that are not in the table. Take 3 and 0:
 
   #+begin_example
   3 crew: 0 capsules, 3 waiting
   0 crew: 0 capsules, all aboard
   #+end_example
 
-- Is "0 crew: all aboard" right? Let them argue for 30 seconds. The
-  point: the samples don't cover everything, and you have to test the
-  edges yourself.
+- Is "0 crew: all aboard" right? The point: the samples don't cover
+  everything, and you have to test the edges yourself.
 
 - Fill in the ~AI use~ line and show the finished file:
-  #+begin_quote
-  AI use: Debugged TypeError (str input co
-  #+end_quote
+  #+begin_example python
+  AI use: used to interpret one runtime error message (TypeError on
+          unconverted input()); no AI-generated code
+  #+end_example
 
-** 28–30 min: The recipe (leave it on the board)
+** The recipe
 
 1. Solve one example by hand -> algorithm
 2. Write the function and call it with a fixed value.
@@ -344,11 +342,10 @@ three mistakes on purpose.
 4. Add ~input()~ last.
 5. Compare against the samples exactly, then try edge cases.
 
-* Final program with edge case guardrail                               :skip:
+* Final program with edge case guardrail                          
 
 [[https://onecompiler.com/python/454fendhr][Onecompiler link]]
 
-(Remove ~:noeval~ before running this)
 #+begin_src python :noeval :results output :exports both :session *Python* :python python3
   """
   Title:  Crew capsules
@@ -381,8 +378,7 @@ three mistakes on purpose.
 
 * Another extension: getting multiple inputs with a loop
 
-- Student asked if one could make the loop independent of the ~range~
-  argument.
+- Can we make the loop independent of the ~range~ argument?
 
 - One way to do that: put =crew= numbers in a =crewlist= and loop over it
   not by index but by value:
