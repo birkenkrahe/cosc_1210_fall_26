@@ -853,13 +853,12 @@ Self-check as usual.
 You find the answers, and much more, in my FAQ.org file in GitHub
 (2021-2026): https://tinyurl.com/birkenkrahe-faq
 
-* W6S1: Assignment review / assignments / lab / popquiz
+* DONE W6S1: Assignment review / assignments / lab / popquiz
 
-- [ ] Assignment review - 5 min
-- [ ] New bonus and mandatory assignments
-- [ ] Review (last week) - 20 min
-- [ ] Lab exercises (coding) - 30 min
-- [ ] Midterm LEQs (Learning Experience Questions) - 15 min
+- [X] Assignment review - 5 min
+- [X] New bonus and mandatory assignments
+- [X] Lab exercises (coding) - 30 min
+- [X] Midterm LEQs (Learning Experience Questions) - 10 min
 
 ** Assignment review: Paystub Calculator & Certificate Printer
 #+attr_html: :width 600px :float nil: 
@@ -892,6 +891,8 @@ Tips:
 - Assignments for the week: Pick (at least) one of the three problems
   and submit a ~.py~ (Python) file for each problem solved.
 
+- We will practice how to approach these problems in class today.
+
 - Bonus: prove the XOR formula - open until Oct 9:
   #+begin_example python
   ((a and not b) or (not a and b)) == (a != b)
@@ -903,22 +904,33 @@ Tips:
   (not (a or b))  == ((not a) and (not b))
   #+end_example
 
-** Review (last week) - 20 min
-
-- Take out pen and paper.
-- Put your name on the sheet. 
-- Solve as many problems as you can in 20 minutes.
-- Hand in your test at the end.
-- This will be your participation trophy for today.
-- I will publish the solution as a PDF later
-
-** Lab exercises - graduating from notebook to scripts - 30 min
+** Code-along - graduating from notebook to scripts - 30 min
 
 - We will solve a problem together focusing on the process.
 - The example is designed just like the home assignments.
 - I introduce onecompiler.com to you as well as ~input()~.
 
-** Midterm Learning Experience Questions (10 min if there's time)
+** Midterm Learning Experience Questions - 10 min
+
+- You can find the questions in Canvas (LEQ)
+- Please answer honestly - open answers are valuable
+- The last three questions are mine - esp. important to me
+
+
+* W6S2: Review / Handling more than two outcomes
+
+- [ ] Review (last week) - 20 min
+
+** Review (last week) - 20 min
+
+- Take out pen and paper.
+- Put your name on the sheet. 
+- Solve as many problems as you can in 20 minutes (or less).
+- Hand in your test at the end.
+- This will be your participation trophy for today.
+- I will publish the solution as a PDF later
+
+
 
 * Footnotes
 
