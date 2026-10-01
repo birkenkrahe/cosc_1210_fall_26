@@ -190,7 +190,7 @@
    #+begin_example
    fuel, engines, guidance = 96, 88, 100
 
-   if fuel _____ 90 ______ engines _____ 95 ______ guidance >= 99:
+   if fuel _____ 90 ______ engines ______ 95 ______ guidance >= 99:
        print("GO")
    else:
        print("NO-GO")
@@ -198,9 +198,10 @@
 
    What is printed?
 
-   *Solution.* Both blanks are ~and~: all three conditions must be
-   ~True~. It prints =NO-GO=, because the engines reading 88 is below
-   the minimum 95.
+   *Solution.* The blanks are ~>=~, ~and~, ~>=~ and ~and~: each reading
+   must reach its minimum, and all three conditions must be ~True~. It
+   prints =NO-GO=, because the engines reading 88 is below the minimum
+   95.
 
    #+begin_src python :results output :exports both :session *Python* :python python3
      fuel, engines, guidance = 96, 88, 100
