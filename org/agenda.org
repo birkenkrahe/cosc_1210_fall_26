@@ -820,7 +820,7 @@ Self-check as usual.
      not yet hand a value back, which is what the next chapter will
      add (~return~).
 
-* DONE W5S3: Viking 1: Mission Decisions (=if=, =else=, =elif=)
+* DONE W5S3: Viking 1: Mission Decisions (=if=, =else=)
 
 - [ ] It's ~time.time~ to ~datetime.datetime~
 - [X] Miscellaneous student questions on programming
@@ -861,13 +861,13 @@ You find the answers, and much more, in my FAQ.org file in GitHub
 - [X] Midterm LEQs (Learning Experience Questions) - 10 min
 
 ** Assignment review: Paystub Calculator & Certificate Printer
-#+attr_html: :width 600px :float nil: 
+#+attr_html: :width 600px :float nil:
 [[../img/paystub_calculator.png]]
 
 Language: variables/statements and built-in functions
 - Sample solution [[https://tinyurl.com/paystub-calculator-solution][tinyurl.com/paystub-calculator-solution]]
 
-#+attr_html: :width 600px :float nil: 
+#+attr_html: :width 600px :float nil:
 [[../img/certificate_printer.png]]
 
 - Language: user-defined functions and refactoring
@@ -916,21 +916,69 @@ Tips:
 - Please answer honestly - open answers are valuable
 - The last three questions are mine - esp. important to me
 
+* DONE W6S2: Viking 1: More than one outcome (=elif=) I
 
-* W6S2: Review / Handling more than two outcomes
-
-- [ ] Review (last week) - 20 min
+- [X] Review (last week) - 20 min
+- [X] Slide deck & code along
 
 ** Review (last week) - 20 min
 
 - Take out pen and paper.
-- Put your name on the sheet. 
+- Put your name on the sheet.
 - Solve as many problems as you can in 20 minutes (or less).
 - Hand in your test at the end.
 - This will be your participation trophy for today.
 - I will publish the solution as a PDF later
 
+** Viking 1: More than one outcome
 
+Artifacts:
+- [[https://claude.ai/artifact/TjgeZpbJU13UQP9upzW8zv][New slide deck (Claude slides)]]
+- [[https://gist.github.com/birkenkrahe/eaf176df662d53027e24a8e7b47ed1ad][Code written in class (gist)]]
+
+* W6S3: Viking 1: More than one outcome II
+#+attr_html: :width 400px :float nil:
+[[../img/mars.png]]
+
+- [ ] All quizzes are open -> midterm exam
+- [ ] Review: paper quiz
+- [ ] Review: more than one outcome (Colab exercise)
+- [ ] Code-along lecture: More of more than one outcome
+
+** Review of the paper quiz
+
+If you did not do well (< 50% = fail, < 80% you need work):
+1. Read the solutions and make sure you understand them:
+   https://tinyurl.com/review-09-30-solution
+2. Do the review again and make sure you get 100% this time. Perhaps
+   do them electronically this time - less boring when repeating:
+   https://tinyurl.com/review-09-30-ipynb
+3. Relax.
+
+If you did well: Just relax.   
+
+The histogram: a two-class society (strongly bimodal).
+#+attr_html: :width 600px :float nil:
+[[../img/review_2026-09-30.png]]
+
+** Review (from Wed): More than one outcome
+
+- Open [[https://tinyurl.com/review-2026-10-02][tinyurl.com/review-2026-10-02]] in Colab.
+- Take 15 min to work through the 5 questions.
+- Check your answers with Gemini - ask it to put its comments into the
+  notebook itself, and identify itself as "Gemini".
+- Download the .ipynb file.
+- Upload the .ipynb file to Canvas.
+
+** Let's get on with rocket science: Viking 1 on HOLD
+
+- Return to the your notebook/editor
+- Watch my presentation
+- Code along with me
+
+Artifacts:
+- [[https://claude.ai/artifact/TjgeZpbJU13UQP9upzW8zv][Slide deck (Claude slides)]]
+- [[https://gist.github.com/birkenkrahe/eaf176df662d53027e24a8e7b47ed1ad][Code written in class (gist)]]
 
 * Footnotes
 
