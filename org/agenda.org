@@ -945,9 +945,15 @@ Artifacts:
 - [ ] Review: more than one outcome (Colab exercise)
 - [ ] Code-along lecture: More of more than one outcome
 
-** Review of the paper quiz
+** Quizzes reopened -> midterm exams
 
-If you did not do well (< 50% = fail, < 80% you need work):
+- I have reopened all the quizzes
+- The midterm exam will consist of 30-35 questions
+- There will be a few more question types
+  
+** Review of the paper quiz: the good, the bad, and the ugly
+
+*If you did not do well (< 50% = fail, < 80% you need work):*
 1. Read the solutions and make sure you understand them:
    https://tinyurl.com/review-09-30-solution
 2. Do the review again and make sure you get 100% this time. Perhaps
@@ -955,20 +961,31 @@ If you did not do well (< 50% = fail, < 80% you need work):
    https://tinyurl.com/review-09-30-ipynb
 3. Relax.
 
-If you did well: Just relax.   
+*If you did well (> 80%):* Just relax. Get a DataCamp certificate! Put it on
+your resumé! Try to solve some Kattis problems! Show me!
 
 The histogram: a two-class society (strongly bimodal).
 #+attr_html: :width 600px :float nil:
 [[../img/review_2026-09-30.png]]
 
+Current total grade distribution:
+#+attr_html: :width 600px :float nil:
+[[../img/total_grade_2026-10-01.png]]
+
 ** Review (from Wed): More than one outcome
 
+Part 1:
 - Open [[https://tinyurl.com/review-2026-10-02][tinyurl.com/review-2026-10-02]] in Colab.
 - Take 15 min to work through the 5 questions.
+- Stop. I'll show you how to work with Gemini.
+
+Part 2:
 - Check your answers with Gemini - ask it to put its comments into the
   notebook itself, and identify itself as "Gemini".
 - Download the .ipynb file.
 - Upload the .ipynb file to Canvas.
+
+Solutions available as a slide deck.
 
 ** Let's get on with rocket science: Viking 1 on HOLD
 
