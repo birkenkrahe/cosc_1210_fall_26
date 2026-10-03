@@ -1,0 +1,106 @@
+#+STARTUP: overview hideblocks indent entitiespretty:
+
+- See [[https://claude.ai/artifact/TjgeZpbJU13UQP9upzW8zv][Slide deck (Claude slides)]].
+- This code will be available as a [[https://gist.github.com/birkenkrahe/eaf176df662d53027e24a8e7b47ed1ad][public gist]].
+
+We want to check =fuel= level. Range of level: below 50 it's LOW, above
+50 it's OK, and abvoe 90 it's FULL.
+#+begin_src python :results output :exports both :session *Python*
+  def fuel_status(level):
+        """check fuel status and print result
+        
+        level: {LOW,OK,FULL} for the range < 50, >= 50, >= 90
+        returns: None
+        """
+        if level < 50:
+            print("LOW FUEL")
+        if level >= 50 and level < 90:
+            print("FUEL OK")
+        if level >= 90:
+            print("FUEL FULL")
+
+  fuel_status(30)
+  fuel_status(60)
+  fuel_status(92)
+#+end_src
+
+#+RESULTS:
+: LOW FUEL
+: FUEL OK
+: FUEL FULL
+
+Wind is not just "fine" or "not fine" - The range rules say: green below 15 km/h,
+yellow below 25 km/h, red from 25 km/h on.
+
+#+begin_src python :results output :exports both :session *Python* 
+  def wind_report(speed):
+      """Print the wind status for a wind speed in km/h
+
+      speed -- wind speed in km/h (number)
+      Prints GREEN below 15, YELLOW below 20, RED otherwise
+      """
+      if speed < 25:
+          print("Wind: YELLOW")
+      elif speed < 15:
+          print("Wind: GREEN")
+      else:
+          print("Wind: RED")
+
+  wind_report(10)
+  wind_report(20)
+  wind_report(30)
+#+end_src
+
+#+RESULTS:
+: Wind: YELLOW
+: Wind: YELLOW
+
+Now let's move on to "nested" ~if~ statements: check =fuel= first, and
+check =wind= only if =fuel= is fine - the second check is conditional on
+the first.
+#+begin_src python :results output :exports both :session *Python* 
+  def launch(fuel, wind):
+      """Print the launch decision.
+
+      fuel -- fuel level in percent (number)
+      wind -- wind speed in km/h (number)
+      """
+      if fuel >= 90:
+          if wind < 25:
+              print("LAUNCH")
+          else:
+              print("HOLD: wind")
+      else:
+          print("HOLD: fuel")
+
+  launch(96, 12)
+  launch(96, 30)
+  launch(80, 12)
+
+#+end_src
+
+#+RESULTS:
+: LAUNCH
+: HOLD: wind
+: HOLD: fuel
+
+#+begin_src python :results output :exports both :session *Python* 
+  def launch_chained(fuel, wind):
+      """Print the launch decision (chained version of `launch`)
+      """
+      if fuel < 90:
+          print("HOLD: fuel") # fuel is below minimum
+      elif wind >= 25:
+          print("HOLD: wind") # wind is too high
+      else:
+          print("LAUNCH")  # fuel and wind are above minimum
+
+  launch_chained(96,12)
+  launch_chained(96,30)
+  launch_chained(80,12)  
+#+end_src
+
+#+RESULTS:
+: LAUNCH
+: HOLD: wind
+: HOLD: fuel

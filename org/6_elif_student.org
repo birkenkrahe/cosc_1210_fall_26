@@ -1,0 +1,291 @@
+#+TITLE: More Than Two Outcomes (elif)
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:1 num:1 ^:nil
+
+* Objectives
+
+By the end of this lesson you can:
+- explain why separate ~if~ statements can print contradicting results
+- choose between more than two outcomes with ~if~, ~elif~ and ~else~
+- explain why the order of the branches in an ~if/elif/else~ chain
+  matters, and what *dead code* is
+- write and read a *nested* conditional, and rewrite it as a chained
+  conditional
+- simplify a nested conditional with ~and~ or a chained comparison
+- read a number from the keyboard with ~input~ and ~int~
+- tell a function that only *prints* from one that ~return~s a value
+  (first look)
+
+The story: *Viking 1* has passed the poll. Now the launch director has to
+weigh wind, fuel and temperature - and sometimes the answer is HOLD.
+
+See also:
+- [[https://claude.ai/artifact/TjgeZpbJU13UQP9upzW8zv][Slide deck (Claude slides)]]
+- [[https://gist.github.com/birkenkrahe/eaf176df662d53027e24a8e7b47ed1ad][Code written in class (gist)]]
+
+* Why not just separate ifs?
+
+Before ~elif~: what happens if you write three separate ~if~ statements
+instead, one per fuel threshold?
+
+#+name: fuel_status
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def fuel_status(level):
+      if level < 50:
+          print("LOW FUEL")
+      if level >= 50:
+          print("FUEL OK")
+      if level >= 90:
+          print("FUEL FULL")
+
+  fuel_status(30)
+  fuel_status(60)
+  fuel_status(92)
+#+end_src
+
+#+RESULTS: fuel_status
+: LOW FUEL
+: FUEL OK
+: FUEL OK
+: FUEL FULL
+
+** Question: What does ~fuel_status(92)~ print?
+
+*** Answer                                                             :skip:
+
+~fuel_status(92)~ prints *two* lines - "FUEL OK" and "FUEL FULL" - a
+status report that contradicts itself. There is no error and no
+warning; the code just quietly does the wrong thing. Each ~if~ checks
+its own condition independently, so nothing stops more than one from
+being ~True~ at the same time.
+
+** PRACTICE Exactly one line
+
+Fix ~fuel_status~ so exactly one line prints, for *any* fuel level -
+using only what you already know (~if~, comparison operators, ~and~,
+~or~, ~not~). No new syntax allowed yet.
+
+*** Solution                                                           :skip:
+
+#+name: fuel_status_fixed
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def fuel_status_fixed(level):
+      if level < 50:
+          print("LOW FUEL")
+      if level >= 50 and level < 90:
+          print("FUEL OK")
+      if level >= 90:
+          print("FUEL FULL")
+
+  fuel_status_fixed(30)
+  fuel_status_fixed(60)
+  fuel_status_fixed(92)
+#+end_src
+
+#+RESULTS: fuel_status_fixed
+: LOW FUEL
+: FUEL OK
+: FUEL FULL
+
+Making the ranges *mutually exclusive* (~level >= 50 and level < 90~,
+not just ~level >= 50~) fixes it - but notice how much bookkeeping that
+took for only three ranges. You just did by hand what ~elif~ does for
+you automatically - that's next.
+
+* Chained conditionals
+
+Wind is not just fine or not fine. The range rules say: green below
+15 km/h, yellow below 25, red from 25 on. Three outcomes need three
+branches - ~elif~ is short for "else if".
+
+Python checks the conditions *from top to bottom* and runs the *first*
+branch whose condition is ~True~. The rest are skipped.
+
+** The wind report
+
+#+name: wind_report
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def wind_report(speed):
+      """Print the wind status for a wind speed in km/h.
+
+      speed -- wind speed in km/h (number)
+      Prints GREEN below 15, YELLOW below 25, RED otherwise.
+      """
+      if speed < 15:
+          print("Wind: GREEN")
+      elif speed < 25:
+          print("Wind: YELLOW")
+      else:
+          print("Wind: RED")
+
+  wind_report(10)
+  wind_report(20)
+  wind_report(30)
+#+end_src
+
+#+RESULTS: wind_report
+: Wind: GREEN
+: Wind: YELLOW
+: Wind: RED
+
+Because the first ~True~ branch wins, the order matters. Swap the first
+two branches:
+
+#+name: wind_report_wrong
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def wind_report_wrong(speed):
+      if speed < 25:
+          print("Wind: YELLOW")
+      elif speed < 15:
+          print("Wind: GREEN")
+      else:
+          print("Wind: RED")
+
+  wind_report_wrong(10)     # should be GREEN
+#+end_src
+
+#+RESULTS: wind_report_wrong
+: Wind: YELLOW
+
+*** Question: What is wrong here?
+
+What does ~wind_report_wrong(10)~ print, and can it ever print GREEN?
+
+**** Answer                                                            :skip:
+
+10 is below 25, so the first branch wins. Every speed below 15 is also
+below 25, so the GREEN branch can never run - it is *dead code*, and
+Python does not warn you. Either *test the narrowest range first*, or
+make the conditions *mutually exclusive*.
+
+** The optional else
+
+The final ~else~ is optional. Without it, nothing happens when no
+condition is ~True~:
+
+#+name: storm_warning
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def storm_warning(speed):
+      """Print STORM from 60 km/h, GALE from 40 km/h, else nothing."""
+      if speed >= 60:
+          print("STORM")
+      elif speed >= 40:
+          print("GALE")
+
+  storm_warning(70)
+  storm_warning(45)
+  storm_warning(10)     # prints nothing
+#+end_src
+
+#+RESULTS: storm_warning
+: STORM
+: GALE
+
+* Nested conditionals
+
+A conditional inside another conditional is *nested*. The launch
+decision depends on fuel first and on wind only if the fuel is fine:
+
+#+name: launch
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def launch(fuel, wind):
+      """Print the launch decision.
+
+      fuel -- fuel level in percent (number)
+      wind -- wind speed in km/h (number)
+      """
+      if fuel >= 90:
+          if wind < 25:
+              print("LAUNCH")
+          else:
+              print("HOLD: wind")
+      else:
+          print("HOLD: fuel")
+
+  launch(96, 12)
+  launch(96, 30)
+  launch(80, 12)
+#+end_src
+
+#+RESULTS: launch
+: LAUNCH
+: HOLD: wind
+: HOLD: fuel
+
+You can also put this in a flowchart:
+
+#+begin_example
+              launch(fuel, wind)
+                      |
+                      v
+               +--------------+  False  +---------------------+
+               | fuel >= 90 ? | ------> | print("HOLD: fuel") |---+
+               +--------------+         +---------------------+   |
+                      | True                                      |
+                      v                                           |
+               +--------------+  False  +---------------------+   |
+               | wind < 25 ?  | ------> | print("HOLD: wind") |---+
+               +--------------+         +---------------------+   |
+                      | True                                      |
+                      v                                           |
+               +-----------------+                                |
+               | print("LAUNCH") |--------------------------------+
+               +-----------------+                                |
+                                                                  v
+                                                 function ends (next call)
+#+end_example
+
+It works, but the nesting makes it hard to read - you have to keep
+track of which ~else~ belongs to which ~if~. A chained conditional does
+the same job without nesting:
+
+#+name: launch_chained
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def launch_chained(fuel, wind):
+      """Print the launch decision (chained version of launch)."""
+      if fuel < 90:
+          print("HOLD: fuel")
+      elif wind >= 25:
+          print("HOLD: wind")
+      else:
+          print("LAUNCH")
+
+  launch_chained(96, 12)
+  launch_chained(96, 30)
+  launch_chained(80, 12)
+#+end_src
+
+#+RESULTS: launch_chained
+: LAUNCH
+: HOLD: wind
+: HOLD: fuel
+
+Compare the flowchart of =launch_chained= below with the previous one
+for =launch=:
+
+#+begin_example
+              launch_chained(fuel, wind)
+                          |
+                          v
+                   +--------------+  True   +---------------------+
+                   | fuel < 90 ?  | ------> | print("HOLD: fuel") |---+
+                   +--------------+         +---------------------+   |
+                          | False                                     |
+                          v                                           |
+                   +--------------+  True   +---------------------+   |
+                   | wind >= 25 ? | ------> | print("HOLD: wind") |---+
+                   +--------------+         +---------------------+   |
+                          | False (else)                              |
+                          v                                           |
+                   +-----------------+                                |
+                   | print("LAUNCH") |--------------------------------+
+                   +-----------------+                                |
+                                                                      v
+                                                     function ends (next call)
+#+end_example
+
+Notice that the three outputs are the same but the conditions are
+reversed so that all conditions are mutually exclusive.
+

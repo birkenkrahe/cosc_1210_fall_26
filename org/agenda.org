@@ -936,29 +936,30 @@ Artifacts:
 - [[https://claude.ai/artifact/TjgeZpbJU13UQP9upzW8zv][New slide deck (Claude slides)]]
 - [[https://gist.github.com/birkenkrahe/eaf176df662d53027e24a8e7b47ed1ad][Code written in class (gist)]]
 
-* W6S3: Viking 1: More than one outcome II
+* DONE W6S3: Viking 1: More than one outcome II
 #+attr_html: :width 400px :float nil:
 [[../img/mars.png]]
 
-- [ ] All quizzes are open -> midterm exam
-- [ ] Review: paper quiz
-- [ ] Review: more than one outcome (Colab exercise)
-- [ ] Code-along lecture: More of more than one outcome
+- [X] All quizzes are open -> midterm exam
+- [X] Review: paper quiz
+- [X] Review: more than one outcome (Colab exercise)
+- [X] Code-along lecture: More of more than one outcome
 
 ** Quizzes reopened -> midterm exams
 
 - I have reopened all the quizzes
 - The midterm exam will consist of 30-35 questions
 - There will be a few more question types
-  
+- There will be [pseudo]code questions
+    
 ** Review of the paper quiz: the good, the bad, and the ugly
 
 *If you did not do well (< 50% = fail, < 80% you need work):*
 1. Read the solutions and make sure you understand them:
-   https://tinyurl.com/review-09-30-solution
+   [[https://tinyurl.com/review-09-30-solution-pdf][https://tinyurl.com/review-09-30-solution-pdf]]   
 2. Do the review again and make sure you get 100% this time. Perhaps
    do them electronically this time - less boring when repeating:
-   https://tinyurl.com/review-09-30-ipynb
+   https://tinyurl.com/review-09-30-ipynb (Colab)
 3. Relax.
 
 *If you did well (> 80%):* Just relax. Get a DataCamp certificate! Put it on
@@ -986,6 +987,20 @@ Part 2:
 - Upload the .ipynb file to Canvas.
 
 Solutions available as a slide deck.
+
+Part 3: Discussion
+- What did you think of Gemini?
+- What did you observe?
+- Did this help or confuse you?
+
+Rules:
+- This is most useful in notebooks with Gemini (there are others)
+- Control the agent from the start
+- Ask it to distinguish its comments and code from yours
+- Order it to not ever give you a solution unless you ask for it
+- Give very, overly specific instructions
+- Ask for short answers and ask it to cut out the flattery
+- To transfer any content, ask for an .md file
 
 ** Let's get on with rocket science: Viking 1 on HOLD
 
