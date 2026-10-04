@@ -1,4 +1,4 @@
-#+TITLE: Conditionals and Recursion
+#+TITLE: Conditionals - Viking 1 GO/NO-GO
 #+AUTHOR: Marcus Birkenkrahe
 #+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
 #+STARTUP: overview hideblocks indent entitiespretty
