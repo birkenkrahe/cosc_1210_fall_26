@@ -1012,6 +1012,104 @@ Artifacts:
 - [[https://claude.ai/artifact/TjgeZpbJU13UQP9upzW8zv][Slide deck (Claude slides)]]
 - [[https://gist.github.com/birkenkrahe/eaf176df662d53027e24a8e7b47ed1ad][Code written in class (gist)]]
 
+* W7S1: Viking 1: One function or several?
+
+** LEQ feedback
+
+Thank you - 17 of 19 of you responded, and 88% said nothing needs
+improvement!
+
+*What you value*
+- Assignments and projects (94% found them beneficial)
+- Instructor support (88%) and detailed feedback (65%)
+- Code-alongs (all 13 who answered found them helpful)
+- Bonus assignments and extra credit to catch up or go further
+- Everything in one place: GitHub, Canvas, recordings
+
+*What you'd like to see improved - and my response*
+
+*Pace* - for some it's slow or easy, for others it's just right for
+   beginners. → If it feels slow, use the bonus assignments, DataCamp
+   and Kattis to challenge yourself. Ask me for more!
+
+ → I'm planning on adding some interactive companions (to play with)
+
+ → I want to build more peer exercises into the flow (soon-ish)
+   
+** Review
+
+1) When do you need an ~else:~ ?
+   #+begin_quote
+   When no condition above is true but the program should still do
+   something. An ~if/elif~ chain without ~else~ silently does nothing
+   for unmatched input (the signal-80 bug). There is at most one
+   ~else~, and it comes last as the catch-all. If nothing should
+   happen in the leftover case, leave it out.
+   #+end_quote
+
+2) When should you nest ~if~ statements?
+   #+begin_quote
+   Only if the second decision is a real follow-up to the first: it
+   only makes sense once the first one has passed.
+   #+end_quote
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     user, password = "admin", "secret"
+     if user == "admin":
+         if password == "secret":
+             print("welcome")
+         else:
+             print("wrong password")
+     else:
+         print("unknown user")
+   #+end_src
+
+   #+begin_quote
+   Checking the password is pointless for an unknown user, so the
+   inner ~if~ belongs inside the outer one. If the two checks are
+   independent (fuel and wind), a chain is easier to read.
+   #+end_quote
+
+3) Can you always rewrite a nested ~if~ as a chain?
+   #+begin_quote
+   Yes, either as an ~if/elif/else~ ladder or with combined conditions
+   (~and~). The behavior stays the same, only the structure changes.
+   Invert the conditions where needed and use ~elif~, not separate
+   ~if~ statements, so the branches stay mutually exclusive. Deep
+   nesting can make the chain longer because conditions get repeated.
+   #+end_quote
+
+   Nested:
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     fuel, wind = 96, 30
+     if fuel >= 90:
+         if wind < 25:
+             print("launch")
+         else:
+             print("hold wind")
+     else:
+         print("hold fuel")
+   #+end_src
+
+   Chained (same behavior):
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     fuel, wind = 96, 30
+     if fuel < 90:
+         print("hold fuel")
+     elif wind >= 25:
+         print("hold wind")
+     else:
+         print("launch")
+   #+end_src
+
+4) What are the rules of coding with an agent?
+   #+begin_quote
+   1. Make it sign its work ("Gemini"), so you can tell its answers
+      from yours.
+   2. No solutions unless you ask - have it ask you questions instead.
+   3. Check its work against your own. You stay in the driver's seat.
+   #+end_quote
+
 * Footnotes
 
 [fn:1]That's what we're doing all semester: Not just using tools, but
