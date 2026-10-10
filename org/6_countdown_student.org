@@ -1,0 +1,463 @@
+#+TITLE: Countdown (Recursion)
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: COSC 1210 (CS I) Fall 26 | Augustana U.
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:1 num:1 ^:nil
+
+* Objectives
+
+By the end of this lesson you can:
+- write a function that calls itself, with a *base case*
+- explain why a recursive function needs both a base case and a
+  recursive case that makes progress toward it
+- draw a stack diagram for a recursive call
+- read a ~RecursionError~ and explain why it happens
+- decide when recursion fits a problem better than a loop
+
+The story: the decision is GO. Now the clock starts: T-minus ten,
+nine, eight... and a function that counts itself down.
+
+See also:
+- [[https://claude.ai/artifact/B8fv12iXDjEMvTmXeQEoet][Slide deck (Claude slides)]]
+- [[https://birkenkrahe.github.io/python_demos/countdown-stepper.html][Recursion Stepper]]
+- [[https://gist.github.com/birkenkrahe/3f7d5052c9e38f2111da3e0990c1f0b4][Code written in class (gist)]]
+
+* Recursion
+
+T-minus five. In the control room the countdown is a loop:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  for i in range(5):
+      print(5-i)
+  print("Liftoff!")
+#+end_src
+
+#+RESULTS:
+: 5
+: 4
+: 3
+: 2
+: 1
+: Liftoff!
+
+There is another way. It is legal for a function to *call itself*.
+This is called *recursion*, and it is one of the most magical things a
+program can do:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def countdown(n):
+      """Print n, n-1, ..., 1, then Liftoff!
+
+      n -- the number to count down from (whole number)
+      """
+      if n <= 0:
+          print("Liftoff!")
+      else:
+          print(n)
+          countdown(n - 1)
+
+  countdown(3)
+#+end_src
+
+#+RESULTS:
+: 3
+: 2
+: 1
+: Liftoff!
+
+* Tracing the calls
+
+What happens when you call ~countdown(3)~?
+
+This is called an *execution trace*:
+
+1. ~n = 3~. Since 3 is greater than 0, it prints 3 and calls
+   ~countdown(2)~.
+2. ~n = 2~. It prints 2 and calls ~countdown(1)~.
+3. ~n = 1~. It prints 1 and calls ~countdown(0)~.
+4. ~n = 0~. Since 0 is not greater than 0, it prints ~Liftoff!~ and
+   returns.
+5. The ~countdown(1)~ call returns, then ~countdown(2)~, then
+   ~countdown(3)~ - and you are back where you started.
+
+Every call has its *own* ~n~ - the locals of each call are separate, just
+like the two ~answer~ variables in ~show_square~ and ~show_cube~ from the
+lecture on functions.
+
+Step through this trace in the [[https://birkenkrahe.github.io/python_demos/countdown-stepper.html?prog=countdown&n=3][Recursion Stepper]]: is the program done
+when ~Liftoff!~ prints?
+
+* Base case and recursive case
+
+Every recursive function needs two things:
+- a *base case*: an input for which it does *not* call itself
+  (here ~n <= 0~)
+- a *recursive case* that makes progress toward the base case (here ~n -
+  1~)
+
+* Watch the unwind
+
+To see the order of events, add a line *after* the recursive call:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def countdown_back(n):
+      if n <= 0:
+          print("Liftoff!")
+      else:
+          print("T-minus", n)
+          countdown_back(n - 1)
+          print("...returned to", n)
+
+  countdown_back(3)
+#+end_src
+
+#+RESULTS:
+: T-minus 3
+: T-minus 2
+: T-minus 1
+: Liftoff!
+: ...returned to 1
+: ...returned to 2
+: ...returned to 3
+
+The "returned" lines appear in reverse order: the innermost call
+finishes first. The calls are stacked up and then unwound.
+
+* Stack diagrams: watch the stack
+
+A *stack diagram* shows the stack of calls: one *frame* per active call, with
+the values of its variables. For ~countdown(3)~ at the moment it prints
+~Liftoff!~:
+
+#+begin_example
+  __main__
+  countdown   n -> 3
+  countdown   n -> 2
+  countdown   n -> 1
+  countdown   n -> 0     <- the call that is running now
+#+end_example
+
+This is the same "stack" as in a traceback - the innermost call is at
+the bottom.
+
+You can step through the code in [[https://pythontutor.com/python-debugger.html][pythontutor.com]] and watch the frames
+pile up, or you can use the interactive companion for this class:
+
+** Question: What happens on the stack?
+
+Open the [[https://birkenkrahe.github.io/python_demos/countdown-stepper.html?prog=countdown_back&n=3][Recursion Stepper]] with ~countdown_back~ and ~n = 3~. Before
+each click on *Step*, predict what happens next:
+
+1. How many frames are on the stack when ~Liftoff!~ prints?
+2. At line 6 a frame pauses. What is it waiting for?
+3. After ~Liftoff!~, which line runs next, and with which ~n~?
+4. Which output lines are printed on the way down (↓), which on the
+   way back up (↑)?
+
+*** Answer                                                             :skip:
+
+1. Five: ~__main__~ plus four ~countdown_back~ frames (~n~ = 3, 2, 1,
+   0) - the same picture as the stack diagram above.
+2. For its own recursive call to come back.
+3. The frame with ~n = 0~ is removed, and the frame with ~n = 1~
+   continues with line 7: it prints ~...returned to 1~.
+4. The ~T-minus~ lines on the way down, the ~returned~ lines on the
+   way back up. ~Liftoff!~ is the base case.
+
+** Question: What does ~recurse(3, 0)~ print?
+
+Your turn - what does this print? Draw the stack diagram first:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def recurse(n, s):
+      if n == 0:
+          print(s)
+      else:
+          print(n,s)
+          recurse(n - 1, n + s)
+
+  recurse(3, 0)
+#+end_src
+
+*** Answer                                                             :skip:
+
+#+begin_example
+3 0
+2 3
+1 5
+6
+#+end_example
+
+The last line is ~6~. The frames hold ~(n, s)~ = (3, 0), (2, 3),
+(1, 5), (0, 6); the last one prints ~s~.
+
+* Infinite recursion
+
+What if there is no base case?
+
+#+begin_src python :results none :exports both :session *Python* :python python3
+  def recurse_forever():
+      recurse_forever()
+#+end_src
+
+#+begin_src python :results none :session *Python* :python python3
+  recurse_forever()
+#+end_src
+
+#+begin_example
+RecursionError: maximum recursion depth exceeded
+#+end_example
+
+Every call creates another frame. Python stops the program when the
+stack gets too deep - the limit is typically 1000 frames:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  import sys
+  print(sys.getrecursionlimit())
+#+end_src
+
+#+RESULTS:
+: 1000
+
+In the traceback you will see the recursive call a few times, then
+~[Previous line repeated 996 more times]~, then the error on the
+*last* line - read it bottom to top, as always.
+
+* A subtler bug: ~countdown_by_two~
+
+A more subtle case: a countdown by two.
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def countdown_by_two(n):
+      if n == 0:
+          print("Liftoff!")
+      else:
+          print(n)
+          countdown_by_two(n - 2)
+
+  countdown_by_two(6)
+#+end_src
+
+#+RESULTS:
+: 6
+: 4
+: 2
+: Liftoff!
+
+It seems to work. Now try 7 (and predict first - which numbers does
+it visit?). Python may add a few words after "exceeded" - the wording
+depends on where in the call it gives up:
+
+#+begin_src python :results none :session *Python* :python python3
+  countdown_by_two(7)
+#+end_src
+
+#+begin_example
+RecursionError: maximum recursion depth exceeded
+#+end_example
+
+7, 5, 3, 1, -1, -3, ... - the value jumps over 0 and never meets the
+base case.
+
+The fix: make the base case catch everything at or below zero:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def countdown_by_two(n):
+      if n <= 0:
+          print("Liftoff!")
+      else:
+          print(n)
+          countdown_by_two(n - 2)
+
+  countdown_by_two(7)
+  countdown_by_two(6)
+#+end_src
+
+#+RESULTS:
+: 7
+: 5
+: 3
+: 1
+: Liftoff!
+: 6
+: 4
+: 2
+: Liftoff!
+
+The rule: every recursive call must move *toward* the base case, and
+the base case must catch every way of getting there.
+
+* Recursion or loop?
+
+Anything you do with recursion you can do with a loop. For a plain
+countdown the loop is simpler. Recursion shines when a problem
+contains a smaller copy of itself - like a triangle of stars, which is
+a triangle of one row fewer, plus one row:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def triangle(n):
+      """Print a triangle of n rows of stars, shortest row first."""
+      if n > 0:
+          triangle(n - 1)
+          print("*" * n)
+
+  triangle(4)
+#+end_src
+
+#+RESULTS:
+: *
+: **
+: ***
+: ****
+
+Compare with the loop version from the function lecture (~stars~).
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def stars(n):
+      for i in range(n):
+          print("*" * (i + 1))
+
+  stars(4)
+#+end_src
+
+#+RESULTS:
+: *
+: **
+: ***
+: ****
+
+** Swap the order: ~triangle_down~
+
+Now swap the order of the two lines in the body - print *before* the
+recursive call:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def triangle_down(n):
+      """Print a triangle of n rows of stars, longest row first."""
+      if n > 0:
+          print("*" * n)
+          triangle_down(n - 1)
+
+  triangle_down(4)
+#+end_src
+
+#+RESULTS:
+: ****
+: ***
+: **
+: *
+
+Whether a line comes before or after the recursive call decides
+whether it runs on the way *down* the stack or on the way back *up*.
+
+** Question: Down or up?
+
+Open the [[https://birkenkrahe.github.io/python_demos/countdown-stepper.html?prog=triangle&n=4][Recursion Stepper]] with ~triangle~ and ~n = 4~.
+
+1. Step through. Is the first star printed before or after the first
+   recursive call?
+2. Click /swap the two lines in the body/ - now it is ~triangle_down~
+   - and step again. When is the first row printed now?
+
+*** Answer                                                             :skip:
+
+1. After: ~triangle(4)~ calls all the way down to ~triangle(0)~
+   first, and nothing is printed on the way down. The first ~*~ comes
+   from the frame with ~n = 1~, on the way back up.
+2. Right away: ~triangle_down(4)~ prints ~****~ before its first
+   call - on the way down.
+
+* PRACTICE Countdown with a hold
+
+Write a recursive ~countdown_hold(n, wind)~:
+- if ~n <= 0~: print ~Liftoff!~
+- otherwise, if ~n == 5~ and the wind is 25 or more: print
+  ~HOLD: wind too high at T-minus 5~ and stop (no more calls)
+- otherwise print ~T-minus n~ and count down from ~n - 1~
+
+Expected output for ~countdown_hold(8, 30)~:
+
+#+begin_example
+T-minus 8
+T-minus 7
+T-minus 6
+HOLD: wind too high at T-minus 5
+#+end_example
+
+and for ~countdown_hold(8, 12)~: T-minus 8 down to T-minus 1, then
+~Liftoff!~.
+
+** Solution                                                           :skip:
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def countdown_hold(n, wind):
+      """Count down from n, holding at T-minus 5 if the wind is too high.
+
+      n    -- the number to count down from (whole number)
+      wind -- wind speed in km/h (number)
+      Prints one line per step; returns nothing.
+      """
+      if n <= 0:
+          print("Liftoff!")
+      elif n == 5 and wind >= 25:
+          print("HOLD: wind too high at T-minus 5")
+      else:
+          print("T-minus", n)
+          countdown_hold(n - 1, wind)
+
+  countdown_hold(8, 30)
+  print()
+  countdown_hold(8, 12)
+#+end_src
+
+#+RESULTS:
+: T-minus 8
+: T-minus 7
+: T-minus 6
+: HOLD: wind too high at T-minus 5
+:
+: T-minus 8
+: T-minus 7
+: T-minus 6
+: T-minus 5
+: T-minus 4
+: T-minus 3
+: T-minus 2
+: T-minus 1
+: Liftoff!
+
+* Summary
+
+- *Recursion*: a function that calls itself. It needs a *base case*
+  that does not recurse, and a recursive case that moves toward it.
+  Each call has its own local variables.
+
+- A *stack diagram* shows one *frame* per active call. The innermost
+  call finishes first, and the calls return in reverse order.
+  Code placed before the recursive call runs on the way down, code
+  after it on the way back up.
+
+- Without a reachable base case the recursion is *infinite*: the stack
+  grows until Python raises ~RecursionError~. Read the last line of the
+  traceback.
+
+- Recursion and loops can do the same work. Recursion fits problems
+  that contain a smaller copy of themselves.
+
+* Glossary
+
+|   | Term               | Meaning                                          |
+|---+--------------------+--------------------------------------------------|
+| 1 | recursion          | A function that calls itself                     |
+| 2 | recursive call     | The call of a function from within itself        |
+| 3 | base case          | The input for which a function does not recurse  |
+| 4 | recursive case     | The branch that calls the function again         |
+| 5 | frame              | One active call on the stack, with its variables |
+| 6 | stack diagram      | Drawing of all frames while a program runs       |
+| 7 | infinite recursion | Recursion that never reaches its base case       |
+| 8 | ~RecursionError~     | Python stops a stack that grows too deep         |
+
+* Next: functions that return a value
+
+So far, every function has only *printed*. A function that *returns*
+hands a value back to its caller - chapter 6.

@@ -1,0 +1,230 @@
+#+STARTUP: overview hideblocks indent entitiespretty:
+- See [[https://claude.ai/artifact/B8fv12iXDjEMvTmXeQEoet][Slide deck (Claude slides)]].
+- This code will be available as a [[https://gist.github.com/birkenkrahe/3f7d5052c9e38f2111da3e0990c1f0b4][public gist]].
+
+* Counting down
+
+#+begin_src python :results output :exports both :session *Python*
+  for i in range(5):    # 0, 1, 2, 3, 4
+      print(5-i)
+
+  print("Liftoff")
+#+end_src
+
+#+RESULTS:
+: 5
+: 4
+: 3
+: 2
+: 1
+: Liftoff
+
+#+begin_src python :results output :exports both :session *Python*
+  def countdown(n):
+      """Print n, n-1,...,1 then Liftoff!
+
+      n -- the number to count down from (whole number)
+      """
+      if n <= 0:
+          print("Liftoff!")
+      else:
+          print(n)
+          countdown(n - 1) # call yourself on n-1
+
+  countdown(3)
+#+end_src
+
+#+RESULTS:
+: 3
+: 2
+: 1
+: Liftoff!
+
+* Countdown back and watch the unwind
+
+#+begin_src python :results output :exports both :session *Python*
+  def countdown_back(n):
+      if n <= 0:  # base case
+          print("Liftoff!")
+      else:
+          print("T-minus", n)
+          countdown_back(n - 1) # call yourself on n-1
+          print("...returned to", n)
+
+  countdown_back(3)
+#+end_src
+
+#+RESULTS:
+: T-minus 3
+: T-minus 2
+: T-minus 1
+: Liftoff!
+: ...returned to 1
+: ...returned to 2
+: ...returned to 3
+
+* PRACTICE What does =recurse= print?
+
+#+begin_src python :results output :exports both :session *Python*
+  def recurse(n, s):
+      if n == 0:
+          print(s)
+      else:
+          print(n,s)  # this is the frame held during each recursive step
+          recurse(n-1, n + s)
+
+  recurse(3, 0)
+#+end_src
+
+#+RESULTS:
+: 3 0
+: 2 3
+: 1 5
+: 6
+
+What is your recursion depth (max. no. of recursive steps):
+#+begin_src python :results output :exports both :session *Python*
+  import sys
+  print(sys.getrecursionlimit()) # after this: RecursionError
+#+end_src
+
+#+RESULTS:
+: 1000
+
+* A subtle bug: countdown by two
+
+#+begin_src python :results output :exports both :session *Python*
+  def countdown_by_two(n):
+      if n <= 0:
+          print("Liftoff!")
+      else:
+          print(n)
+          countdown_by_two(n-2)
+
+  countdown_by_two(2)
+  countdown_by_two(7)
+#+end_src
+
+#+RESULTS:
+: 2
+: Liftoff!
+: 7
+: 5
+: 3
+: 1
+: Liftoff!
+
+The rule: every recursive case must move toward the base case,
+and the base case must catch every way of getting there.
+
+* Should we use recursion or should we use a loop?
+
+#+begin_src python :results output :exports both :session *Python*
+  def stars(n):
+      for i in range(n):
+          print("*" * (i + 1))
+
+  stars(4)
+#+end_src
+
+#+RESULTS:
+: *
+: **
+: ***
+: ****
+
+Recursive version:
+#+begin_src python :results output :exports both :session *Python*
+  def triangle(n):
+      if n > 0:
+          triangle(n - 1)  # call triangle on the way back up
+          print("*" * n)
+
+  triangle(4)
+#+end_src
+
+#+RESULTS:
+: *
+: **
+: ***
+: ****
+
+#+begin_src python :results output :exports both :session *Python*
+  def triangle_down(n):
+      if n > 0:
+          print("*" * n)
+          triangle_down(n - 1) # call triangle_down on the way down
+
+  triangle_down(4)
+#+end_src
+
+#+RESULTS:
+: ****
+: ***
+: **
+: *
+
+* PRACTICE Write =countdown_hold=
+
+Write a recursive =countdown_hold(n, wind)=.
+
+- If n <= 0 print Liftoff!
+- Otherwise, if n == 5 and the wind is 25 or more: print "HOLD: wind
+  too high at T-minus 5" and stop (no more calls).
+- Otherwise: print T-minus n and count down from n-1.
+
+Input: countdown_hold(8, 30)
+#+begin_example python
+   T-minus 8
+   T-minus 7
+   T-minus 6
+   HOLD: wind too high at T-minus 5
+#+end_example
+
+Input: countdown_hold(8, 12)
+#+begin_example python
+   T-minus 8
+   T-minus 7
+   T-minus 6
+   T-minus 5
+   T-minus 4
+   T-minus 3
+   T-minus 2
+   T-minus 1
+   Liftoff!
+#+end_example
+
+
+#+begin_src python :results output :exports both :session *Python*
+  def countdown_hold(n, wind):
+        # base case met?
+        if n <= 0:
+              print("Liftoff!")
+              # otherwise: is n == 5 and the wind stronger than 25?
+        elif n == 5 and wind >= 25:
+              print("HOLD: wind too high at T-minus 5")
+              # otherwise: countdown (recursive case)
+        else:
+              print("T-minus",n)
+              countdown_hold(n - 1, wind)
+
+  countdown_hold(8, 30)
+  countdown_hold(8, 12)  
+#+end_src
+
+#+RESULTS:
+#+begin_example
+T-minus 8
+T-minus 7
+T-minus 6
+HOLD: wind too high at T-minus 5
+T-minus 8
+T-minus 7
+T-minus 6
+T-minus 5
+T-minus 4
+T-minus 3
+T-minus 2
+T-minus 1
+Liftoff!
+#+end_example
