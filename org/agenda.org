@@ -1012,7 +1012,7 @@ Artifacts:
 - [[https://claude.ai/artifact/TjgeZpbJU13UQP9upzW8zv][Slide deck (Claude slides)]]
 - [[https://gist.github.com/birkenkrahe/eaf176df662d53027e24a8e7b47ed1ad][Code written in class (gist)]]
 
-* W7S1: Viking 1: One function or several?
+* DONE W7S1: Viking 1: One function or several?
 
 ** LEQ feedback
 
@@ -1108,6 +1108,224 @@ improvement!
       from yours.
    2. No solutions unless you ask - have it ask you questions instead.
    3. Check its work against your own. You stay in the driver's seat.
+   #+end_quote
+
+* DONE W7S2: Countdown - recursion
+
+** Midterm exam preparation
+
+I've posted the *complete quizzes 1-5 with answers* to help you prepare
+for the mid-term exam. You can feed these to AI to:
+- ask for similar questions (ask AI to make them a little harder)
+- ask for small coding problems and for questions where you need to
+  find the bug
+- ask AI after, say, 10 questions, to give you a performance
+  assessment ("how did I do?" What should I focus on now?")
+
+*Important:* You cannot blindly trust the AI's answers. You have to
+check back with the course material. This makes AI-assisted drills
+kind of expensive but, in my opinion, still worth it.
+
+Notice that the exam questions will *not be exactly like* the quiz
+questions. There will be different question types, including a few
+coding questions (similar to some of our in-class review quizzes). All
+the material is, however, available on Canvas. Ask me if you have any
+questions! Also: *open (handwritten) notes only, no printouts.*
+
+Also: *Charge your laptops*. Friday, FSC 372 at 2 pm - 3 pm 
+
+** Review
+
+1) In which order does Python check the branches of an ~if/elif/else~
+   chain, and what happens when more than one condition is ~True~?
+   #+begin_quote
+   Top to bottom; the first ~True~ condition runs, the rest are
+   skipped.
+   #+end_quote
+
+2) What does this print?
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     def grade(points):
+         if points >= 90:
+             print("A")
+         elif points >= 80:
+             print("B")
+         else:
+             print("C")
+
+     grade(95)
+     grade(85)
+     grade(50)
+   #+end_src
+
+   #+RESULTS:
+   : A
+   : B
+   : C
+
+3) What type does ~input~ return, and how do you get a number?
+   #+begin_quote
+   Always a string; convert it with ~int~ (or ~float~).
+   #+end_quote
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     num     = 3
+     pi      = 3.14
+     pi_str  = "3.14"
+     print(int(pi))   # this truncates to integer - narrowing conversion
+     print(float(num)) # this converts to float - widening conversion
+     print(int(pi_str)) # this throws a ValueError
+   #+end_src
+
+   #+RESULTS:
+   : 3
+   : 3.0
+
+
+4) Rewrite as one condition: ~if 0 < x:~ nested with ~if x < 10:~
+   #+begin_quote
+   =if 0 < x < 10:= or =if 0 < x and x < 10=
+   #+end_quote
+
+5) Mission control's ~command(name, seconds)~ uses ~if/elif~ on
+   ~name~: for ~"launch"~ it prints two lines, for ~"hold"~ it
+   turns ~seconds~ into minutes and prints, for ~"abort"~ it prints
+   one line. One function or three - and why?
+   #+begin_quote
+   Three (~liftoff~, ~hold~, ~abort~). The branches do different
+   *steps*, not the same steps with different *values* - and
+   ~seconds~ is only used by ~hold~; the others pass a dummy ~0~.
+   Compare ~go_nogo~: same steps, different values - one function.
+   #+end_quote
+
+* W8S1: To Plot Or Not To Plot
+#+attr_html: :width 300px :float nil:
+[[../img/textplot.png]]
+
+** Post-mortem: The whole truth: ~input()~ conversion ([[https://chat.google.com/room/AAQAeL5a2zw/qgtY6oEV_ME/qgtY6oEV_ME?cls=10][GChat]])
+
+|  Input | input() returns | Conversion    | Result                                       |
+|--------+-----------------+---------------+----------------------------------------------|
+|      3 | '3'             | int('3')      | 3: '3' is a valid integer literal            |
+|   3.14 | '3.14'          | int('3.14')   | ValueError: int() rejects  decimal pt in str |
+| "3.14" | '"3.14"'        | int('"3.14"') | ValueError: quote marks are characters too   |
+|      3 | '3'             | float('3')    | 3.0: integer text is also valid float text   |
+|    "3" | '"3"'           | float('"3"')  | ValueError: quote marks are characters too   |
+
+** Bonus tutorial: mathematical induction from zero
+
+Published a nice tutorial on mathematical induction/computational
+recursion (ca. 30 min): [[https://birkenkrahe.github.io/go/induction][birkenkrahe.github.io/go/induction]]
+
+Review question: What's in ~result~ when you run the code below?
+
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def countdown(n):
+      if n <= 0:
+          print("Liftoff!")
+      else:
+          print(n)
+          countdown(n - 1)
+
+  result = countdown(3)
+  print(result)
+#+end_src
+
+*** Answer
+
+~countdown~ prints, but it gives nothing back to its caller: ~result~ is
+~None~. How do you get a value *back* from a function? That's today's
+topic.
+
+** To To Plot Or Not To Plot with ~matplotlib.pyplot~
+
+*Code along session:*
+- Data visualization (penultimate pipeline step)
+- Gapminder dataset (global economics data)
+- Using ~matplotlib.pyplot~ (graphics library)
+- Choosing the right plot
+- Customizing plots
+- Animating plots (example)
+
+*Homework assignment:*
+- Pick the right plot
+- Starter file in Colab
+- Upload the .ipynb file
+
+* W9S1: Viking 1 in Mars orbit: ~return~, ~None~, pure functions, ~assert~
+** Viking 1 in Mars orbit
+
+The story for the week: *Viking 1* has left the launch pad behind. On
+June 19, 1976, it entered orbit around Mars.[fn:1] Every reading it
+takes is worthless unless it comes *back* to Earth.
+
+By the end of this lesson you can:
+- explain why a function that only prints cannot answer its caller
+- hand a value back with ~return~ and store, print, or reuse it
+- spot a function that implicitly returns ~None~
+- explain what makes a function *pure*, and why it matters
+- test a pure function with a one-line ~assert~
+
+Sessions this week (chapter 6, return values):
+1. Phone home: ~return~, ~None~, pure functions, ~assert~
+2. Where to land: every path returns, Boolean functions, incremental
+   development, guardrails
+3. Talking through the orbiter: recursion with return values, input
+   validation
+
+* W9S2: Where to land on Mars
+* W9S3: Talking through the orbiter
+** Review
+
+1) Down or up? What does this print?
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     def countdown_up(n):
+         if n <= 0:
+             print("Liftoff!")
+         else:
+             countdown_up(n - 1)
+             print(n)
+
+     countdown_up(3)
+   #+end_src
+
+   #+RESULTS:
+   : Liftoff!
+   : 1
+   : 2
+   : 3
+
+   #+begin_quote
+   The ~print~ comes *after* the recursive call, so it runs on the way
+   back *up*: the innermost call (~n = 1~) prints first. Compare
+   ~triangle_down~, where the ~print~ comes before the call.
+   #+end_quote
+
+2) Spot the gap: ~countdown_by_three(9)~ prints 9, 6, 3, Liftoff!. For
+   which starting values does it work, and what happens with 10?
+
+   #+begin_src python :results output :exports both :session *Python* :python python3
+     def countdown_by_three(n):
+         if n == 0:
+             print("Liftoff!")
+         else:
+             print(n)
+             countdown_by_three(n - 3)
+
+     countdown_by_three(9)
+   #+end_src
+
+   #+RESULTS:
+   : 9
+   : 6
+   : 3
+   : Liftoff!
+
+   #+begin_quote
+   Only for multiples of 3 (0, 3, 6, ...). With 10 it goes 10, 7, 4,
+   1, -2, ... and jumps over 0, until Python gives up with a
+   ~RecursionError~. Fix: ~if n <= 0:~
    #+end_quote
 
 * Footnotes
