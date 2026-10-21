@@ -1198,7 +1198,7 @@ Also: *Charge your laptops*. Friday, FSC 372 at 2 pm - 3 pm
    Compare ~go_nogo~: same steps, different values - one function.
    #+end_quote
 
-* W8S1: To Plot Or Not To Plot
+* DONE W8S1: To Plot Or Not To Plot
 #+attr_html: :width 300px :float nil:
 [[../img/textplot.png]]
 
@@ -1240,19 +1240,90 @@ topic.
 ** To To Plot Or Not To Plot with ~matplotlib.pyplot~
 
 *Code along session:*
-- Data visualization (penultimate pipeline step)
-- Gapminder dataset (global economics data)
-- Using ~matplotlib.pyplot~ (graphics library)
-- Choosing the right plot
-- Customizing plots
-- Animating plots (example)
+- [X] Data visualization (penultimate pipeline step)
+- [X] Gapminder dataset (global economics data)
+- [X] Using ~matplotlib.pyplot~ (graphics library)
+- [ ] Choosing the right plot
+- [X] Customizing plots
+- [ ] Animating plots (example)
 
 *Homework assignment:*
 - Pick the right plot
 - Starter file in Colab
 - Upload the .ipynb file
 
-* W9S1: Viking 1 in Mars orbit: ~return~, ~None~, pure functions, ~assert~
+* DONE W9S1: Plotting II
+
+- [X] New tutorial: ~pip~ on Windows (and Mac)
+- [X] Methods and attributes
+- [ ] Review: Plotting I
+- [ ] Plotting II
+- [ ] Home assignment (in Colab)
+
+** Methods and attributes - behavior and states ([[https://chat.google.com/room/AAQAeL5a2zw/WF0gISvQBG8/WF0gISvQBG8?cls=10][from chat]])
+
+More on ~df.tail~ (the output that @Sviatoslav Makin reported): ~tail~
+is a method of a ~DataFrame~, just like ~head~, ~info~, and ~describe~.
+Methods are functions that manipulate ~DataFrame~ objects (essentially
+tables). Now, what happens if you leave out the ~()~ after the name?
+
+- ~df.tail()~ calls the method and returns the last 5 rows.
+  ~df.tail(3)~ returns the last three.
+- ~df.tail~ (without parentheses) gives you the method itself, not its
+  result. Same thing happens if you ~def~ a function =hello()= and
+  enter =hello= on its own. Whatever rows were shown when you enter
+  ~df.tail~ are just Python showing you which ~DataFrame~ the method
+  belongs to.
+- Now compare ~df.gdp_cap~: that's access of an attribute - the column
+  with the data for the GDP per capita - and it returns that column.
+
+So a name after the dot ~.~ can be data (a column) or a method. The
+~()~ runs the method. Rule of thumb: if you see ~<...>~ you forgot the
+parentheses.
+
+Methods are also said to encapsulate the *behavior* of an object,
+while *attributes* encapsulate the *state* of an object.
+
+** Review
+
+1. What's the point of data visualization?
+
+2. What's the GapMinder dataset?
+
+3. Which plots did we create so far and how?
+
+4. What can you change about a plot?
+   #+begin_quote
+   1. type
+   2. markers
+   3. axes
+   4. ticks
+   5. axis labels
+   6. title
+   7. colors
+   8. text
+   9. legend
+   10. dimension
+   #+end_quote
+
+** Plotting II
+
+*Code along session:*
+- [X] Data visualization (penultimate pipeline step)
+- [X] Gapminder dataset (global economics data)
+- [X] Using ~matplotlib.pyplot~ (graphics library)
+- [ ] Logarithmic transformation
+- [ ] Choosing the right plot
+- [X] Customizing plots
+- [ ] Animating plots (interactive companion)
+
+** Homework assignment:
+- Pick the right plot
+- Starter file in Colab
+- Upload the .ipynb file
+
+* W9S2: Viking 1 in Mars orbit: ~return~, ~None~, pure functions, ~assert~
+
 ** Viking 1 in Mars orbit
 
 The story for the week: *Viking 1* has left the launch pad behind. On
@@ -1266,15 +1337,16 @@ By the end of this lesson you can:
 - explain what makes a function *pure*, and why it matters
 - test a pure function with a one-line ~assert~
 
-Sessions this week (chapter 6, return values):
+The next three sessions this week and next (ch6, return values):
 1. Phone home: ~return~, ~None~, pure functions, ~assert~
 2. Where to land: every path returns, Boolean functions, incremental
    development, guardrails
 3. Talking through the orbiter: recursion with return values, input
    validation
 
-* W9S2: Where to land on Mars
-* W9S3: Talking through the orbiter
+
+* W9S3: Where to land on Mars
+* W10S1: Talking through the orbiter
 ** Review
 
 1) Down or up? What does this print?
