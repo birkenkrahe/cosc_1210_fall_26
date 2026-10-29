@@ -1,5 +1,6 @@
 #+TITLE: Spot a Keyword
 #+STARTUP: overview hideblocks indent entitiespretty
+This code is available as a [[https://gist.github.com/birkenkrahe/95e7833cb6d61165777d70598b2a52b4][public gist]].
 * Loop over a string
 
 #+begin_src python :results output :exports both :session *Python*
