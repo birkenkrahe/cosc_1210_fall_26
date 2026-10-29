@@ -1,9 +1,9 @@
 #+TITLE: Spot a Keyword
 #+STARTUP: overview hideblocks indent entitiespretty
-* DONE Loop over a string
+* Loop over a string
 
 #+begin_src python :results output :exports both :session *Python*
-  for letter in "Why?":   # loop over every letter in the range of the String
+  for letter in "Why?":   # loop over every letter in the string
       print(letter, end=" ") # replace line break by empty space
 #+end_src
 
@@ -11,7 +11,7 @@
 : W h y ?
 
 #+begin_src python :results output :exports both :session *Python*
-  for letter in "Why?":   # loop over every letter in the range of the String
+  for letter in "Why?":   # loop over every letter in the string
       if letter == "?":
           print(True)
       else:
@@ -56,14 +56,14 @@ To find out what's wrong, use a ~print~ scaffold:
 : True
 : False
 
-* DONE Count with a loop
+* Count with a loop
 
 #+begin_src python :results output :exports both :session *Python* 
   def count_words(sentence):
       """Return the number of words in sentence:
          words are separated by single spaces
       """
-      count = 1n # initialize the counter variable
+      count = 1  # initialize the counter variable
       for letter in sentence:
           if letter == " ":     # found a space
              count = count + 1  # increase the counter, or count += 1
@@ -73,8 +73,9 @@ To find out what's wrong, use a ~print~ scaffold:
 #+end_src
 
 #+RESULTS:
+: 5
 
-If you remove `count = 1` you get this error:
+If you remove ~count = 1~ you get this error:
 #+begin_example
 UnboundLocalError: cannot access local variable 'count'
 where it is not associated with a value
@@ -89,8 +90,8 @@ where it is not associated with a value
 : 3
 : 1
 
-* DONE Colab terminal -> external
-* DONE Is the word in the sentence?
+* Colab terminal -> external
+* Is the word in the sentence?
 
 #+begin_src python :results output :exports both :session *Python* 
   print("mother" in "My mother is always busy.") # returns a Boolean
@@ -124,7 +125,7 @@ where it is not associated with a value
 : True
 : True
 
-* NEXT Review
+* Review
 
 #+begin_src python :results output :exports both :session *Python*
   def has_letter(sentence, letter):
@@ -166,7 +167,7 @@ where it is not associated with a value
 
 #+begin_src python :results output :exports both :session *Python* 
   def count_letter(sentence, letter):
-      """Count the occurrences of letter in sentence. Return True/False"""
+      """Count the occurrences of letter in sentence. Return the count."""
       count = 0
       for character in sentence:
           if character.lower() == letter.lower():
@@ -367,7 +368,7 @@ because
 
 #+begin_src python :results output :exports both :session *Python* 
   for line in open("keywords.txt"): # go through keywords.txt line by line
-      print(line,end="")  # replaces \n by empty spacen
+      print(line,end="")  # replaces \n by an empty string
 #+end_src
 
 #+RESULTS:
@@ -387,7 +388,7 @@ because
 #+begin_src python :results output :exports both :session *Python* 
   for line in open("keywords.txt"): # go through keywords.txt line by line
       word = line.strip() # remove whitespace
-      print(word,end=" ")  # replaces \n by empty spacen
+      print(word,end=" ")  # replaces \n by a space
 #+end_src
 
 #+RESULTS:
