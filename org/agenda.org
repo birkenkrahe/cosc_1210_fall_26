@@ -1,3 +1,4 @@
+
 #+TITLE: Agenda
 #+AUTHOR: Marcus Birkenkrahe
 #+SUBTITLE: COSC 1210 (CS I) FA26 | Augustana U.
@@ -437,7 +438,7 @@ After completing this code-along lecture with practice, you can:
 - Expressions vs. statements
 - ~print~ function
 - Function arguments
-- Extended eample: Pythagoras' theorem
+- Extended example: Pythagoras' theorem
 - Home assignment: Pay stub calculator
 - Bonus assignments: Circle Calculator, Change Maker
 
@@ -1322,7 +1323,7 @@ while *attributes* encapsulate the *state* of an object.
 - Starter file in Colab
 - Upload the .ipynb file
 
-* W9S2: Viking 1 in Mars orbit: ~return~, ~None~, pure functions, ~assert~
+* DONE W9S2: Viking 1 in Mars orbit: ~return~, ~None~, pure functions, ~assert~
 
 ** Viking 1 in Mars orbit
 
@@ -1344,61 +1345,151 @@ The next three sessions this week and next (ch6, return values):
 3. Talking through the orbiter: recursion with return values, input
    validation
 
+* DONE W9S3: Where to land on Mars: Boolean functions, leap of faith, ~isinstance~
 
-* W9S3: Where to land on Mars
-* W10S1: Talking through the orbiter
-** Review
+* DONE W10S1: A new journey: building ELIZA - iteration and search - spot a keyword
+#+attr_html: :width 400px :float nil:
+[[../img/ELIZA.png]]
 
-1) Down or up? What does this print?
+- Loop over a string to find out if a sentence is a question.
+- Looping over a sentence to count the number of words.
+- Is a specific word ~in~ a sentence?
+- Lowering string values with ~.lower()~
+- Writing Python scripts to file (in Colab)
+- Running Python scripts in a terminal
+- Redirecting error (stderr) to output (stdout) with =2>&1=
+- Building command pipelines in a Linux terminal with =|=
+  
+* DONE W10S2: Building ELIZA - finish spot a keyword
 
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     def countdown_up(n):
-         if n <= 0:
-             print("Liftoff!")
-         else:
-             countdown_up(n - 1)
-             print(n)
+** Review: mini challenge (10 min + 5 min discussion)
 
-     countdown_up(3)
-   #+end_src
+1. Write =has_letter(sentence, letter)=: it returns ~True~ if =letter=
+   appears in =sentence=, ignoring case, and ~False~ otherwise. Use a
+   ~for~ loop.
+   #+begin_example
+   >>> print(has_letter("Why?", "?"))
+   True
+   >>> print(has_letter("Eliza", "A"))
+   True
+   >>> print(has_letter("Hello", "z"))
+   False
+   >>> print(has_letter("Oz", "z"))
+   True
+   #+end_example
 
-   #+RESULTS:
-   : Liftoff!
-   : 1
-   : 2
-   : 3
+2. Write =count_letter(sentence, letter)=: it returns how often =letter=
+   appears in =sentence=, ignoring case.
+   #+begin_example
+   >>> print(count_letter("Mississippi", "S"))
+   4
+   >>> print(count_letter("Eliza says Hello", "L"))
+   3
+   #+end_example
 
-   #+begin_quote
-   The ~print~ comes *after* the recursive call, so it runs on the way
-   back *up*: the innermost call (~n = 1~) prints first. Compare
-   ~triangle_down~, where the ~print~ comes before the call.
-   #+end_quote
+*** Solution                                                          :skip:
 
-2) Spot the gap: ~countdown_by_three(9)~ prints 9, 6, 3, Liftoff!. For
-   which starting values does it work, and what happens with 10?
+#+begin_src python :results output :exports both :session *Python* :python python3
+  def has_letter(sentence, letter):
+      """Return True if letter appears in sentence, ignoring case."""
+      for c in sentence:
+          if c.lower() == letter.lower():
+              return True
+      return False
 
-   #+begin_src python :results output :exports both :session *Python* :python python3
-     def countdown_by_three(n):
-         if n == 0:
-             print("Liftoff!")
-         else:
-             print(n)
-             countdown_by_three(n - 3)
+  def count_letter(sentence, letter):
+      """Return how often letter appears in sentence, ignoring case."""
+      count = 0
+      for c in sentence:
+          if c.lower() == letter.lower():
+              count += 1
+      return count
 
-     countdown_by_three(9)
-   #+end_src
+  print(has_letter("Why?", "?"))
+  print(has_letter("Eliza", "A"))
+  print(has_letter("Hello", "z"))
+  print(has_letter("Oz", "z"))
+  print(count_letter("Mississippi", "S"))
+  print(count_letter("Eliza says Hello", "L"))
+#+end_src
 
-   #+RESULTS:
-   : 9
-   : 6
-   : 3
-   : Liftoff!
+#+RESULTS:
+: True
+: True
+: False
+: True
+: 4
+: 3
 
-   #+begin_quote
-   Only for multiples of 3 (0, 3, 6, ...). With 10 it goes 10, 7, 4,
-   1, -2, ... and jumps over 0, until Python gives up with a
-   ~RecursionError~. Fix: ~if n <= 0:~
-   #+end_quote
+*** Discussion                                                        :skip:
+
+- With ~return False~ in an ~else~ inside the loop, =has_letter= only
+  looks at the first letter: it returns ~False~ for ="Why?"=, ="Eliza"=
+  and ="Oz"=. For ="Hello"= it returns the right ~False~ by accident
+  (and so would ="Oz", "o"=: the letter is first) - one passing test
+  proves nothing.
+- ="A"= in ="Eliza"=: without =.lower()= on both sides the result is
+  ~False~ - the fix of =mentions=.
+- ~count = 0~, not 1: no letter found yet before the loop
+  (=count_words= started at 1 because it counted spaces).
+- One line: ~return letter.lower() in sentence.lower()~ - the ~in~
+  operator does the loop for you.
+
+
+** Functions so far
+
+| Function                       | Effect                                    |
+|--------------------------------+-------------------------------------------|
+| =has_question_mark(sentence)=    | ~True~ if sentence contains "?"             |
+| =count_words(sentence)=          | Spaces + 1 (words separated by one space) |
+| =mentions(sentence, word)=       | ~True~ if word is in sentence, any case     |
+| =has_letter(sentence, letter)=   | ~True~ if letter is in sentence, any case   |
+| =count_letter(sentence, letter)= | How often letter is in sentence, any case |
+
+
+* W10S3: Building ELIZA - the first reply (iteration and search II)
+
+** Home assignment: Your Own Python Setup
+
+Install Python on your own computer, find out where it lives (~PATH~),
+run a =.py= file from the terminal, and give your project its own
+virtual environment. Plan on 1 to 2 hours.
+
+- Tutorial (pick your operating system at the top):
+  https://claude.ai/artifact/HCwu6KNqVBBf54yvvgoiJS
+
+- Stage 1, due Wed 11/4, 2:00 pm: screenshot of ~python3 --version~
+  (Windows: ~python --version~) in the [[https://chat.google.com/room/AAQAeL5a2zw/ruApM6rV_54/ruApM6rV_54?cls=10][GChat thread]].
+
+- Stage 2, due Fri 11/6, 2:00 pm: screenshot of ~python check_env.py~
+  run in your venv, uploaded to Canvas.
+
+- Stuck, or found a mistake in the tutorial? Post in the same thread
+  with a screenshot of the error and your operating system. The
+  Windows steps are not tested yet.
+
+
+** Review: mini challenge (10 min + 5 min discussion)
+
+Extend =count_keywords(sentence)= from last session: a second
+parameter for the keyword file, and a version without ~.strip()~ to
+see why we need it. Problem, solution and discussion: slides 2-4 of
+[[file:9_iteration_search/9_search/9_search.pdf][9_search.pdf]].
+
+
+** The first reply (iteration and search II)
+
+ELIZA can see every keyword in a sentence. To answer, it needs exactly
+one - and a reply for it.
+
+- write a *linear search* that returns the first match or ~None~
+- explain why "not found" takes longer than "found"
+- write a Boolean function that reuses another function
+- choose a reply with ~if~ / ~elif~ / ~else~ and a fallback
+- test a function with a *doctest* in its docstring
+
+File: [handout presentation in the public folder]
+
 
 * Footnotes
 
