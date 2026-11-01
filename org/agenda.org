@@ -1,4 +1,3 @@
-
 #+TITLE: Agenda
 #+AUTHOR: Marcus Birkenkrahe
 #+SUBTITLE: COSC 1210 (CS I) FA26 | Augustana U.
@@ -1446,8 +1445,7 @@ The next three sessions this week and next (ch6, return values):
 | =has_letter(sentence, letter)=   | ~True~ if letter is in sentence, any case   |
 | =count_letter(sentence, letter)= | How often letter is in sentence, any case |
 
-
-* W10S3: Building ELIZA - the first reply (iteration and search II)
+* DONE W10S3: Building ELIZA - the first reply (iteration and search II)
 
 ** Home assignment: Your Own Python Setup
 
@@ -1468,14 +1466,12 @@ virtual environment. Plan on 1 to 2 hours.
   with a screenshot of the error and your operating system. The
   Windows steps are not tested yet.
 
-
 ** Review: mini challenge (10 min + 5 min discussion)
 
 Extend =count_keywords(sentence)= from last session: a second
 parameter for the keyword file, and a version without ~.strip()~ to
 see why we need it. Problem, solution and discussion: slides 2-4 of
 [[file:9_iteration_search/9_search/9_search.pdf][9_search.pdf]].
-
 
 ** The first reply (iteration and search II)
 
@@ -1487,6 +1483,50 @@ one - and a reply for it.
 - write a Boolean function that reuses another function
 - choose a reply with ~if~ / ~elif~ / ~else~ and a fallback
 - test a function with a *doctest* in its docstring
+
+File: [handout presentation in the public folder]
+
+
+* W11S1: Building ELIZA - "Why are you tired?" (strings I)
+
+** Reminder: Your Own Python Setup
+
+- Stage 1, due Wed 11/4, 2:00 pm: screenshot of ~python3 --version~
+  in the [[https://chat.google.com/room/AAQAeL5a2zw/ruApM6rV_54/ruApM6rV_54?cls=10][GChat thread]].
+- Stage 2, due Fri 11/6, 2:00 pm: screenshot of ~python check_env.py~
+  in your venv, uploaded to Canvas.
+
+** Capstone project: your own chatbot (10 min)
+
+Instead of weekly home assignments, the rest of the term builds up to
+a capstone project: your own ELIZA-style chatbot, built in pairs and
+presented in class in the last week. What you build, milestones and
+points.
+
+** Review: mini challenge (15 min + 5 min discussion)
+
+The family rule from last session, as a starter notebook in Colab:
+[[https://birkenkrahe.github.io/go/replyreview][birkenkrahe.github.io/go/replyreview]]
+
+1. Write =find_keyword= again, from pseudocode.
+2. Run =respond= from class.
+3. Write the Boolean function =is_family(keyword)= and add a family
+   branch to =respond=.
+4. A shorter version with ~in~ - what goes wrong?
+5. Catch the bug with a doctest.
+
+** "Why are you tired?" (strings I)
+
+ELIZA's replies so far are fixed sentences. The original reused your
+own words: "I am tired" came back as "Why are you tired?"
+
+- get characters and pieces of a string with *indexes* and *slices*
+- explain why a string cannot be changed, and build a new one instead
+- use the string methods =startswith=, =endswith=, =count=,
+  =replace=, =strip=
+- explain why swapping words with =replace= goes wrong
+- write text to a file, and add to it, with =open=, =write= and
+  =close=
 
 File: [handout presentation in the public folder]
 
