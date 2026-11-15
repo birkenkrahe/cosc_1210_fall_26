@@ -3,6 +3,8 @@
 #+SUBTITLE: COSC 1210 (CS I) FA26 | Augustana U.
 #+STARTUP: overview hideblocks indent entitiespretty
 #+OPTIONS: toc:nil num:nil ^:nil
+#+caption: Wanderer above a sea of fog, Caspar David Friedrich (1818)
+[[../img/wanderer.jpg]]
 
 * DONE W1S1: Overview
 #+attr_html: :width 600px :float nil:
@@ -1447,6 +1449,11 @@ The next three sessions this week and next (ch6, return values):
 
 * DONE W10S3: Building ELIZA - the first reply (iteration and search II)
 
+Lecture links:
+
+- Interactive companion: [[https://birkenkrahe.github.io/python_demos/keyword-scanner.html][Keyword Scanner: Linear Search, One Line at a Time]]
+
+
 ** Home assignment: Your Own Python Setup
 
 Install Python on your own computer, find out where it lives (~PATH~),
@@ -1486,8 +1493,11 @@ one - and a reply for it.
 
 File: [handout presentation in the public folder]
 
+* DONE W11S1: Building ELIZA - capstone project; review mini challenge
 
-* W11S1: Building ELIZA - "Why are you tired?" (strings I)
+Lecture links:
+
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/capstone_intro_handout.pdf][capstone_intro_handout.pdf]] (GitHub)
 
 ** Reminder: Your Own Python Setup
 
@@ -1501,7 +1511,45 @@ File: [handout presentation in the public folder]
 Instead of weekly home assignments, the rest of the term builds up to
 a capstone project: your own ELIZA-style chatbot, built in pairs and
 presented in class in the last week. What you build, milestones and
-points.
+points. You build it in a Colab notebook: nothing to install.
+
+Each week: what class covers, and what you can already do on the
+project:
+#+name: capstone schedule
+| Date      | In class                     | On your project                   |
+|-----------+------------------------------+-----------------------------------|
+| Mon 11/02 | the capstone project         | run the starter, chat with DOCTOR |
+| Wed 11/04 | "I am X" -> "Why are you X?" | new name, greeting; copy a rule   |
+|           |                              | and change its words              |
+| Fri 11/06 | "I am X" -> "Why are you X?" | write five sample exchanges       |
+| Mon 11/09 | regular expressions          | one rule per sample exchange      |
+| Fri 11/13 | capstone review: your bot    | PROPOSAL DUE 2 pm                 |
+|           | as a system                  | then: 6+ rules, each with a test  |
+|           |                              | line                              |
+| Mon 11/16 | lists of rules and replies   | order your rules: specific ones   |
+|           |                              | above general ones                |
+| Wed 11/18 | dictionaries, rules in YAML  | your persona file: 6+ rules,      |
+|           |                              | your own reflections              |
+| Fri 11/20 | lists, dictionaries: memory; | 8+ test lines; Run all, no errors |
+|           | then your questions          |                                   |
+| Mon 11/23 | capstone: run prototypes;    | PROTOTYPE DUE 2 pm                |
+|           | counting (for the statistics | then: 12 rules, 15 test lines;    |
+|           | extension)                   | your extension, with doctests     |
+| Mon 11/30 | capstone: clinic, dry run    | check cell clean; AI statement    |
+| Tue 12/01 |                              | FINAL CODE DUE 11:59 pm           |
+| Wed 12/02 | presentations                | upload your .ipynb or PDF first   |
+| Fri 12/04 | presentations                |                                   |
+
+The extensions memory and statistics come up in class on 11/20
+and 11/23. After the prototype, a second video shows how to add an
+extension to your engine. Markov fallback is not taught in class - pick
+it only if you read chapter 12 ahead.
+
+- Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]] (=File > Save a
+  copy in Drive=)
+- Project brief (try the sample bot): [[https://claude.ai/artifact/8S47LsiuvRYk52FksB8T4t][Your Own Chatbot]]
+- Live demo (video): [[https://drive.google.com/file/d/1u9ukxaQArlQ1NWOu3zOVw2994qJv3hpf/view?usp=sharing][capstone live demo]] (Google Drive)
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/capstone_intro_handout.pdf][capstone_intro_handout.pdf]] (GitHub)
 
 ** Review: mini challenge (15 min + 5 min discussion)
 
@@ -1514,6 +1562,25 @@ The family rule from last session, as a starter notebook in Colab:
    branch to =respond=.
 4. A shorter version with ~in~ - what goes wrong?
 5. Catch the bug with a doctest.
+
+Sample solution: [[https://birkenkrahe.github.io/go/replyreview-solution][birkenkrahe.github.io/go/replyreview-solution]]
+
+* DONE W11S2: Building ELIZA - "Why are you tired?" (strings I)
+
+Lecture and code links:
+
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/10_reply_handout.pdf][10_reply_handout.pdf]] (GitHub)
+- [[https://gist.github.com/birkenkrahe/bb899b585c2e2b5d44ab5d34e761fde7][Code written in class (gist)]]
+
+Interactive companion:
+- [[https://birkenkrahe.github.io/python_demos/normalize-pipeline.html][Normalize Pipeline: One Link at a Time]]
+
+** Reminder: Your Own Python Setup
+
+- Stage 1, due today, 2:00 pm: screenshot of ~python3 --version~ in
+  the [[https://chat.google.com/room/AAQAeL5a2zw/ruApM6rV_54/ruApM6rV_54?cls=10][GChat thread]].
+- Stage 2, due Fri 11/6, 2:00 pm: screenshot of ~python check_env.py~
+  in your venv, uploaded to Canvas.
 
 ** "Why are you tired?" (strings I)
 
@@ -1528,8 +1595,263 @@ own words: "I am tired" came back as "Why are you tired?"
 - write text to a file, and add to it, with =open=, =write= and
   =close=
 
-File: [handout presentation in the public folder]
+* DONE W11S3: Your Own Python Setup - review; finish strings I
 
+** Your Own Python Setup: review (30 min)
+
+Stage 2 is due today, 2:00 pm. (Canvas)
+
+- Video: [[https://drive.google.com/file/d/1Ha3XZYgJbx8l6gV_VWv1fmes0PAWXhsX/view?usp=drive_link][Your Own Python Setup]] (Google Drive)
+- Problem posted in the [[https://chat.google.com/room/AAQAeL5a2zw/ruApM6rV_54/ruApM6rV_54?cls=10][GChat thread]] first (then Canvas)
+
+Together:
+- from an empty folder to ~python check_env.py~ in a venv, step by
+  step, on Mac and Windows
+- review: where Python lives (~PATH~), what a virtual environment is
+  for, where ~pip install~ puts a module
+- on Windows especially (with WSL): how you find out where you are
+  (~pwd~), who you are (~whoami~), and how you get home (~cd ~~).
+
+*** Review questions
+
+1. You type ~python3 hello.py~ and get "No such file or directory",
+   but =hello.py= exists. What is wrong, and which commands help?
+   #+begin_quote
+   You are in the wrong working directory. ~pwd~ shows where you are,
+   ~ls~ (Windows: ~dir~) what is there; ~cd ~/cs1210~ moves you to the
+   folder with the file.
+   #+end_quote
+
+2. ~which -a python3~ prints three lines. Which Python runs when you
+   type ~python3~, and why?
+   #+begin_quote
+   The first one. The shell searches the folders on ~PATH~ in order
+   and stops at the first match.
+   #+end_quote
+
+3. ~ls~ in your =cs1210= folder shows only =hello.py=. Where is the
+   =.venv= folder you just created?
+   #+begin_quote
+   It is there, but hidden: names that start with a dot are not
+   listed. ~ls -a~ shows it.
+   #+end_quote
+
+4. What does activating the venv change, and how do you see that it
+   is on?
+   #+begin_quote
+   It puts =.venv/bin= (Windows: =.venv\Scripts=) at the front of
+   ~PATH~, so ~python~ and ~pip~ are found there first. The prompt
+   starts with =(.venv)=.
+   #+end_quote
+
+5. Why ~python -m pip install requests~ and not just ~pip install
+   requests~?
+   #+begin_quote
+   A bare ~pip~ is found on ~PATH~ separately and can belong to a
+   different Python. The package then lands where your program never
+   looks: =ModuleNotFoundError=. ~python -m pip~ installs into the
+   Python you run.
+   #+end_quote
+
+6. You installed =requests= in your venv only. Yesterday ~import
+   requests~ worked. Today, in a new terminal, it fails with
+   =ModuleNotFoundError=. Why?
+   #+begin_quote
+   A new terminal starts without the venv, so ~python~ is the Python
+   outside it, which has no =requests=. Activate the venv again
+   (~source .venv/bin/activate~, Windows: ~.venv\Scripts\Activate.ps1~)
+   and look for =(.venv)= in the prompt.
+   #+end_quote
+
+7. On Windows, typing ~python~ opens the Microsoft Store. What
+   happened?
+   #+begin_quote
+   The real Python is not on ~PATH~ (the box "Add python.exe to PATH"
+   was not ticked), so the shell finds the fake =python.exe= in
+   =WindowsApps= first. Fix ~PATH~, or use ~py~ meanwhile.
+   #+end_quote
+
+** Finish strings I (5-8 min)
+
+"ELIZA keeps a log": write the conversation to a file with =open=,
+=write= and =close=.
+
+** Review: normalizing (5 min)
+
+Three questions on =normalize= and =i_am_reply= from strings I.
+
+* DONE W12S1: Building ELIZA - "Why do you need a break?" (strings II)
+
+Lecture and code links:
+
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/10_pattern_handout.pdf][10_pattern_handout.pdf]] (GitHub)
+- [[https://gist.github.com/birkenkrahe/acc21469b20980bb82da8ff071c19119][Code written in class (gist)]]
+
+Interactive companion:
+- [[https://birkenkrahe.github.io/python_demos/pattern-lab.html][Pattern Lab: One Pattern, Many Sentences]]
+
+** Capstone: form your team (5 min)
+
+Teams are pairs; with 19 students, one team has three members. The
+proposal is due Friday 11/13, 2:00 pm, with one submission per team,
+so your team has to exist before then.
+
+Now, in class:
+
+1. Find your partner. No team yet? Raise your hand and we match you
+   right here.
+2. Agree on your bot: what is it for, and who would talk to it?
+3. Agree on your extensions: one for each of you, each a different
+   one, and who writes which.
+4. Fill in the [[https://augie.instructure.com/courses/15635/pages/capstone-project][Capstone Project page]] on Canvas: add your team and your
+   bot persona to the project table.
+5. Join your group in the group set "Capstone" on Canvas: the proposal
+   is a group assignment.
+
+Everyone on the team speaks in the presentation.
+
+** "Why do you need a break?" (strings II: regular expressions)
+
+=i_am_reply= and =feel_reply= are the same function with a different
+prefix, and ~in~ still finds "mother" inside "smothered". A *regular
+expression* describes a whole family of sentences in one pattern.
+
+- search a string for a pattern with =re.search= and use the *match
+  object* it returns, or handle ~None~
+- use the special characters =|=, =^=, =$=, =?=, =.= and =*= in a
+  pattern
+- cut out part of a match with parentheses and =group(1)=
+- replace what a pattern matches with =re.sub=
+- match whole words only with =\b= in a *raw string*
+
+* DONE W12S2: Capstone review - your bot as a system
+
+This session reviews what ELIZA can do so far and how your capstone
+bot is built: a *persona* file that holds the data and an *engine* that
+holds the code. Three reply functions become one function with
+parameters - the step before the *rules* become *data*. *Lists* come next.
+
+Links:
+
+- Project brief: [[https://claude.ai/artifact/8S47LsiuvRYk52FksB8T4t][Your Own Chatbot]]
+- Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]]
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/11_review_handout.pdf][11_review_handout.pdf]] (GitHub)
+- Pattern lab: [[https://birkenkrahe.github.io/python_demos/][birkenkrahe.github.io/python_demos/]]
+- Review, starter notebook (Colab): [[https://birkenkrahe.github.io/go/elizareview][birkenkrahe.github.io/go/elizareview]]
+- Review, sample solution: [[https://birkenkrahe.github.io/go/elizareview-solution][birkenkrahe.github.io/go/elizareview-solution]]
+
+** Proposal due today, 2:00 pm (Canvas) - 10 min
+
+Text entry, 3 points. Canvas closes at 2:00 pm: no late submission.
+
+- what your bot is for and who would talk to it
+- one exchange: what the user types, what the bot answers
+- your extension: which one, and in a team, who writes which
+
+** Capstone review: your bot is a system (see slides)
+
+So far you have written one function at a time. The capstone trains a
+different skill: *systems thinking*. A system is a set of parts, each
+with one job, and defined connections between them. Your bot has three
+parts:
+
+| Part                    | Holds                    | Where              |
+|-------------------------+--------------------------+--------------------|
+| Engine                  | the steps: clean, match, | engine cell        |
+|                         | reply, log               | (Python functions) |
+| Personality             | name, greeting, goodbye, | persona cell       |
+|                         | fallback replies         | (YAML config file) |
+| Conversation dictionary | which pattern gets which | =rules= in the       |
+|                         | replies                  | YAML file          |
+
+In class, the conversation dictionary is not a dictionary yet: its
+pairs of pattern and reply still sit in ~if~ / ~elif~ branches and in
+functions such as =i_am_reply=. Each new sentence type has meant new
+code. Moving the pairs into a collection means a new rule is new data,
+and the engine does not change.
+
+* W13S1: "Can you tell me more?" (lists: rules and replies)
+
+ELIZA answers with one rule at a time and always says the same thing.
+A *list* holds as many rules and replies as you like, and it can
+change: ELIZA takes the next reply and puts it back at the end, so it
+does not repeat itself.
+
+Links:
+
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/11_rules_handout.pdf][11_rules_handout.pdf]] (GitHub)
+- Project brief: [[https://claude.ai/artifact/8S47LsiuvRYk52FksB8T4t][Your Own Chatbot]]
+
+** Your prototype (rest of the class, and after)
+
+The prototype is due *Monday 11/23, 2:00 pm* on Canvas: your notebook
+(=.ipynb=, with its output). It runs, at least 6 of your own rules work,
+and it has a test conversation of at least 8 lines. A slide deck shows
+every step, from the starter notebook to the upload:
+[[https://birkenkrahe.github.io/go/capstone-steps][birkenkrahe.github.io/go/capstone-steps]]. A video goes through the same
+steps: [[https://birkenkrahe.github.io/go/capstone-video][birkenkrahe.github.io/go/capstone-video]]. The finished sample
+prototype (SAGE) opens in Colab:
+[[https://birkenkrahe.github.io/go/capstone-sample][birkenkrahe.github.io/go/capstone-sample]].
+
+- Run all: no errors, from the first cell to the last.
+- Test each rule with a sentence of its own, and one sentence that
+  matches no rule.
+- Stuck? Read the whole error message first, then ask.
+
+** "Can you tell me more?" (lists: rules and replies)
+
+- make a list, read its elements by index, slice it, and test
+  membership with ~in~
+- change a list: assign to an index, =append=, =pop=
+- pass a list to a function that changes it
+- loop over a list of rules and use the first one that matches
+
+The order of the rules matters: the first rule that matches wins, so
+put specific rules above general ones - in your persona file, too.
+
+* W13S2: "Who am I talking to?" (dictionaries: reflection and rules from a file)
+
+ELIZA swaps "my" for "your" word by word: a list of words. Then a
+*dictionary* looks each word up directly and gives the parts of a
+rule names. With names, the rules can leave the code: a YAML file
+holds the persona, the code is the engine - your capstone notebook.
+
+Links:
+
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/12_persona_handout.pdf][12_persona_handout.pdf]] (GitHub)
+- [[https://claude.ai/artifact/UKr5mmtioUsRRMe2RMBzbu][YAML for Your Chatbot]]: the YAML in your persona file
+
+** Reflection word by word (lists, continued)
+
+- split a sentence into words, change them one by one, and =join=
+  them again
+
+** "Who am I talking to?" (dictionaries)
+
+- make a dictionary, look up a key, add and change entries, and test
+  for a key with ~in~
+- use =get= with a default instead of risking a =KeyError=
+- write a rule as a dictionary and a whole script as a dictionary
+- write a YAML file and load it with =yaml.safe_load=
+- explain the split between engine (code) and script (data)
+
+* W13S3: Finish lists and dictionaries; your prototype
+
+We finish lists and dictionaries. The rest of the class is yours: work
+on your prototype, and bring your questions and your bugs. I stay
+after class for as long as you need help.
+
+Links:
+
+- Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]]
+- Project brief: [[https://claude.ai/artifact/8S47LsiuvRYk52FksB8T4t][Your Own Chatbot]]
+
+** ELIZA remembers (lists, continued)
+
+When no rule matches, ELIZA can bring back something you said
+earlier: "Earlier you said your ...". The memory is a list: new
+phrases go in at the end, the oldest comes out first. This is the
+*memory* extension of the capstone.
 
 * Footnotes
 
