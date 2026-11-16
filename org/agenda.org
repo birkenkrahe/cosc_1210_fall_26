@@ -3,6 +3,7 @@
 #+SUBTITLE: COSC 1210 (CS I) FA26 | Augustana U.
 #+STARTUP: overview hideblocks indent entitiespretty
 #+OPTIONS: toc:nil num:nil ^:nil
+#+attr_html: :width 400px :float nil: 
 #+caption: Wanderer above a sea of fog, Caspar David Friedrich (1818)
 [[../img/wanderer.jpg]]
 
@@ -1782,7 +1783,19 @@ Links:
 - Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/11_rules_handout.pdf][11_rules_handout.pdf]] (GitHub)
 - Project brief: [[https://claude.ai/artifact/8S47LsiuvRYk52FksB8T4t][Your Own Chatbot]]
 
-** Your prototype (rest of the class, and after)
+** Side topic: How does an electric toothbrush keep time?
+
+- That's what I asked myself one morning.
+
+- I created a short tutorial that shows how it works in Python.
+
+- The solution combines counting and creating a state machine.
+
+- The real software runs on a microcontroller in C.
+
+- Link: https://birkenkrahe.github.io/go/toothbrush
+
+** Your prototype (on your own; questions after class on Friday)
 
 The prototype is due *Monday 11/23, 2:00 pm* on Canvas: your notebook
 (=.ipynb=, with its output). It runs, at least 6 of your own rules work,
@@ -1800,14 +1813,25 @@ prototype (SAGE) opens in Colab:
 
 ** "Can you tell me more?" (lists: rules and replies)
 
-- make a list, read its elements by index, slice it, and test
-  membership with ~in~
-- change a list: assign to an index, =append=, =pop=
-- pass a list to a function that changes it
-- loop over a list of rules and use the first one that matches
+- *Rules become data.* A rule is a value - a pattern and a list of
+  replies - and all rules go into one list. One loop handles any
+  number of rules: a new rule is a new list element, not a new
+  ~elif~.
 
-The order of the rules matters: the first rule that matches wins, so
-put specific rules above general ones - in your persona file, too.
+- *The order is a decision.* The first rule that matches answers, so
+  put specific rules above general ones - in your persona file, too.
+
+- *A list can change, and a function can change it.* A list passed
+  to a function is not copied. =next_reply= moves the reply it uses
+  to the end of the list, so the order of the list remembers which
+  reply comes next - no counter needed.
+
+- *A list holds values of any type, also lists.* A rule mixes a
+  string and a list, and you read it by position: =rule[0]=,
+  =rule[1]=. Dictionaries (next) give the parts names.
+
+- *Words, not letters.* =split= turns a sentence into a list of
+  words, so you can swap whole words; =join= puts them back together.
 
 * W13S2: "Who am I talking to?" (dictionaries: reflection and rules from a file)
 
