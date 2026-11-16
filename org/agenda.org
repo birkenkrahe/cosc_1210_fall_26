@@ -1772,6 +1772,8 @@ code. Moving the pairs into a collection means a new rule is new data,
 and the engine does not change.
 
 * W13S1: "Can you tell me more?" (lists: rules and replies)
+#+attr_html: :width 200px :float nil:
+[[../img/toothbrush.jpg]]
 
 ELIZA answers with one rule at a time and always says the same thing.
 A *list* holds as many rules and replies as you like, and it can
@@ -1797,15 +1799,18 @@ Links:
 
 ** Your prototype (on your own; questions after class on Friday)
 
-The prototype is due *Monday 11/23, 2:00 pm* on Canvas: your notebook
-(=.ipynb=, with its output). It runs, at least 6 of your own rules work,
-and it has a test conversation of at least 8 lines. A slide deck shows
-every step, from the starter notebook to the upload:
-[[https://birkenkrahe.github.io/go/capstone-steps][birkenkrahe.github.io/go/capstone-steps]]. A video goes through the same
-steps: [[https://birkenkrahe.github.io/go/capstone-video][birkenkrahe.github.io/go/capstone-video]]. The finished sample
-prototype (SAGE) opens in Colab:
-[[https://birkenkrahe.github.io/go/capstone-sample][birkenkrahe.github.io/go/capstone-sample]].
+- Prototype is due *Monday 11/23, 2:00 pm* on Canvas: your notebook
+  (=.ipynb=, with its output).
+- It runs, at least 6 of your own rules work, and it has a test
+  conversation of at least 8 lines.
+- Slide deck shows every step, from the starter notebook to the
+  upload: [[https://birkenkrahe.github.io/go/capstone-steps][birkenkrahe.github.io/go/capstone-steps]].
+- Video goes through the same steps:
+  [[https://birkenkrahe.github.io/go/capstone-video][birkenkrahe.github.io/go/capstone-video]].
+- The finished sample prototype (SAGE) opens in Colab:
+[[https://birkenkrahe.github.io/go/capstone-sample][  birkenkrahe.github.io/go/capstone-sample]].
 
+What to do:
 - Run all: no errors, from the first cell to the last.
 - Test each rule with a sentence of its own, and one sentence that
   matches no rule.
@@ -1832,6 +1837,7 @@ prototype (SAGE) opens in Colab:
 
 - *Words, not letters.* =split= turns a sentence into a list of
   words, so you can swap whole words; =join= puts them back together.
+
 
 * W13S2: "Who am I talking to?" (dictionaries: reflection and rules from a file)
 
