@@ -1529,22 +1529,22 @@ project:
 |           |                              | line                              |
 | Mon 11/16 | lists of rules and replies   | order your rules: specific ones   |
 |           |                              | above general ones                |
-| Wed 11/18 | dictionaries, rules in YAML  | your persona file: 6+ rules,      |
+| Wed 11/18 | lists: reflection, memory    | your persona file: 6+ rules,      |
 |           |                              | your own reflections              |
-| Fri 11/20 | lists, dictionaries: memory; | 8+ test lines; Run all, no errors |
+| Fri 11/20 | dictionaries, rules in YAML; | 8+ test lines; Run all, no errors |
 |           | then your questions          |                                   |
 | Mon 11/23 | capstone: run prototypes;    | PROTOTYPE DUE 2 pm                |
 |           | counting (for the statistics | then: 12 rules, 15 test lines;    |
 |           | extension)                   | your extension, with doctests     |
-| Mon 11/30 | capstone: clinic, dry run    | check cell clean; AI statement    |
+| Mon 11/30 | presentations                | upload your .ipynb or PDF first   |
 | Tue 12/01 |                              | FINAL CODE DUE 11:59 pm           |
-| Wed 12/02 | presentations                | upload your .ipynb or PDF first   |
-| Fri 12/04 | presentations                |                                   |
+| Wed 12/02 | presentations                |                                   |
+| Fri 12/04 | presentations                | complete notebook by 11:59 pm     |
 
-The extensions memory and statistics come up in class on 11/20
-and 11/23. After the prototype, a second video shows how to add an
-extension to your engine. Markov fallback is not taught in class - pick
-it only if you read chapter 12 ahead.
+The extensions memory and statistics come up in class on 11/18
+and 11/23. After the prototype, a video lecture shows how to add an
+extension to your engine and test it with doctests. Markov fallback
+is not taught in class - pick it only if you read chapter 12 ahead.
 
 - Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]] (=File > Save a
   copy in Drive=)
@@ -1771,7 +1771,7 @@ functions such as =i_am_reply=. Each new sentence type has meant new
 code. Moving the pairs into a collection means a new rule is new data,
 and the engine does not change.
 
-* W13S1: "Can you tell me more?" (lists: rules and replies)
+* DONE W13S1: "Can you tell me more?" (lists: rules and replies)
 #+attr_html: :width 200px :float nil:
 [[../img/toothbrush.jpg]]
 
@@ -1833,28 +1833,96 @@ What to do:
 
 - *A list holds values of any type, also lists.* A rule mixes a
   string and a list, and you read it by position: =rule[0]=,
-  =rule[1]=. Dictionaries (next) give the parts names.
+  =rule[1]=. Dictionaries give the parts names.
 
-- *Words, not letters.* =split= turns a sentence into a list of
+* DONE W13S2: "Earlier you said..." (lists: reflection and memory)
+
+We finish lists. ELIZA swaps "my" for "your" word by word: a sentence
+becomes a list of words. And when no rule matches, ELIZA can bring
+back something you said earlier: a list is its memory.
+
+Links:
+
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/11_rules_handout.pdf][11_rules_handout.pdf]] (GitHub)
+- Project brief: [[https://claude.ai/artifact/8S47LsiuvRYk52FksB8T4t][Your Own Chatbot]]
+
+** Reflection word by word
+
+- *Words, not letters.* =replace= changes letters, so "i" also hits
+  the "i" inside "like". =split= turns a sentence into a list of
   words, so you can swap whole words; =join= puts them back together.
 
+- *Two loops.* =reflect= walks through the words, and for each word
+  through the list of pairs. It compares the original word, so "you"
+  becomes "I" and is not swapped back.
 
-* W13S2: "Who am I talking to?" (dictionaries: reflection and rules from a file)
+** ELIZA remembers
 
-ELIZA swaps "my" for "your" word by word: a list of words. Then a
-*dictionary* looks each word up directly and gives the parts of a
-rule names. With names, the rules can leave the code: a YAML file
-holds the persona, the code is the engine - your capstone notebook.
+When no rule matches, ELIZA can bring back something you said
+earlier: "Earlier you said your ...". The memory is a list: new
+phrases go in at the end, the oldest comes out first. This is the
+*memory* extension of the capstone.
+
+* W13S3: "Who am I talking to?" (dictionaries: reflection and rules from a file)
+
+A *dictionary* looks each word up directly and gives the parts of a rule
+names. With names, the rules can leave the code: a YAML file holds the
+persona, the code is the engine - your capstone notebook.  Bring your
+questions about your prototype: I stay after class for as long as you
+need help.
 
 Links:
 
 - Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/12_persona_handout.pdf][12_persona_handout.pdf]] (GitHub)
 - [[https://claude.ai/artifact/UKr5mmtioUsRRMe2RMBzbu][YAML for Your Chatbot]]: the YAML in your persona file
+- Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]]
 
-** Reflection word by word (lists, continued)
+** After the prototype: what is left for the final code
 
-- split a sentence into words, change them one by one, and =join=
-  them again
+The final code is due *Tuesday 12/01, 11:59 pm*: a notebook that runs.
+The persona part is more of what you did for the prototype; the
+extension is new.
+
+|                              | Prototype (11/23) | Final code (12/01)         |
+|------------------------------+-------------------+----------------------------|
+| Rules                        | 6 that work       | 12, each with 2+ replies   |
+| Rules with a group and ={x}=   | -                 | at least 4                 |
+| Rules with =\b=                | -                 | at least 3                 |
+| Test conversation            | 8 lines           | 15 lines; every rule fires |
+| Greeting, goodbye, fallback, | -                 | your own                   |
+| reflections                  |                   |                            |
+| Extension                    | -                 | one for each of you        |
+| Doctests                     | -                 | 2+ per new function;       |
+|                              |                   | the doctest cell: failed=0 |
+| Docstrings                   | -                 | every function             |
+| AI-use statement             | first cell        | first cell; in a team: who |
+|                              |                   | wrote which extension      |
+
+Your extension, and what class gives you for it:
+
+| Extension        | From class                                         |
+|------------------+----------------------------------------------------|
+| Memory           | =remember= and =no_match_reply= (lists)                |
+| Statistics       | counting which rules answer, bar chart (next)      |
+| Your name, Tone  | your own: new keys in the script, new functions    |
+| Markov, own idea | not taught in class                                |
+
+- Do the persona part first: it needs nothing new.
+- I will post *the next solution video*, for the final code, over the
+  weekend: it shows how an extension goes into the engine, with
+  doctests.
+- Presentations are on Monday 11/30, Wednesday 12/02 and Friday
+  12/04. I will create a *Canvas page where you book* your
+  presentation.
+- *If the Monday or the Friday class is used* for a teaching
+  demonstration by a candidate for our CS position, the teams of that
+  day present online: record your presentation, upload it to Google
+  Drive and share it in the Google Chat space.
+- *If you have trouble finishing:* upload what you have by Tuesday
+  12/01 - it must run (Run all, no errors) - and present it. Until
+  *Friday 12/04, 11:59 pm* you can add what is missing (rules, test
+  lines, your extension) and upload the complete notebook.
+- *What is your confidence index right now?* (0-10)
 
 ** "Who am I talking to?" (dictionaries)
 
@@ -1865,23 +1933,45 @@ Links:
 - write a YAML file and load it with =yaml.safe_load=
 - explain the split between engine (code) and script (data)
 
-* W13S3: Finish lists and dictionaries; your prototype
 
-We finish lists and dictionaries. The rest of the class is yours: work
-on your prototype, and bring your questions and your bugs. I stay
-after class for as long as you need help.
+* W14S1: "How often do you say that?" (dictionaries: counting); your prototypes
+
+ELIZA answers, but which rules do the work? A dictionary can count:
+one key per rule, one number per key. The counts show which rules
+answer, which never do, and how often ELIZA falls back - the
+*statistics* extension of the capstone. Your prototype is due before
+class: we run prototypes today.
 
 Links:
 
-- Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]]
-- Project brief: [[https://claude.ai/artifact/8S47LsiuvRYk52FksB8T4t][Your Own Chatbot]]
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/12_count_handout.pdf][12_count_handout.pdf]] (GitHub)
 
-** ELIZA remembers (lists, continued)
+** "How often do you say that?" (dictionaries: counting)
 
-When no rule matches, ELIZA can bring back something you said
-earlier: "Earlier you said your ...". The memory is a list: new
-phrases go in at the end, the oldest comes out first. This is the
-*memory* extension of the capstone.
+- count with a dictionary, with ~in~ or with =get=
+- loop over a dictionary's keys and find the key with the largest
+  count
+- count which rule answers each line of a test conversation
+- find the rules that never fire
+- draw the counts as a bar chart
+
+** Capstone: the presentation
+
+- Comments in class today on the presentation, the last step of the
+  capstone.
+- The presentation assignment is in Canvas.
+
+** Video lecture: "What else can you do?" (extensions and doctests)
+
+A video lecture shows how an extension goes into your engine, step by
+step:
+
+- write doctests in a docstring and run them with =doctest.testmod=
+- read a failing doctest: expected and got
+- write an extension as a function with its own doctests
+- add the extension to =respond= and give it replies in the YAML
+  script
+- decide whether something needs an extension or only a rule
 
 * Footnotes
 
