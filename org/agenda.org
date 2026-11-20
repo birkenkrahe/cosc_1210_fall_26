@@ -1873,6 +1873,7 @@ need help.
 
 Links:
 
+- Code-along notebook for today (Colab): [[https://birkenkrahe.github.io/go/persona][birkenkrahe.github.io/go/persona]]
 - Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/12_persona_handout.pdf][12_persona_handout.pdf]] (GitHub)
 - [[https://claude.ai/artifact/UKr5mmtioUsRRMe2RMBzbu][YAML for Your Chatbot]]: the YAML in your persona file
 - Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]]
