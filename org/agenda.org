@@ -1534,17 +1534,18 @@ project:
 | Fri 11/20 | dictionaries, rules in YAML; | 8+ test lines; Run all, no errors |
 |           | then your questions          |                                   |
 | Mon 11/23 | capstone: run prototypes;    | PROTOTYPE DUE 2 pm                |
-|           | counting (for the statistics | then: 12 rules, 15 test lines;    |
-|           | extension)                   | your extension, with doctests     |
+|           | an extension, with doctests  | then: 12 rules, 15 test lines;    |
+|           |                              | your extension, with doctests     |
 | Mon 11/30 | presentations                | upload your .ipynb or PDF first   |
 | Tue 12/01 |                              | FINAL CODE DUE 11:59 pm           |
 | Wed 12/02 | presentations                |                                   |
 | Fri 12/04 | presentations                | complete notebook by 11:59 pm     |
 
-The extensions memory and statistics come up in class on 11/18
-and 11/23. After the prototype, a video lecture shows how to add an
-extension to your engine and test it with doctests. Markov fallback
-is not taught in class - pick it only if you read chapter 12 ahead.
+The memory extension came up in class on 11/18. On 11/23, after the
+prototypes, I show in class how to add an extension to your engine
+and test it with doctests. Statistics and Markov fallback are not
+taught in class - pick them only if you read ahead (chapters 10 and
+12).
 
 - Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]] (=File > Save a
   copy in Drive=)
@@ -1904,21 +1905,16 @@ Your extension, and what class gives you for it:
 | Extension        | From class                                         |
 |------------------+----------------------------------------------------|
 | Memory           | =remember= and =no_match_reply= (lists)                |
-| Statistics       | counting which rules answer, bar chart (next)      |
+| Statistics       | not taught in class (counting with a dictionary)   |
 | Your name, Tone  | your own: new keys in the script, new functions    |
 | Markov, own idea | not taught in class                                |
 
 - Do the persona part first: it needs nothing new.
-- I will post *the next solution video*, for the final code, over the
-  weekend: it shows how an extension goes into the engine, with
-  doctests.
+- On *Monday 11/23*, after the prototypes, we put an extension into
+  the engine, with doctests, and you practice it.
 - Presentations are on Monday 11/30, Wednesday 12/02 and Friday
   12/04. I will create a *Canvas page where you book* your
   presentation.
-- *If the Monday or the Friday class is used* for a teaching
-  demonstration by a candidate for our CS position, the teams of that
-  day present online: record your presentation, upload it to Google
-  Drive and share it in the Google Chat space.
 - *If you have trouble finishing:* upload what you have by Tuesday
   12/01 - it must run (Run all, no errors) - and present it. Until
   *Friday 12/04, 11:59 pm* you can add what is missing (rules, test
@@ -1935,44 +1931,43 @@ Your extension, and what class gives you for it:
 - explain the split between engine (code) and script (data)
 
 
-* W14S1: "How often do you say that?" (dictionaries: counting); your prototypes
+* W14S1: Your prototypes; "What else can you do?" (extensions and doctests)
 
-ELIZA answers, but which rules do the work? A dictionary can count:
-one key per rule, one number per key. The counts show which rules
-answer, which never do, and how often ELIZA falls back - the
-*statistics* extension of the capstone. Your prototype is due before
-class: we run prototypes today.
+Your prototype is due before class, at 2:00 pm. We run the prototypes
+of the teams that are ready. Then ELIZA gets her first extension: a
+function that spots short answers, tested with doctests, with its
+own replies in the YAML script - the steps you take for your own
+extension in the final code.
 
 Links:
 
-- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/12_count_handout.pdf][12_count_handout.pdf]] (GitHub)
+- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/13_extensions_handout.pdf][13_extensions_handout.pdf]] (GitHub)
+- Book your presentation: [[https://augie.instructure.com/courses/15635/pages/book-your-presentation-time-here][Canvas page]] - enter your names by 2:00 pm today
 
-** "How often do you say that?" (dictionaries: counting)
+** Run the prototypes
 
-- count with a dictionary, with ~in~ or with =get=
-- loop over a dictionary's keys and find the key with the largest
-  count
-- count which rule answers each line of a test conversation
-- find the rules that never fire
-- draw the counts as a bar chart
+- Teams that are ready: Runtime > Run all, then we read the
+  transcript together - does each rule answer its line?
 
-** Capstone: the presentation
-
-- Comments in class today on the presentation, the last step of the
-  capstone.
-- The presentation assignment is in Canvas.
-
-** Video lecture: "What else can you do?" (extensions and doctests)
-
-A video lecture shows how an extension goes into your engine, step by
-step:
+** "What else can you do?" (extensions and doctests)
 
 - write doctests in a docstring and run them with =doctest.testmod=
 - read a failing doctest: expected and got
 - write an extension as a function with its own doctests
 - add the extension to =respond= and give it replies in the YAML
   script
-- decide whether something needs an extension or only a rule
+- decide where your extension goes: =respond= or =main=
+
+** PRACTICE: long answers
+
+Write =is_long(sentence)=: True if the normalized sentence has more
+than 12 words. Give it at least 2 doctests and run
+=doctest.testmod()=. Then add a =long= list of replies to the YAML
+script and a check in =respond=, so that a long sentence gets "That
+is a lot. What matters most?" and "I need a break." still gets "Why
+do you need a break?".
+
+** Your questions about the final code
 
 * Footnotes
 
