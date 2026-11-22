@@ -1533,19 +1533,18 @@ project:
 |           |                              | your own reflections              |
 | Fri 11/20 | dictionaries, rules in YAML; | 8+ test lines; Run all, no errors |
 |           | then your questions          |                                   |
-| Mon 11/23 | capstone: run prototypes;    | PROTOTYPE DUE 2 pm                |
-|           | an extension, with doctests  | then: 12 rules, 15 test lines;    |
+| Mon 11/23 | no class; video: your        | PROTOTYPE DUE 11:59 pm            |
+|           | extension, step by step      | then: 12 rules, 15 test lines;    |
 |           |                              | your extension, with doctests     |
 | Mon 11/30 | presentations                | upload your .ipynb or PDF first   |
 | Tue 12/01 |                              | FINAL CODE DUE 11:59 pm           |
 | Wed 12/02 | presentations                |                                   |
 | Fri 12/04 | presentations                | complete notebook by 11:59 pm     |
 
-The memory extension came up in class on 11/18. On 11/23, after the
-prototypes, I show in class how to add an extension to your engine
-and test it with doctests. Statistics and Markov fallback are not
-taught in class - pick them only if you read ahead (chapters 10 and
-12).
+The memory extension came up in class on 11/18. A video shows how to
+add an extension to your engine and test it with doctests, and a
+video lecture covers statistics. Markov fallback is not taught - pick
+it only if you read ahead (chapter 12).
 
 - Starter notebook: [[https://birkenkrahe.github.io/go/capstone][birkenkrahe.github.io/go/capstone]] (=File > Save a
   copy in Drive=)
@@ -1800,7 +1799,7 @@ Links:
 
 ** Your prototype (on your own; questions after class on Friday)
 
-- Prototype is due *Monday 11/23, 2:00 pm* on Canvas: your notebook
+- Prototype is due *Monday 11/23, 11:59 pm* on Canvas: your notebook
   (=.ipynb=, with its output).
 - It runs, at least 6 of your own rules work, and it has a test
   conversation of at least 8 lines.
@@ -1864,7 +1863,7 @@ earlier: "Earlier you said your ...". The memory is a list: new
 phrases go in at the end, the oldest comes out first. This is the
 *memory* extension of the capstone.
 
-* W13S3: "Who am I talking to?" (dictionaries: reflection and rules from a file)
+* DONE W13S3: "Who am I talking to?" (dictionaries: reflection and rules from a file)
 
 A *dictionary* looks each word up directly and gives the parts of a rule
 names. With names, the rules can leave the code: a YAML file holds the
@@ -1905,13 +1904,12 @@ Your extension, and what class gives you for it:
 | Extension        | From class                                         |
 |------------------+----------------------------------------------------|
 | Memory           | =remember= and =no_match_reply= (lists)                |
-| Statistics       | not taught in class (counting with a dictionary)   |
+| Statistics       | video lecture: counting with a dictionary          |
 | Your name, Tone  | your own: new keys in the script, new functions    |
 | Markov, own idea | not taught in class                                |
 
 - Do the persona part first: it needs nothing new.
-- On *Monday 11/23*, after the prototypes, we put an extension into
-  the engine, with doctests, and you practice it.
+- A video shows how an extension goes into the engine, with doctests.
 - Presentations are on Monday 11/30, Wednesday 12/02 and Friday
   12/04. I will create a *Canvas page where you book* your
   presentation.
@@ -1931,43 +1929,34 @@ Your extension, and what class gives you for it:
 - explain the split between engine (code) and script (data)
 
 
-* W14S1: Your prototypes; "What else can you do?" (extensions and doctests)
+* W14S1: No class (Mon 11/23) - finish your project
 
-Your prototype is due before class, at 2:00 pm. We run the prototypes
-of the teams that are ready. Then ELIZA gets her first extension: a
-function that spots short answers, tested with doctests, with its
-own replies in the YAML script - the steps you take for your own
-extension in the final code.
+There is no class meeting today. Use the class hour (from 2:00 pm) to
+meet with your team and work on your bot and your presentation. I am
+in my office, FSC 386, today from 9 am to 5 pm and all day Tuesday:
+drop in with your questions.
 
-Links:
+** Deadlines
 
-- Slides: [[https://github.com/birkenkrahe/cosc_1210_fall_26/blob/main/pdf/13_extensions_handout.pdf][13_extensions_handout.pdf]] (GitHub)
-- Book your presentation: [[https://augie.instructure.com/courses/15635/pages/book-your-presentation-time-here][Canvas page]] - enter your names by 2:00 pm today
+- Today: [[https://augie.instructure.com/courses/15635/pages/book-your-presentation-time-here][book your presentation time]].
+- Today, 11:59 pm: the [[https://augie.instructure.com/courses/15635/assignments/277385][capstone prototype]] (moved from 2:00 pm). I
+  check and grade the prototypes over the break.
+- Tuesday 12/01, 11:59 pm: the final code - a notebook that runs.
+- Mon 11/30, Wed 12/02 or Fri 12/04: [[https://augie.instructure.com/courses/15635/assignments/277387][your presentation]], with slides,
+  on the day you booked.
 
-** Run the prototypes
+** Videos in place of the lectures
 
-- Teams that are ready: Runtime > Run all, then we read the
-  transcript together - does each rule answer its line?
+I post the links when they are ready; watch them whenever it suits
+you.
 
-** "What else can you do?" (extensions and doctests)
-
-- write doctests in a docstring and run them with =doctest.testmod=
-- read a failing doctest: expected and got
-- write an extension as a function with its own doctests
-- add the extension to =respond= and give it replies in the YAML
-  script
-- decide where your extension goes: =respond= or =main=
-
-** PRACTICE: long answers
-
-Write =is_long(sentence)=: True if the normalized sentence has more
-than 12 words. Give it at least 2 doctests and run
-=doctest.testmod()=. Then add a =long= list of replies to the YAML
-script and a check in =respond=, so that a long sentence gets "That
-is a lot. What matters most?" and "I need a break." still gets "Why
-do you need a break?".
-
-** Your questions about the final code
+- Your extension, step by step: how an extension goes into the
+  engine, with doctests - for your final code.
+- "How often do you say that?": counting with a dictionary, which is
+  the statistics extension, with an AI-generated video overview.
+- "What else can you do?": the lecture on extensions and doctests -
+  write doctests, read a failing one, and add an extension (short
+  answers) to the engine and the YAML script.
 
 * Footnotes
 
