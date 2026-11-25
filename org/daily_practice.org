@@ -1,0 +1,222 @@
+#+TITLE: Daily Python Practice with an AI Tutor
+#+SUBTITLE: COSC 1210 — How to set it up and how to use it
+#+AUTHOR: Marcus Birkenkrahe
+#+STARTUP: overview hideblocks indent entitiespretty
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* What this is
+
+You get better at programming by writing small programs often. This
+guide shows you how to set up an AI chat assistant so that it gives
+you one small Python exercise every day, a little harder each day,
+and reviews your code without solving the exercise for you.
+
+One exercise takes 10 to 20 minutes. Nothing here is graded.
+
+The AI writes the exercises and checks your work. You write all of
+the code.
+
+* What you need
+
+- An AI chat assistant. Any of the common ones works, also in the
+  free version: ChatGPT, Claude, Gemini, Copilot. You only type
+  messages; the AI needs no access to your files.
+- A Google Colab notebook, as in class.
+
+* Step 1: make one practice notebook
+
+Create a Colab notebook and name it =daily_practice.ipynb=. Use it
+for the whole practice, not a new notebook per day.
+
+Put three headings (text cells) at the top:
+
+1. *Log*: a table with one row per day (you fill it in, see Step 4).
+2. *Concepts*: short notes on what you learned (see Step 5).
+3. *Exercises*: below it, one text cell and one code cell per day.
+
+The AI does not keep your work for you. The notebook is your record.
+
+* Step 2: tell the AI the rules
+
+Start a new chat. Copy the prompt below, replace the two parts in
+square brackets, and send it.
+
+#+begin_example
+I want daily Python practice. Please act as my tutor and follow these
+rules for this whole conversation.
+
+About me: I am in a first Python course. We have covered:
+[list the topics, for example: variables, arithmetic, functions with
+return, if/elif/else, for and while loops, strings, lists,
+dictionaries]. I am least sure about: [one or two topics].
+
+Exercises:
+1. Give me one small exercise at a time, and only when I write "next".
+2. Each exercise practices one concept and takes 10 to 20 minutes.
+   Use only topics from my list.
+3. Start easy. Make each exercise a little harder than the one
+   before. If I say "too easy" or "too hard", adjust.
+4. Number the exercises: Day 1, Day 2, and so on.
+
+Format of each exercise:
+1. A short refresher on the concept, with a code example that is NOT
+   the exercise.
+2. The problem: what to write, with a table of example calls and the
+   results they must give.
+3. A test cell: Python code I can paste below my solution that calls
+   my function and prints "ok" or "FAIL" for each case.
+4. Do not include the solution.
+
+Help and review:
+1. Never show me the solution, or code that solves the exercise,
+   unless I write exactly "show me the solution". This also holds for
+   hints and for answers to my questions.
+2. When I ask a question, explain the concept or the error message.
+   Use an example that is different from the exercise.
+3. When I paste my code and write "check it", review it: say whether
+   it is correct, name inputs for which it fails, and point out
+   style problems. Do not rewrite my code. Describe the problem and
+   let me fix it.
+4. After the review, give me one or two short notes on concepts that
+   came up, and one follow-up question to think about.
+
+If you understand, reply only with "Ready. Write next to begin."
+#+end_example
+
+The list of topics matters. Without it, the AI uses features we have
+not covered. Take the topics from the course agenda.
+
+* Step 3: do one exercise a day
+
+1. Write =next= in the chat.
+2. Copy the problem into a text cell of your notebook, under a
+   heading such as "Day 1: name of the exercise".
+3. Note the time. Write your solution in a code cell below it.
+4. Paste the AI's test cell below your solution and run both.
+5. When all tests print =ok=, or when you cannot get further, paste
+   your code into the chat and write =check it=.
+6. Read the review. Fix what it names and run the tests again.
+
+Stop after one exercise. One a day for a month helps you more than
+ten in one evening.
+
+* Step 4: keep the log
+
+After each exercise, add a row to the log table in your notebook:
+
+| Day | Date   | Exercise  | Topic  | Minutes | Result            |
+|-----+--------+-----------+--------+---------+-------------------|
+|   1 | Dec 7  | =min_max= | tuples |      15 | solved            |
+|   2 | Dec 8  | ...       | ...    |      25 | solved after hint |
+
+The minutes show you if the exercises get too easy or too hard. Tell
+the AI when they do.
+
+* Step 5: keep the concepts
+
+The review ends with one or two concept notes. Copy each into the
+Concepts section of your notebook as a question with its answer, in
+your own words. Example:
+
+#+begin_example
+Q: What does a function return when it ends without a return
+   statement?
+A: None. If I then try to unpack the result into two variables, I
+   get a TypeError.
+#+end_example
+
+Once a week, let the AI quiz you. Paste your questions (without the
+answers) and send:
+
+#+begin_example
+Quiz me on these concepts, one question at a time. Wait for my
+answer before you say whether it is right. Do not show an answer
+before I have tried.
+#+end_example
+
+* Asking questions without getting the answer
+
+You may ask as much as you like. Ask about the concept or the error,
+not for the code.
+
+| Ask this                                         | Not this              |
+|--------------------------------------------------+-----------------------|
+| What does this error message mean?               | Fix my code.          |
+| Which input makes my function fail?              | What is the solution? |
+| What does =!r= do in an f-string?                | Write it for me.      |
+| Is a loop or a built-in function the usual way?  | Show me how you do it.|
+
+When you are stuck for more than 20 minutes, ask for a hint: "Give me
+one hint, without code." If that is not enough, write =show me the
+solution=, then type the solution yourself (do not paste it), run it,
+and explain each line in a text cell. Mark the day as "solution seen"
+in your log.
+
+* When the chat forgets the rules
+
+A chat AI does not remember earlier chats, and in a long chat it can
+drift away from the rules.
+
+- Use the same chat every day if your AI keeps it. If it offers
+  "projects" or "custom instructions", put the prompt from Step 2
+  there.
+- If you must start a new chat, send the prompt from Step 2 again
+  and add: "I have finished Day N. The last exercises were: ..."
+  with the last rows of your log.
+- If the AI shows a solution you did not ask for, say so: "You
+  showed the solution. Do not do that. Give me a different exercise
+  on the same concept."
+
+* Check the AI
+
+The AI makes mistakes: a test that expects a wrong result, a review
+that calls correct code wrong, an explanation that is false.
+
+- Run everything. What Python prints decides, not what the AI says.
+- If a test fails and you think your code is right, work the example
+  out by hand, then ask the AI to do the same step by step.
+- If an explanation surprises you, test it with two lines of code or
+  look it up in /Think Python/.
+
+This is the course AI-use policy applied to practice: you may use
+AI, you verify what it tells you, and you must understand every line
+you keep. If you later use what you practiced in an assignment, the
+AI-use statement in your notebook header still has to say
+specifically what you used AI for.
+
+* What one day looks like
+
+This is what a good exercise from the AI looks like. It has a
+refresher, a problem with examples, and tests, and no solution.
+
+#+begin_example
+Day 1: min_max
+
+Refresher. A tuple is a fixed group of values written with commas.
+You can unpack it into one variable per value:
+
+    point = (3, 4)
+    x, y = point
+
+Problem. Write a function min_max(numbers) that takes a non-empty
+list of numbers and returns the smallest and the largest value as one
+tuple, smallest first.
+
+    min_max([3, 1, 4])    returns (1, 4)
+    min_max([7])          returns (7, 7)
+
+Tests.
+
+    cases = [
+        ([3, 1, 4], (1, 4)),
+        ([7], (7, 7)),
+        ([-2, -8, 0], (-8, 0)),
+    ]
+    for numbers, expected in cases:
+        got = min_max(numbers)
+        print("ok" if got == expected else "FAIL", numbers, got)
+#+end_example
+
+If the first exercise you get looks very different (no tests, a
+solution included, several concepts at once), tell the AI what is
+missing and ask it to redo the exercise.
